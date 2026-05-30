@@ -26,6 +26,23 @@ body {
     font-family: var(--font-sans);
     font-size: 16px;
     line-height: 1.7;
+    position: relative;
+    min-height: 100vh;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    background: url('../img/logo-sentrya-branca.png') center center no-repeat;
+    background-size: 50%; /* Tamanho maior */
+    opacity: 0.02; /* Quase não notável */
+    z-index: -1;
+    pointer-events: none;
 }
 
 ::selection {
