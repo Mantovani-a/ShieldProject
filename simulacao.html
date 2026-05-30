@@ -28,11 +28,39 @@
                 <a href="acoes.html" class="nav-link-brand">Ações</a>
             </nav>
 
-            <a href="acoes.html" class="btn btn-outline-brand-copper font-mono text-uppercase tracking-widest px-4 py-2 small">
-                Central
-            </a>
+            <div class="d-flex align-items-center gap-3">
+                <a href="acoes.html" class="btn btn-outline-brand-copper font-mono text-uppercase tracking-widest px-4 py-2 small d-none d-md-inline-block">
+                    Central
+                </a>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="btn btn-link text-brand-copper d-md-none p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu" style="border:none; background:transparent;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                </button>
+            </div>
         </div>
     </header>
+
+    <!-- Offcanvas Mobile Menu -->
+    <div class="offcanvas offcanvas-end bg-brand-black text-brand-light border-start border-brand-border" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+        <div class="offcanvas-header border-bottom border-brand-border">
+            <h5 class="offcanvas-title font-mono text-uppercase tracking-widest text-brand-copper" id="mobileMenuLabel">Sentrya</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="d-flex flex-column gap-4 font-mono text-uppercase tracking-widest mt-3">
+                <a href="index.html" class="nav-link-brand">Início</a>
+                <a href="simulacao.html" class="nav-link-brand active">Simulação</a>
+                <a href="acoes.html" class="nav-link-brand">Ações</a>
+                <hr class="border-brand-border my-2">
+                <a href="acoes.html" class="btn btn-brand-copper font-mono text-uppercase tracking-widest px-4 py-3 small text-center w-100">
+                    Central
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- MAPA VETORIAL & TELEMETRIA -->
     <section id="mapa-operacoes" class="min-vh-100 pt-5 border-bottom border-brand-border d-flex align-items-center">
