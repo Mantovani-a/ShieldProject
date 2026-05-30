@@ -21,16 +21,13 @@
                         brand: {
                             black: '#0A0A0A',
                             card: '#232323',
-
                             border: 'rgba(243, 241, 236, 0.08)',
-
                             copper: '#C85A0A',
                             copperDim: '#9E4708',
                             copperFaint: 'rgba(200, 90, 10, 0.08)',
-
                             grayText: '#B8B6B1',
                             grayLight: '#F3F1EC'
-}
+                        }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -48,47 +45,25 @@
 
     <!-- HEADER MINIMALISTA -->
     <header class="fixed top-0 w-full z-50 bg-[#0A0A0A]/95 backdrop-blur-xl border-b border-white/5">
-    <div class="max-w-7xl mx-auto h-20 px-8 flex items-center justify-between">
-
-        <!-- Logo -->
-        <a href="#" class="flex items-center">
-            <img
-                src="img/logosentrya.png"
-                alt="Sentrya"
-                class="h-16 w-auto transition-all duration-300 hover:scale-105"
-            >
-        </a>
-
-        <!-- Navegação -->
-        <nav class="hidden md:flex items-center gap-12 font-mono text-[14px] uppercase tracking-[0.15em]">
-
-            <a href="#mapa-operacoes"
-               class="text-[#B8B6B1] hover:text-[#F3F1EC] transition-colors">
-                Satélites
+        <div class="max-w-7xl mx-auto h-20 px-8 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center">
+                <img src="img/logosentrya.png" alt="Sentrya" class="h-16 w-auto transition-all duration-300 hover:scale-105">
             </a>
 
-            <a href="#simulador"
-               class="text-[#B8B6B1] hover:text-[#F3F1EC] transition-colors">
-                Roteamento
+            <!-- Navegação -->
+            <nav class="hidden md:flex items-center gap-12 font-mono text-[14px] uppercase tracking-[0.15em]">
+                <a href="#mapa-operacoes" class="text-[#B8B6B1] hover:text-[#F3F1EC] transition-colors">Satélites</a>
+                <a href="#simulador" class="text-[#B8B6B1] hover:text-[#F3F1EC] transition-colors">Roteamento</a>
+                <a href="#timeline" class="text-[#B8B6B1] hover:text-[#F3F1EC] transition-colors">Histórico</a>
+            </nav>
+
+            <!-- Botão -->
+            <a href="#simulador" class="hidden sm:flex items-center justify-center h-11 px-6 rounded-md border border-[#C85A0A]/40 text-[#F3F1EC] font-mono text-[11px] uppercase tracking-widest hover:bg-[#C85A0A] hover:text-[#0A0A0A] transition-all duration-300">
+                Central
             </a>
-
-            <a href="#timeline"
-               class="text-[#B8B6B1] hover:text-[#F3F1EC] transition-colors">
-                Histórico
-            </a>
-
-        </nav>
-
-        <!-- Botão -->
-        <a href="#simulador"
-           class="hidden sm:flex items-center justify-center h-11 px-6 rounded-md border border-[#C85A0A]/40 text-[#F3F1EC] font-mono text-[11px] uppercase tracking-widest hover:bg-[#C85A0A] hover:text-[#0A0A0A] transition-all duration-300">
-
-            Central
-
-        </a>
-
-    </div>
-</header>
+        </div>
+    </header>
 
     <!-- HERO SECTION -->
     <section class="relative min-h-screen flex items-center px-8 pt-32 border-b border-brand-border">
@@ -99,27 +74,19 @@
                 <h1 class="text-4xl md:text-5xl font-light tracking-tight leading-tight max-w-2xl text-white animate-fade-up delay-2">
                     Verifique se sua região está em <span class="text-brand-copper font-normal">risco</span>, e obtenha as informações necessárias.
                 </h1>
+                
                 <!-- Animação do Texto Descritivo -->
                 <p class="text-brand-grayText max-w-xl text-lg leading-relaxed animate-fade-up delay-3">
                     Consulte o nome da sua cidade abaixo para verificar possíveis áreas de risco, alertas ativos e informações atualizadas sobre desastres naturais na sua região.
                 </p>
+                
                 <div class="flex gap-3 mt-6 animate-fade-up delay-4">
-    
-                    <input
-                        id="cidadeBusca"
-                        type="text"
-                        placeholder="Digite sua cidade..."
-                        class="w-full max-w-md bg-[#0A0A0A] border border-[#232323] rounded-md px-4 py-3 text-white focus:outline-none focus:border-[#C85A0A] transition"
-                    >
-
-                    <button
-                        id="btnBuscarCidade"
-                        class="px-6 py-3 bg-[#C85A0A] text-white rounded-md hover:opacity-90 transition"
-                    >
+                    <input id="cidadeBusca" type="text" placeholder="Digite sua cidade..." class="w-full max-w-md bg-[#0A0A0A] border border-[#232323] rounded-md px-4 py-3 text-white focus:outline-none focus:border-[#C85A0A] transition">
+                    <button id="btnBuscarCidade" class="px-6 py-3 bg-[#C85A0A] text-white rounded-md hover:opacity-90 transition">
                         Buscar
                     </button>
-
                 </div>
+                
                 <!-- Animação dos Botões de Ação -->
                 <div class="flex items-center space-x-6 pt-4 animate-fade-up delay-4">
                     <a href="#mapa-operacoes" class="font-mono text-[11px] uppercase tracking-widest bg-[#f4f4f5] hover:bg-white text-brand-black px-6 py-3 transition-colors">
@@ -133,58 +100,43 @@
 
             <!-- Coluna do Mapa Vetorial Interativo -->
             <div class="lg:col-span-5 flex items-center justify-center animate-fade-up delay-3">
-                <svg
-                    viewBox="240 320 120 125"
-                    class="w-full max-w-[450px] lg:max-w-full h-auto text-[#232323] fill-current">
-
-                    <path d="M314.24,438.85l6.25-12.02l0.23-10.1l11.66-7.52h6.53l5.13-8.69l0.93-16.68l-2.1-4.46l12.36-11.28l0.47-12.45l-16.79-8.22l-20.28-6.34l-9.56-0.94l2.57-5.4l-0.7-8.22l-2.09-0.69l-3.09,6.14l-1.62,2.03l-4.16-1.84l-13.99,4.93l-4.66-5.87l0.75-6.13l-4.4,4.48l-4.86-2.62l-0.49,0.69l0.01,2.13l4.19,2.25l-6.29,6.63l-3.97-0.04l-4.02-4.09l-4.55,0.14l-0.56,4.86l2.61,3.17l-3.08,9.87l-3.6,0.28l-5.73,3.62l-1.4,7.11l4.97,5.32l0.91-1.03l3.49-0.94l2.98,5.02l8.53-3.66l3.31,0.19l2.28,8.07l12.17,3.86l2.1,6.44l5.18,0.62l2.47,6.15l-1.67,5.47l2.18,2.86l-0.32,4.26l5.84-0.55l5.35,6.76l-0.42,4.75l3.17,2.68l-7.6,11.51L314.24,438.85L314.24,438.85z"/>
+                <svg viewBox="240 320 120 125" class="w-full max-w-[450px] lg:max-w-full h-auto text-[#232323] fill-current">
+                    <path d="M314.24,438.85l6.25-12.02l0.23-10.1l11.66-7.52h6.53l5.13-8.69l0.93-16.68l-2.1-4.46l12.36-11.28l0.47-12.45l-16.79-8.22l-20.28-6.34l-9.56-0.94l2.57-5.4l-0.7-8.22l-2.09-0.69l-3.09,6.14l-1.62,2.03l-4.16-1.84l-13.99,4.93l-4.66-5.87l0.75-6.13l-4.4,4.48l-4.86-2.62l-0.49,0.69l0.01,2.13l4.19,2.25l-6.29,6.63l-3.97-0.04l-4.02-4.09l-4.55,0.14l-0.56,4.86l2.61,3.17l-3.08,9.87l-3.6,0.28l-5.73,3.62l-1.4,7.11l4.97,5.32l0.91-1.03l3.49-0.94l2.98,5.02l8.53-3.66l3.31,0.19l2.28,8.07l12.17,3.86l2.1,6.44l5.18,0.62l2.47,6.15l-1.67,5.47l2.18,2.86l-0.32,4.26l5.84-0.55l5.35,6.76l-0.42,4.75l3.17,2.68l-7.6,11.51L314.24,438.85L314.24,438.85z" />
 
                     <!-- RIO GRANDE DO SUL -->
                     <g id="pin-rs" class="cursor-pointer" transform="translate(314 434)">
-                        <circle r="10" fill="transparent" pointer-events="all"/>
+                        <circle r="10" fill="transparent" pointer-events="all" />
                         <circle r="4" fill="rgba(200,90,10,0.50)">
-                            <animate attributeName="r"
-                                    values="4;8;4"
-                                    dur="2s"
-                                    repeatCount="indefinite"/>
+                            <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite" />
                         </circle>
-                        <circle r="2.5" fill="#C85A0A"/>
+                        <circle r="2.5" fill="#C85A0A" />
                     </g>
 
                     <!-- RIO DE JANEIRO -->
                     <g id="pin-rj" class="cursor-pointer" transform="translate(331 409)">
-                        <circle r="10" fill="transparent" pointer-events="all"/>
+                        <circle r="10" fill="transparent" pointer-events="all" />
                         <circle r="4" fill="rgba(27,108,168,0.50)">
-                            <animate attributeName="r"
-                                    values="4;8;4"
-                                    dur="2s"
-                                    repeatCount="indefinite"/>
+                            <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite" />
                         </circle>
-                        <circle r="2.5" fill="#1B6CA8"/>
+                        <circle r="2.5" fill="#1B6CA8" />
                     </g>
 
                     <!-- NORDESTE -->
                     <g id="pin-ne" class="cursor-pointer" transform="translate(348 358)">
-                        <circle r="10" fill="transparent" pointer-events="all"/>
+                        <circle r="10" fill="transparent" pointer-events="all" />
                         <circle r="4" fill="rgba(200,90,10,0.50)">
-                            <animate attributeName="r"
-                                    values="4;8;4"
-                                    dur="2s"
-                                    repeatCount="indefinite"/>
+                            <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite" />
                         </circle>
-                        <circle r="2.5" fill="#C85A0A"/>
+                        <circle r="2.5" fill="#C85A0A" />
                     </g>
 
                     <!-- AMAZÔNIA -->
                     <g id="pin-am" class="cursor-pointer" transform="translate(285 360)">
-                        <circle r="10" fill="transparent" pointer-events="all"/>
+                        <circle r="10" fill="transparent" pointer-events="all" />
                         <circle r="4" fill="rgba(200,90,10,0.50)">
-                            <animate attributeName="r"
-                                    values="4;8;4"
-                                    dur="2s"
-                                    repeatCount="indefinite"/>
+                            <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite" />
                         </circle>
-                        <circle r="2.5" fill="#C85A0A"/>
+                        <circle r="2.5" fill="#C85A0A" />
                     </g>
                 </svg>
             </div>
@@ -204,35 +156,34 @@
                 </p>
             </div>
 
-                <!-- Painel de Dados -->
-                <div class="lg:col-span-12 flex flex-col justify-between">
-                    <div id="telemetry-display" class="spotlight-card p-8 space-y-6 flex-grow rounded">
-                        <div class="flex justify-between items-center border-b border-brand-border  pb-4 relative z-10">
-                            <span class="font-mono text-sm text-brand-copper uppercase" id="tel-local">[ Foco: Perímetro ]</span>
-                            <span class="font-mono text-[9px] text-brand-grayText" id="tel-id">ID: 000-A</span>
+            <!-- Painel de Telemetria -->
+            <div class="w-full">
+                <div id="telemetry-display" class="spotlight-card p-8 space-y-6 rounded">
+                    <div class="flex justify-between items-center border-b border-brand-border pb-4 relative z-10">
+                        <span class="font-mono text-sm text-brand-copper uppercase" id="tel-local">[ Foco: Perímetro ]</span>
+                        <span class="font-mono text-[9px] text-brand-grayText" id="tel-id">ID: 000-A</span>
+                    </div>
+                    
+                    <div class="space-y-4 relative z-10">
+                        <div class="space-y-1">
+                            <h4 class="text-[10px] font-mono uppercase text-brand-grayText">Resumo Operacional</h4>
+                            <p class="text-sm font-light text-[#f4f4f5]" id="tel-status">Selecione um ponto ativo no mapa vetorial.</p>
                         </div>
-                        
-                        <div class="space-y-4 relative z-10">
-                            <div class="space-y-1">
-                                <h4 class="text-[10px] font-mono uppercase text-brand-grayText">Resumo Operacional</h4>
-                                <p class="text-sm font-light text-[#f4f4f5]" id="tel-status">Selecione um ponto ativo no mapa vetorial.</p>
-                            </div>
 
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="bg-brand-black/50 p-3 rounded border border-brand-border">
-                                    <span class="text-[9px] font-mono text-brand-grayText block uppercase">Alerta Crítico</span>
-                                    <span class="text-sm font-mono text-white" id="tel-risk-val">--</span>
-                                </div>
-                                <div class="bg-brand-black/50 p-3 rounded border border-brand-border">
-                                    <span class="text-[9px] font-mono text-brand-grayText block uppercase">Análise Hídrica</span>
-                                    <span class="text-sm font-mono text-white" id="tel-pop">--</span>
-                                </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-brand-black/50 p-3 rounded border border-brand-border">
+                                <span class="text-[9px] font-mono text-brand-grayText block uppercase">Alerta Crítico</span>
+                                <span class="text-sm font-mono text-white" id="tel-risk-val">--</span>
                             </div>
-
-                            <p class="text-sm text-brand-grayText leading-relaxed" id="tel-analise">
-                                Selecione um dos marcadores circulares do sensor espacial. O processamento orbital exibirá o diagnóstico correspondente no monitor.
-                            </p>
+                            <div class="bg-brand-black/50 p-3 rounded border border-brand-border">
+                                <span class="text-[9px] font-mono text-brand-grayText block uppercase">Análise Hídrica</span>
+                                <span class="text-sm font-mono text-white" id="tel-pop">--</span>
+                            </div>
                         </div>
+
+                        <p class="text-sm text-brand-grayText leading-relaxed" id="tel-analise">
+                            Selecione um dos marcadores circulares do sensor espacial. O processamento orbital exibirá o diagnóstico correspondente no monitor.
+                        </p>
                     </div>
                 </div>
             </div>
