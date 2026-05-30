@@ -1,4 +1,5 @@
-// --- 1. INTERACTION: SPOTLIGHT EFFECT QUE SEGUE O MOUSE ---
+// --- EFEITOS VISUAIS ---
+
 document.querySelectorAll('.spotlight-card').forEach(card => {
     card.addEventListener('mousemove', e => {
         const rect = card.getBoundingClientRect();
@@ -9,18 +10,21 @@ document.querySelectorAll('.spotlight-card').forEach(card => {
     });
 });
 
-// --- 2. SCROLL INTERACTION: REVELAÇÃO SUAVE (INTERSECTION OBSERVER) ---
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if(entry.isIntersecting) {
-            entry.target.classList.add('active');
-        }
-    });
-}, { threshold: 0.1 });
+const reveals = document.querySelectorAll('.reveal');
+if (reveals.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    reveals.forEach((el) => observer.observe(el));
+}
 
-document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+// --- TELEMETRIA DO MAPA ---
 
-// --- 4. MAPA VETORIAL - CARREGAR TELEMETRIA ---
 const pontosInfo = {
     rs: {
         local: "[ Rio Grande do Sul ]",
@@ -31,13 +35,13 @@ const pontosInfo = {
         analise: "Imagens do satélite Sentinel indicam descompasso hídrico persistente em locais baixos. Comunicação civil limitada a fallback."
     },
     rj: {
-    local: "[ Rio de Janeiro - Região Serrana ]",
-    id: "ID: MON-304",
-    status: "Área sob monitoramento contínuo.",
-    risco: "Em Avaliação",
-    pop: "Monitoramento Ativo",
-    analise: "Sensores pluviométricos e imagens orbitais indicam instabilidade potencial. Equipes técnicas acompanham a evolução das condições do terreno."
-},
+        local: "[ Rio de Janeiro - Região Serrana ]",
+        id: "ID: MON-304",
+        status: "Área sob monitoramento contínuo.",
+        risco: "Em Avaliação",
+        pop: "Monitoramento Ativo",
+        analise: "Sensores pluviométricos e imagens orbitais indicam instabilidade potencial. Equipes técnicas acompanham a evolução das condições do terreno."
+    },
     ne: {
         local: "[ Região Nordeste ]",
         id: "ID: LEO-112",
@@ -53,133 +57,135 @@ const pontosInfo = {
         risco: "Alerta Ambiental",
         pop: "Queimadas Ativas",
         analise: "Sensores orbitais identificaram aumento significativo de temperatura superficial e emissões térmicas compatíveis com incêndios florestais."
-},
+    }
 };
 
 function focarPonto(id) {
     const info = pontosInfo[id];
+    if (!info) return;
 
-    document.getElementById('tel-local').textContent = info.local;
-    document.getElementById('tel-id').textContent = info.id;
-    document.getElementById('tel-status').textContent = info.status;
-    document.getElementById('tel-risk-val').textContent = info.risco;
-    document.getElementById('tel-pop').textContent = info.pop;
-    document.getElementById('tel-analise').textContent = info.analise;
-
+    const telLocal = document.getElementById('tel-local');
+    const telId = document.getElementById('tel-id');
+    const telStatus = document.getElementById('tel-status');
+    const telRiskVal = document.getElementById('tel-risk-val');
+    const telPop = document.getElementById('tel-pop');
+    const telAnalise = document.getElementById('tel-analise');
     const painel = document.getElementById('telemetry-display');
 
-    if (id === 'rj') {
-        painel.style.borderColor = '#1B6CA8';
+    if (telLocal) telLocal.textContent = info.local;
+    if (telId) telId.textContent = info.id;
+    if (telStatus) telStatus.textContent = info.status;
+    if (telRiskVal) telRiskVal.textContent = info.risco;
+    if (telPop) telPop.textContent = info.pop;
+    if (telAnalise) telAnalise.textContent = info.analise;
 
-        document.getElementById('tel-local').style.color = '#4EA0DC';
-        document.getElementById('tel-risk-val').style.color = '#4EA0DC';
-    } else {
-        painel.style.borderColor = '#C85A0A';
-
-        document.getElementById('tel-local').style.color = '#C85A0A';
-        document.getElementById('tel-risk-val').style.color = '#C85A0A';
+    if (painel) {
+        if (id === 'rj') {
+            painel.style.borderColor = '#1B6CA8';
+            if (telLocal) telLocal.style.color = '#4EA0DC';
+            if (telRiskVal) telRiskVal.style.color = '#4EA0DC';
+        } else {
+            painel.style.borderColor = '#C85A0A';
+            if (telLocal) telLocal.style.color = '#C85A0A';
+            if (telRiskVal) telRiskVal.style.color = '#C85A0A';
+        }
     }
 }
 
-// Ativação do Clique dos Eventos nos Elementos SVG
-document.getElementById('pin-rs').addEventListener('click', () => {
-    focarPonto('rs');
-    document.getElementById('mapa-operacoes').scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-    });
+['rs', 'rj', 'ne', 'am'].forEach(id => {
+    const pin = document.getElementById(`pin-${id}`);
+    if (pin) {
+        pin.addEventListener('click', () => {
+            focarPonto(id);
+            const mapaOperacoes = document.getElementById('mapa-operacoes');
+            if (mapaOperacoes) {
+                mapaOperacoes.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    }
 });
 
-document.getElementById('pin-rj').addEventListener('click', () => {
-    focarPonto('rj');
-    document.getElementById('mapa-operacoes').scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-    });
-});
+// --- REGISTRO SOS E ALGORITMO DE PRIORIZAÇÃO ---
 
-document.getElementById('pin-ne').addEventListener('click', () => {
-    focarPonto('ne');
-    document.getElementById('mapa-operacoes').scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-    });
-});
-
-document.getElementById('pin-am').addEventListener('click', () => {
-    focarPonto('am');
-    document.getElementById('mapa-operacoes').scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-    });
-});
-
-// --- 5. WORKSPACE: CADASTRO DE SOS & ALGORITMO DE ROTAS ---
-function registrarEmergencia(event) {
-    event.preventDefault();
-    
-    const local = document.getElementById('sosLocal').value;
-    const tipo = document.getElementById('sosTipo').value;
-    const pessoas = parseInt(document.getElementById('sosPessoas').value);
-
-    let prioValue = 4;
-    if(tipo.includes("Inundação")) prioValue = 1;
-    if(tipo.includes("Colapso")) prioValue = 2;
-
-    const list = document.getElementById('incident-list');
-    const card = document.createElement('div');
-    card.className = "p-3 bg-brand-copperFaint border border-brand-copper rounded flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 transition-all duration-500 opacity-0 transform translate-y-4";
-    card.setAttribute('data-prioridade', prioValue);
-    
-    card.innerHTML = `
-        <div class="space-y-0.5">
-            <span class="text-white text-[11px] font-medium">${local}</span>
-            <p class="text-[10px] text-brand-grayText">${tipo} • ${pessoas} Pessoas</p>
-        </div>
-        <div class="text-right flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto mt-2 sm:mt-0">
-            <span class="text-[10px] text-brand-copper font-bold uppercase">[Aguardando]</span>
-        </div>
-    `;
-
-    list.prepend(card);
-
-    setTimeout(() => {
-        card.classList.remove('opacity-0', 'translate-y-4');
-    }, 100);
-
-    document.getElementById('sosForm').reset();
-}
-
-function otimizarRotas() {
-    const list = document.getElementById('incident-list');
-    const items = Array.from(list.children);
-
-    items.sort((a, b) => {
-        return parseInt(a.getAttribute('data-prioridade')) - parseInt(b.getAttribute('data-prioridade'));
-    });
-
-    list.innerHTML = '';
-    
-    items.forEach((item, index) => {
-        const priorityBadge = item.querySelector('.text-right span');
-        if (priorityBadge) {
-            priorityBadge.innerHTML = `[Prioridade #${index + 1}]`;
-            priorityBadge.classList.remove('text-brand-copper');
-            priorityBadge.classList.add('text-brand-grayLight');
-        }
+const sosForm = document.getElementById('sosForm');
+if (sosForm) {
+    sosForm.addEventListener('submit', (event) => {
+        event.preventDefault();
         
-        if(index === 0) {
-            item.className = "p-3 bg-brand-copperFaint border border-brand-copper/50 rounded flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 transition-all duration-500";
-        } else {
-            item.className = "p-3 bg-brand-black/40 border border-brand-border rounded flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 transition-all duration-500";
+        const local = document.getElementById('sosLocal').value;
+        const tipo = document.getElementById('sosTipo').value;
+        const pessoas = parseInt(document.getElementById('sosPessoas').value);
+
+        let prioValue = 4;
+        if (tipo.includes("Inundação")) prioValue = 1;
+        if (tipo.includes("Colapso")) prioValue = 2;
+
+        const list = document.getElementById('incident-list');
+        if (list) {
+            const card = document.createElement('div');
+            card.className = "p-3 bg-brand-dark-opacity border border-brand-border rounded d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 mb-2 transition-all duration-500 opacity-0";
+            card.style.transform = "translateY(16px)";
+            card.setAttribute('data-prioridade', prioValue);
+            
+            card.innerHTML = `
+                <div class="d-flex flex-column gap-1">
+                    <span class="text-white text-xs font-medium">${local}</span>
+                    <p class="text-xs text-brand-gray mb-0">${tipo} • ${pessoas} Pessoas</p>
+                </div>
+                <div class="text-sm-end w-100 w-sm-auto mt-2 mt-sm-0">
+                    <span class="text-xs text-brand-copper font-bold text-uppercase">[Aguardando]</span>
+                </div>
+            `;
+
+            list.prepend(card);
+
+            setTimeout(() => {
+                card.classList.remove('opacity-0');
+                card.style.transform = "translateY(0)";
+            }, 100);
         }
 
-        list.appendChild(item);
+        sosForm.reset();
     });
 }
 
+const btnOtimizarRotas = document.getElementById('btnOtimizarRotas');
+if (btnOtimizarRotas) {
+    btnOtimizarRotas.addEventListener('click', () => {
+        const list = document.getElementById('incident-list');
+        if (!list) return;
 
-// --- 6. TIMELINE DINÂMICA ---
+        const items = Array.from(list.children);
+        items.sort((a, b) => {
+            return parseInt(a.getAttribute('data-prioridade')) - parseInt(b.getAttribute('data-prioridade'));
+        });
+
+        list.innerHTML = '';
+        
+        items.forEach((item, index) => {
+            const priorityBadge = item.querySelector('.text-sm-end span');
+            if (priorityBadge) {
+                priorityBadge.innerHTML = `[Prioridade #${index + 1}]`;
+                priorityBadge.classList.remove('text-brand-copper');
+                priorityBadge.classList.add('text-brand-light');
+            }
+            
+            if (index === 0) {
+                item.className = "p-3 bg-brand-dark-opacity border border-brand-copper rounded d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 mb-2 transition-all duration-500";
+            } else {
+                item.className = "p-3 bg-brand-dark-opacity border border-brand-border rounded d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 mb-2 transition-all duration-500";
+            }
+
+            list.appendChild(item);
+        });
+    });
+}
+
+// --- LINHA DO TEMPO HISTÓRICA ---
+
 const tDados = {
     1: {
         tipo: "[ Precipitação Inicial ]",
@@ -206,56 +212,87 @@ const tDados = {
 function timelineData(id) {
     for (let i = 1; i <= 4; i++) {
         const btn = document.getElementById(`tbtn-${i}`);
-        if (i === id) {
-            btn.className = "text-brand-copper border-b border-brand-copper pb-2 px-2 transition-colors";
-        } else {
-            btn.className = "pb-2 px-2 hover:text-[#f4f4f5] transition-colors";
+        if (btn) {
+            if (i === id) {
+                btn.className = "btn-timeline active";
+            } else {
+                btn.className = "btn-timeline";
+            }
         }
     }
 
     const box = document.getElementById('timeline-box');
-    box.style.opacity = 0;
-    
-    setTimeout(() => {
-        const info = tDados[id];
-        box.innerHTML = `
-            <div class="flex justify-between items-center text-[10px] font-mono relative z-10">
-                <span class="text-brand-copper">${info.tipo}</span>
-                <span class="text-brand-grayText">Estudo de Caso RS</span>
-            </div>
-            <h3 class="text-base text-white relative z-10">${info.titulo}</h3>
-            <p class="text-sm text-brand-grayText leading-relaxed relative z-10">${info.texto}</p>
-        `;
-        box.style.opacity = 1;
-    }, 200);
+    if (box) {
+        box.style.opacity = '0';
+        
+        setTimeout(() => {
+            const info = tDados[id];
+            box.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center font-mono text-xs mb-3">
+                    <span class="text-brand-copper">${info.tipo}</span>
+                    <span class="text-brand-gray">Estudo de Caso RS</span>
+                </div>
+                <h3 class="h5 text-white mb-3">${info.titulo}</h3>
+                <p class="text-brand-gray mb-0">${info.texto}</p>
+            `;
+            box.style.opacity = '1';
+        }, 200);
+    }
 }
+
+for (let i = 1; i <= 4; i++) {
+    const btn = document.getElementById(`tbtn-${i}`);
+    if (btn) {
+        btn.addEventListener('click', () => {
+            timelineData(i);
+        });
+    }
+}
+
+// --- BUSCA DE CIDADES E QUERY PARAMETERS ---
 
 const btnBuscarCidade = document.getElementById('btnBuscarCidade');
-
 if (btnBuscarCidade) {
-
     btnBuscarCidade.addEventListener('click', () => {
+        const cidadeBusca = document.getElementById('cidadeBusca');
+        if (!cidadeBusca) return;
 
-        const cidade = document
-            .getElementById('cidadeBusca')
-            .value
-            .trim();
-
+        const cidade = cidadeBusca.value.trim();
         if (!cidade) return;
 
-        const campoLocalizacao = document.querySelector(
-            '#simulador input[placeholder="Bairro, Município"]'
-        );
-
-        if (campoLocalizacao) {
-            campoLocalizacao.value = cidade;
+        const sosLocalInput = document.getElementById('sosLocal');
+        if (sosLocalInput) {
+            sosLocalInput.value = cidade;
+            const simuladorSec = document.getElementById('simulador');
+            if (simuladorSec) {
+                simuladorSec.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        } else {
+            window.location.href = `acoes.html?cidade=${encodeURIComponent(cidade)}`;
         }
-
-        document.getElementById('simulador').scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-
     });
-
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const cidadeParam = urlParams.get('cidade');
+    if (cidadeParam) {
+        const sosLocalInput = document.getElementById('sosLocal');
+        if (sosLocalInput) {
+            sosLocalInput.value = cidadeParam;
+            sosLocalInput.focus();
+            const simuladorSec = document.getElementById('simulador');
+            if (simuladorSec) {
+                setTimeout(() => {
+                    simuladorSec.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }, 100);
+            }
+        }
+    }
+});

@@ -1,353 +1,140 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SENTRYA — Monitoramento de Desastres por Satélite</title>
     
-    <!-- Tailwind CSS para estruturação limpa -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Google Fonts: Inter para legibilidade clássica e JetBrains Mono para telemetria fina -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=JetBrains+Mono:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            black: '#0A0A0A',
-                            card: '#232323',
-                            border: 'rgba(243, 241, 236, 0.08)',
-                            copper: '#C85A0A',
-                            copperDim: '#9E4708',
-                            copperFaint: 'rgba(200, 90, 10, 0.08)',
-                            grayText: '#B8B6B1',
-                            grayLight: '#F3F1EC'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Estilos específicos do projeto -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-brand-black text-[#f4f4f5] font-sans overflow-x-hidden antialiased selection:bg-brand-copperFaint selection:text-brand-copper">
+<body class="bg-brand-black text-brand-light font-sans overflow-x-hidden">
 
-    <!-- HEADER MINIMALISTA -->
-    <header class="fixed top-0 w-full z-50 bg-[#0A0A0A]/95 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-7xl mx-auto h-20 px-8 flex items-center justify-between">
-            <!-- Logo -->
-            <a href="#" class="flex items-center">
-                <img src="img/logosentrya.png" alt="Sentrya" class="h-16 w-auto transition-all duration-300 hover:scale-105">
+    <!-- HEADER -->
+    <header class="fixed-top bg-brand-header border-bottom border-brand-border py-3">
+        <div class="container-xl d-flex align-items-center justify-content-between">
+            <a href="index.html" class="d-flex align-items-center">
+                <img src="img/logosentrya.png" alt="Sentrya" class="img-logo transition-scale">
             </a>
 
-            <!-- Navegação -->
-            <nav class="hidden md:flex items-center gap-12 font-mono text-[14px] uppercase tracking-[0.15em]">
-                <a href="#mapa-operacoes" class="text-[#B8B6B1] hover:text-[#F3F1EC] transition-colors">Satélites</a>
-                <a href="#simulador" class="text-[#B8B6B1] hover:text-[#F3F1EC] transition-colors">Roteamento</a>
-                <a href="#timeline" class="text-[#B8B6B1] hover:text-[#F3F1EC] transition-colors">Histórico</a>
+            <nav class="nav d-none d-md-flex align-items-center gap-5 text-uppercase font-mono tracking-widest small">
+                <a href="index.html" class="nav-link-brand active">Início</a>
+                <a href="simulacao.html" class="nav-link-brand">Simulação</a>
+                <a href="acoes.html" class="nav-link-brand">Ações</a>
             </nav>
 
-            <!-- Botão -->
-            <a href="#simulador" class="hidden sm:flex items-center justify-center h-11 px-6 rounded-md border border-[#C85A0A]/40 text-[#F3F1EC] font-mono text-[11px] uppercase tracking-widest hover:bg-[#C85A0A] hover:text-[#0A0A0A] transition-all duration-300">
+            <a href="acoes.html" class="btn btn-outline-brand-copper font-mono text-uppercase tracking-widest px-4 py-2 small">
                 Central
             </a>
         </div>
     </header>
 
     <!-- HERO SECTION -->
-    <section class="relative min-h-screen flex items-center px-8 pt-32 border-b border-brand-border">
-        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-20">
-            <!-- Coluna de Texto e Controles -->
-            <div class="lg:col-span-7 flex flex-col justify-center space-y-6">
-                <!-- Animação do Título Principal -->
-                <h1 class="text-4xl md:text-5xl font-light tracking-tight leading-tight max-w-2xl text-white animate-fade-up delay-2">
-                    Verifique se sua região está em <span class="text-brand-copper font-normal">risco</span>, e obtenha as informações necessárias.
-                </h1>
-                
-                <!-- Animação do Texto Descritivo -->
-                <p class="text-brand-grayText max-w-xl text-lg leading-relaxed animate-fade-up delay-3">
-                    Consulte o nome da sua cidade abaixo para verificar possíveis áreas de risco, alertas ativos e informações atualizadas sobre desastres naturais na sua região.
-                </p>
-                
-                <div class="flex gap-3 mt-6 animate-fade-up delay-4">
-                    <input id="cidadeBusca" type="text" placeholder="Digite sua cidade..." class="w-full max-w-md bg-[#0A0A0A] border border-[#232323] rounded-md px-4 py-3 text-white focus:outline-none focus:border-[#C85A0A] transition">
-                    <button id="btnBuscarCidade" class="px-6 py-3 bg-[#C85A0A] text-white rounded-md hover:opacity-90 transition">
-                        Buscar
-                    </button>
-                </div>
-                
-                <!-- Animação dos Botões de Ação -->
-                <div class="flex items-center space-x-6 pt-4 animate-fade-up delay-4">
-                    <a href="#mapa-operacoes" class="font-mono text-[11px] uppercase tracking-widest bg-[#f4f4f5] hover:bg-white text-brand-black px-6 py-3 transition-colors">
-                        Iniciar Varredura
-                    </a>
-                    <a href="#solucao" class="font-mono text-[11px] uppercase tracking-widest text-brand-grayText hover:text-white transition-colors">
-                        Visão de Projeto →
-                    </a>
-                </div>
-            </div>
-
-            <!-- Coluna do Mapa Vetorial Interativo -->
-            <div class="lg:col-span-5 flex items-center justify-center animate-fade-up delay-3">
-                <svg viewBox="240 320 120 125" class="w-full max-w-[450px] lg:max-w-full h-auto text-[#232323] fill-current">
-                    <path d="M314.24,438.85l6.25-12.02l0.23-10.1l11.66-7.52h6.53l5.13-8.69l0.93-16.68l-2.1-4.46l12.36-11.28l0.47-12.45l-16.79-8.22l-20.28-6.34l-9.56-0.94l2.57-5.4l-0.7-8.22l-2.09-0.69l-3.09,6.14l-1.62,2.03l-4.16-1.84l-13.99,4.93l-4.66-5.87l0.75-6.13l-4.4,4.48l-4.86-2.62l-0.49,0.69l0.01,2.13l4.19,2.25l-6.29,6.63l-3.97-0.04l-4.02-4.09l-4.55,0.14l-0.56,4.86l2.61,3.17l-3.08,9.87l-3.6,0.28l-5.73,3.62l-1.4,7.11l4.97,5.32l0.91-1.03l3.49-0.94l2.98,5.02l8.53-3.66l3.31,0.19l2.28,8.07l12.17,3.86l2.1,6.44l5.18,0.62l2.47,6.15l-1.67,5.47l2.18,2.86l-0.32,4.26l5.84-0.55l5.35,6.76l-0.42,4.75l3.17,2.68l-7.6,11.51L314.24,438.85L314.24,438.85z" />
-
-                    <!-- RIO GRANDE DO SUL -->
-                    <g id="pin-rs" class="cursor-pointer" transform="translate(314 434)">
-                        <circle r="10" fill="transparent" pointer-events="all" />
-                        <circle r="4" fill="rgba(200,90,10,0.50)">
-                            <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite" />
-                        </circle>
-                        <circle r="2.5" fill="#C85A0A" />
-                    </g>
-
-                    <!-- RIO DE JANEIRO -->
-                    <g id="pin-rj" class="cursor-pointer" transform="translate(331 409)">
-                        <circle r="10" fill="transparent" pointer-events="all" />
-                        <circle r="4" fill="rgba(27,108,168,0.50)">
-                            <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite" />
-                        </circle>
-                        <circle r="2.5" fill="#1B6CA8" />
-                    </g>
-
-                    <!-- NORDESTE -->
-                    <g id="pin-ne" class="cursor-pointer" transform="translate(348 358)">
-                        <circle r="10" fill="transparent" pointer-events="all" />
-                        <circle r="4" fill="rgba(200,90,10,0.50)">
-                            <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite" />
-                        </circle>
-                        <circle r="2.5" fill="#C85A0A" />
-                    </g>
-
-                    <!-- AMAZÔNIA -->
-                    <g id="pin-am" class="cursor-pointer" transform="translate(285 360)">
-                        <circle r="10" fill="transparent" pointer-events="all" />
-                        <circle r="4" fill="rgba(200,90,10,0.50)">
-                            <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite" />
-                        </circle>
-                        <circle r="2.5" fill="#C85A0A" />
-                    </g>
-                </svg>
-            </div>
-        </div>
-    </section>
-
-    <!-- MAPA INTERATIVO SENSORIAL -->
-    <section id="mapa-operacoes" class="py-24 px-8 bg-brand-black border-b border-brand-border reveal">
-        <div class="max-w-7xl mx-auto space-y-12">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-                <div class="space-y-2">
-                    <span class="font-mono text-[10px] text-brand-copper tracking-widest uppercase">[ Telemetria Ativa ]</span>
-                    <h2 class="text-4xl font-light text-white">Pontos Críticos Registrados</h2>
-                </div>
-                <p class="text-sm text-brand-grayText max-w-sm">
-                    Selecione um alerta no mapa principal acima para visualizar o diagnóstico satelital e os dados operacionais da região.
-                </p>
-            </div>
-
-            <!-- Painel de Telemetria -->
-            <div class="w-full">
-                <div id="telemetry-display" class="spotlight-card p-8 space-y-6 rounded">
-                    <div class="flex justify-between items-center border-b border-brand-border pb-4 relative z-10">
-                        <span class="font-mono text-sm text-brand-copper uppercase" id="tel-local">[ Foco: Perímetro ]</span>
-                        <span class="font-mono text-[9px] text-brand-grayText" id="tel-id">ID: 000-A</span>
-                    </div>
+    <section class="min-vh-100 d-flex align-items-center pt-5 border-bottom border-brand-border">
+        <div class="container-xl py-5 mt-5">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-7 reveal">
+                    <span class="font-mono text-brand-copper tracking-widest text-uppercase d-block mb-3">[ Apresentação do Projeto ]</span>
+                    <h1 class="display-5 text-white fw-light mb-4">
+                        O problema da comunicação terrestre em <span class="text-brand-copper fw-normal">cenários extremos</span>.
+                    </h1>
                     
-                    <div class="space-y-4 relative z-10">
-                        <div class="space-y-1">
-                            <h4 class="text-[10px] font-mono uppercase text-brand-grayText">Resumo Operacional</h4>
-                            <p class="text-sm font-light text-[#f4f4f5]" id="tel-status">Selecione um ponto ativo no mapa vetorial.</p>
-                        </div>
+                    <p class="text-brand-gray text-lg mb-4">
+                        Durante desastres naturais graves (como as enchentes no RS em 2024), redes de telefonia móvel e cabos terrestres falham completamente devido à inundação e perda de energia de repetidoras locais. Isso isola populações inteiras e paralisa as equipes de resgate.
+                    </p>
 
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-brand-black/50 p-3 rounded border border-brand-border">
-                                <span class="text-[9px] font-mono text-brand-grayText block uppercase">Alerta Crítico</span>
-                                <span class="text-sm font-mono text-white" id="tel-risk-val">--</span>
-                            </div>
-                            <div class="bg-brand-black/50 p-3 rounded border border-brand-border">
-                                <span class="text-[9px] font-mono text-brand-grayText block uppercase">Análise Hídrica</span>
-                                <span class="text-sm font-mono text-white" id="tel-pop">--</span>
-                            </div>
-                        </div>
+                    <h2 class="h4 text-white fw-light mb-3">
+                        A solução: Conectividade Orbital e Triagem Automatizada
+                    </h2>
+                    
+                    <p class="text-brand-gray mb-4">
+                        A SENTRYA monitora áreas de risco de forma ativa via satélite e provê rotas de socorro redundantes através de satélites LEO (órbita baixa). Isso viabiliza o envio de alertas SOS urgentes diretamente do local afetado e o cálculo imediato de rotas de salvamento prioritárias.
+                    </p>
+                    
+                    <div class="d-flex flex-wrap gap-3 mt-2">
+                        <a href="simulacao.html" class="btn btn-brand-light font-mono text-uppercase tracking-widest px-4 py-3">
+                            Ver Simulação
+                        </a>
+                        <a href="acoes.html" class="btn btn-outline-brand-copper font-mono text-uppercase tracking-widest px-4 py-3">
+                            Tomar Ação →
+                        </a>
+                    </div>
+                </div>
 
-                        <p class="text-sm text-brand-grayText leading-relaxed" id="tel-analise">
-                            Selecione um dos marcadores circulares do sensor espacial. O processamento orbital exibirá o diagnóstico correspondente no monitor.
-                        </p>
+                <div class="col-lg-5 reveal delay-2">
+                    <div class="spotlight-card p-5 rounded">
+                        <span class="font-mono text-brand-copper tracking-widest text-uppercase d-block mb-3">[ Detecção e Transmissão ]</span>
+                        <ul class="list-unstyled font-mono text-brand-gray text-sm mb-0">
+                            <li class="mb-4">
+                                <span class="text-white d-block mb-1">01 / Varredura Radar</span>
+                                Sensoriamento ativo independente de nuvens ou hora do dia para obter dados do solo.
+                            </li>
+                            <li class="mb-4">
+                                <span class="text-white d-block mb-1">02 / Constelação LEO</span>
+                                Transmissão de telemetria e dados em frequências não terrestres seguras.
+                            </li>
+                            <li>
+                                <span class="text-white d-block mb-1">03 / Triagem Algorítmica</span>
+                                Ordenação automática de resgates orientada pela densidade de vulneráveis no local.
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- STATS -->
-    <section class="border-b border-brand-border bg-brand-black/30 py-12 reveal">
-        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 px-8">
-            <div class="space-y-1">
-                <span class="text-[10px] font-mono text-brand-grayText uppercase block">[ Resposta ]</span>
-                <span class="text-2xl font-light text-brand-copper">-45%</span>
-                <p class="text-sm text-brand-grayText">Tempo de roteamento operacional</p>
-            </div>
-            <div class="space-y-1">
-                <span class="text-[10px] font-mono text-brand-grayText uppercase block">[ Área útil ]</span>
-                <span class="text-2xl font-light text-brand-copper">100%</span>
-                <p class="text-sm text-brand-grayText">Independente de redes celulares</p>
-            </div>
-            <div class="space-y-1">
-                <span class="text-[10px] font-mono text-brand-grayText uppercase block">[ Sensoriamento ]</span>
-                <span class="text-2xl font-light text-brand-copper">0,5m</span>
-                <p class="text-sm text-brand-grayText">Resolução óptica máxima</p>
-            </div>
-            <div class="space-y-1">
-                <span class="text-[10px] font-mono text-brand-grayText uppercase block">[ Conectividade ]</span>
-                <span class="text-2xl font-light text-brand-copper">Fallback</span>
-                <p class="text-sm text-brand-grayText">Protocolo LEO redundante</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- TERMINAL E ROTEADOR -->
-    <section id="simulador" class="py-24 px-8 border-b border-brand-border reveal">
-        <div class="max-w-7xl mx-auto space-y-12">
-            <div class="space-y-2">
-                <span class="font-mono text-[10px] text-brand-copper tracking-widest uppercase">[ Módulo Operacional ]</span>
-                <h2 class="text-4xl font-light text-white">Logística de Triagem e Rotas</h2>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <!-- Esquerda: SOS -->
-                <div class="lg:col-span-4 spotlight-card p-8 rounded space-y-4">
-                    <div class="border-b border-brand-border pb-3 relative z-10">
-                        <span class="text-sm font-mono text-brand-copper uppercase">[ Registro SOS ]</span>
-                    </div>
-
-                    <form id="sosForm" onsubmit="registrarEmergencia(event)" class="space-y-4 text-sm font-mono relative z-10">
-                        <div class="space-y-1">
-                            <label class="text-[9px] text-brand-grayText block uppercase">Localização</label>
-                            <input required id="sosLocal" type="text" placeholder="Bairro, Município" class="w-full bg-brand-black border border-brand-border p-3 text-white focus:outline-none focus:border-brand-copper rounded transition-colors">
-                        </div>
-
-                        <div class="space-y-1">
-                            <label class="text-[9px] text-brand-grayText block uppercase">Categoria de Ocorrência</label>
-                            <select id="sosTipo" class="w-full bg-brand-black border border-brand-border p-3 text-white focus:outline-none focus:border-brand-copper rounded transition-colors">
-                                <option value="Inundação Crítica">Inundação de Grande Porte</option>
-                                <option value="Risco de Colapso">Deslizamento / Encosta</option>
-                                <option value="Isolamento Hidrológico">Escassez Crítica / Seca</option>
-                            </select>
-                        </div>
-
-                        <div class="space-y-1">
-                            <label class="text-[9px] text-brand-grayText block uppercase">Vulneráveis Estimados</label>
-                            <input required id="sosPessoas" type="number" min="1" max="200" placeholder="Quantidade" class="w-full bg-brand-black border border-brand-border p-3 text-white focus:outline-none focus:border-brand-copper rounded transition-colors">
-                        </div>
-
-                        <button type="submit" class="w-full py-3 border border-brand-copper/40 text-brand-copper hover:bg-brand-copper hover:text-brand-black transition-all text-[10px] tracking-widest uppercase rounded font-mono">
-                            Enviar via Satélite
-                        </button>
-                    </form>
+    <!-- ESTUDO DE CASO HISTÓRICO -->
+    <section class="py-5 border-bottom border-brand-border reveal">
+        <div class="container-xl py-5">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-5">
+                    <span class="font-mono text-brand-copper tracking-widest text-uppercase d-block mb-2">[ Retrospectiva Crítica ]</span>
+                    <h2 class="display-6 text-white fw-light">Rio Grande do Sul (2024)</h2>
+                    <p class="text-brand-gray max-w-lg mx-auto">
+                        Análise de campo em condições de colapso de infraestrutura terrestre de telecomunicações.
+                    </p>
                 </div>
 
-                <!-- Direita: Fila de Roteamento -->
-                <div class="lg:col-span-8 spotlight-card p-8 rounded flex flex-col justify-between">
-                    <div class="w-full relative z-10">
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-brand-border pb-4 mb-4 gap-4">
-                            <div>
-                                <span class="font-mono text-sm text-brand-copper uppercase">[ Fila de Atendimento ]</span>
-                                <p class="text-[10px] text-brand-grayText">Pedidos prioritários filtrados por urgência humanitária</p>
-                            </div>
-                            <button onclick="otimizarRotas()" class="px-4 py-2 border border-brand-copper/30 hover:border-brand-copper/80 text-brand-copper font-mono text-[10px] uppercase tracking-widest rounded transition-all">
-                                Reordenar Prioridade
-                            </button>
-                        </div>
-
-                        <div id="incident-list" class="space-y-3 font-mono text-sm max-h-[250px] overflow-y-auto">
-                            <!-- Alerta 1 -->
-                            <div class="p-3 bg-brand-black/40 border border-brand-border rounded flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 transition-all duration-500" data-prioridade="2">
-                                <div class="space-y-0.5">
-                                    <span class="text-white text-[11px] font-medium">Região Serrana - RJ</span>
-                                    <p class="text-[10px] text-brand-grayText">Risco de Colapso • 12 Pessoas</p>
-                                </div>
-                                <div class="text-right flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto mt-2 sm:mt-0">
-                                    <span class="text-[10px] text-brand-copper font-bold uppercase">[Aguardando]</span>
-                                </div>
-                            </div>
-
-                            <!-- Alerta 2 -->
-                            <div class="p-3 bg-brand-black/40 border border-brand-border rounded flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 transition-all duration-500" data-prioridade="1">
-                                <div class="space-y-0.5">
-                                    <span class="text-white text-[11px] font-medium">Eldorado do Sul - Centro</span>
-                                    <p class="text-[10px] text-brand-grayText">Inundação Crítica • 80 Pessoas</p>
-                                </div>
-                                <div class="text-right flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto mt-2 sm:mt-0">
-                                    <span class="text-[10px] text-brand-copper font-bold uppercase">[Aguardando]</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 pt-4 border-t border-brand-border text-[9px] font-mono text-brand-grayText relative z-10 flex justify-between">
-                        <span>Algoritmo: Urgência = (População * Risco)</span>
-                        <span>SENTRYA v1.02</span>
+                <div class="timeline-navigation mb-4">
+                    <div class="d-flex justify-content-between border-bottom border-brand-border pb-2 font-mono text-brand-gray text-xs">
+                        <button id="tbtn-1" class="btn-timeline active">Abril 27</button>
+                        <button id="tbtn-2" class="btn-timeline">Abril 30</button>
+                        <button id="tbtn-3" class="btn-timeline">Maio 05</button>
+                        <button id="tbtn-4" class="btn-timeline">Maio 12</button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- ESTUDO DE CASO -->
-    <section id="timeline" class="py-24 px-8 border-b border-brand-border reveal">
-        <div class="max-w-4xl mx-auto space-y-12">
-            <div class="text-center space-y-2">
-                <span class="font-mono text-[10px] text-brand-copper tracking-widest uppercase">[ Retrospectiva Crítica ]</span>
-                <h2 class="text-4xl font-light text-white">Rio Grande do Sul (2024)</h2>
-                <p class="text-sm text-brand-grayText max-w-lg mx-auto leading-relaxed">
-                    Lições de resgate em condições de perda total de sinal terrestre de telefonia móvel.
-                </p>
-            </div>
-
-            <div class="space-y-8">
-                <div class="flex justify-between border-b border-brand-border pb-2 font-mono text-[10px] text-brand-grayText">
-                    <button onclick="timelineData(1)" id="tbtn-1" class="text-brand-copper border-b border-brand-copper pb-2 px-2 transition-colors">Abril 27</button>
-                    <button onclick="timelineData(2)" id="tbtn-2" class="pb-2 px-2 hover:text-[#f4f4f5] transition-colors">Abril 30</button>
-                    <button onclick="timelineData(3)" id="tbtn-3" class="pb-2 px-2 hover:text-[#f4f4f5] transition-colors">Maio 05</button>
-                    <button onclick="timelineData(4)" id="tbtn-4" class="pb-2 px-2 hover:text-[#f4f4f5] transition-colors">Maio 12</button>
-                </div>
-
-                <div id="timeline-box" class="spotlight-card p-8 space-y-4 min-h-[180px] rounded transition-all duration-300">
-                    <div class="flex justify-between items-center text-[10px] font-mono relative z-10">
+                <div id="timeline-box" class="spotlight-card p-5 rounded transition-all">
+                    <div class="d-flex justify-content-between align-items-center font-mono text-xs mb-3">
                         <span class="text-brand-copper">[ Precipitação Inicial ]</span>
-                        <span class="text-brand-grayText">Fase Operacional 1</span>
+                        <span class="text-brand-gray">Fase Operacional 1</span>
                     </div>
-                    <h3 class="text-base text-white relative z-10">Volume acumulado de alta intensidade</h3>
-                    <p class="text-sm text-brand-grayText leading-relaxed relative z-10">Modelos de solo saturaram em tempo recorde nos leitos dos rios Taquari e Jacuí. Agências locais operaram sem centralização em tempo real de altitudes e relevo topográfico.</p>
+                    <h3 class="h5 text-white mb-3">Volume acumulado de alta intensidade</h3>
+                    <p class="text-brand-gray mb-0">Modelos de solo saturaram em tempo recorde nos leitos dos rios Taquari e Jacuí. Agências locais operaram sem centralização em tempo real de altitudes e relevo topográfico.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="border-t border-brand-border py-10 px-8 bg-brand-black font-mono text-[11px] text-brand-grayText">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <span class="text-[#f4f4f5] font-light">SENTRYA — 2026</span>
-            <div class="flex space-x-6">
-                <a href="#" class="hover:text-brand-copper transition-colors">Especificações</a>
-                <a href="#" class="hover:text-brand-copper transition-colors">Segurança</a>
-                <a href="#" class="hover:text-brand-copper transition-colors">Código Aberto</a>
+    <footer class="border-t border-brand-border py-5 bg-brand-black font-mono text-xs text-brand-gray">
+        <div class="container-xl d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3">
+            <span class="text-white fw-light">SENTRYA — 2026</span>
+            <div class="d-flex gap-4">
+                <a href="#" class="footer-link">Especificações</a>
+                <a href="#" class="footer-link">Segurança</a>
+                <a href="#" class="footer-link">Código Aberto</a>
             </div>
         </div>
     </footer>
 
-    <!-- INTERAÇÕES JAVASCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
