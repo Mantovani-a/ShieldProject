@@ -92,68 +92,9 @@
 
     <!-- HERO SECTION -->
     <section class="relative min-h-screen flex items-center px-8 pt-32 border-b border-brand-border">
-        <!-- Canvas Dinâmico Minimalista (Interativo com mouse) -->
-        <div class="absolute right-0 top-0 w-full lg:w-1/2 h-full flex items-center justify-center z-10 opacity-20 lg:opacity-40">
-
-            <svg
-                viewBox="240 320 120 125"
-                class="w-[650px] max-w-[80%] h-auto text-[#232323] fill-current">
-
-                <path d="M314.24,438.85l6.25-12.02l0.23-10.1l11.66-7.52h6.53l5.13-8.69l0.93-16.68l-2.1-4.46l12.36-11.28l0.47-12.45l-16.79-8.22l-20.28-6.34l-9.56-0.94l2.57-5.4l-0.7-8.22l-2.09-0.69l-3.09,6.14l-1.62,2.03l-4.16-1.84l-13.99,4.93l-4.66-5.87l0.75-6.13l-4.4,4.48l-4.86-2.62l-0.49,0.69l0.01,2.13l4.19,2.25l-6.29,6.63l-3.97-0.04l-4.02-4.09l-4.55,0.14l-0.56,4.86l2.61,3.17l-3.08,9.87l-3.6,0.28l-5.73,3.62l-1.4,7.11l4.97,5.32l0.91-1.03l3.49-0.94l2.98,5.02l8.53-3.66l3.31,0.19l2.28,8.07l12.17,3.86l2.1,6.44l5.18,0.62l2.47,6.15l-1.67,5.47l2.18,2.86l-0.32,4.26l5.84-0.55l5.35,6.76l-0.42,4.75l3.17,2.68l-7.6,11.51L314.24,438.85L314.24,438.85z"/>
-
-                <!-- RIO GRANDE DO SUL -->
-            <g id="pin-rs" class="cursor-pointer" transform="translate(314 434)">
-                <circle r="10" fill="transparent" pointer-events="all"/>
-                <circle r="4" fill="rgba(200,90,10,0.50)">
-                    <animate attributeName="r"
-                            values="4;8;4"
-                            dur="2s"
-                            repeatCount="indefinite"/>
-                </circle>
-                <circle r="2.5" fill="#C85A0A"/>
-            </g>
-
-            <!-- RIO DE JANEIRO -->
-            <g id="pin-rj" class="cursor-pointer" transform="translate(331 409)">
-                <circle r="10" fill="transparent" pointer-events="all"/>
-                <circle r="4" fill="rgba(27,108,168,0.50)">
-                    <animate attributeName="r"
-                            values="4;8;4"
-                            dur="2s"
-                            repeatCount="indefinite"/>
-                </circle>
-                <circle r="2.5" fill="#1B6CA8"/>
-            </g>
-
-            <!-- NORDESTE -->
-            <g id="pin-ne" class="cursor-pointer" transform="translate(348 358)">
-                <circle r="10" fill="transparent" pointer-events="all"/>
-                <circle r="4" fill="rgba(200,90,10,0.50)">
-                    <animate attributeName="r"
-                            values="4;8;4"
-                            dur="2s"
-                            repeatCount="indefinite"/>
-                </circle>
-                <circle r="2.5" fill="#C85A0A"/>
-            </g>
-
-            <!-- AMAZÔNIA -->
-            <g id="pin-am" class="cursor-pointer" transform="translate(285 360)">
-                <circle r="10" fill="transparent" pointer-events="all"/>
-                <circle r="4" fill="rgba(200,90,10,0.50)">
-                    <animate attributeName="r"
-                            values="4;8;4"
-                            dur="2s"
-                            repeatCount="indefinite"/>
-                </circle>
-                <circle r="2.5" fill="#C85A0A"/>
-            </g>
-            </svg>
-
-        </div>
-
-        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 z-20 pointer-events-none">
-            <div class="lg:col-span-7 flex flex-col justify-center space-y-6 pointer-events-auto">
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-20">
+            <!-- Coluna de Texto e Controles -->
+            <div class="lg:col-span-7 flex flex-col justify-center space-y-6">
                 <!-- Animação do Título Principal -->
                 <h1 class="text-4xl md:text-5xl font-light tracking-tight leading-tight max-w-2xl text-white animate-fade-up delay-2">
                     Verifique se sua região está em <span class="text-brand-copper font-normal">risco</span>, e obtenha as informações necessárias.
@@ -188,6 +129,64 @@
                         Visão de Projeto →
                     </a>
                 </div>
+            </div>
+
+            <!-- Coluna do Mapa Vetorial Interativo -->
+            <div class="lg:col-span-5 flex items-center justify-center animate-fade-up delay-3">
+                <svg
+                    viewBox="240 320 120 125"
+                    class="w-full max-w-[450px] lg:max-w-full h-auto text-[#232323] fill-current">
+
+                    <path d="M314.24,438.85l6.25-12.02l0.23-10.1l11.66-7.52h6.53l5.13-8.69l0.93-16.68l-2.1-4.46l12.36-11.28l0.47-12.45l-16.79-8.22l-20.28-6.34l-9.56-0.94l2.57-5.4l-0.7-8.22l-2.09-0.69l-3.09,6.14l-1.62,2.03l-4.16-1.84l-13.99,4.93l-4.66-5.87l0.75-6.13l-4.4,4.48l-4.86-2.62l-0.49,0.69l0.01,2.13l4.19,2.25l-6.29,6.63l-3.97-0.04l-4.02-4.09l-4.55,0.14l-0.56,4.86l2.61,3.17l-3.08,9.87l-3.6,0.28l-5.73,3.62l-1.4,7.11l4.97,5.32l0.91-1.03l3.49-0.94l2.98,5.02l8.53-3.66l3.31,0.19l2.28,8.07l12.17,3.86l2.1,6.44l5.18,0.62l2.47,6.15l-1.67,5.47l2.18,2.86l-0.32,4.26l5.84-0.55l5.35,6.76l-0.42,4.75l3.17,2.68l-7.6,11.51L314.24,438.85L314.24,438.85z"/>
+
+                    <!-- RIO GRANDE DO SUL -->
+                    <g id="pin-rs" class="cursor-pointer" transform="translate(314 434)">
+                        <circle r="10" fill="transparent" pointer-events="all"/>
+                        <circle r="4" fill="rgba(200,90,10,0.50)">
+                            <animate attributeName="r"
+                                    values="4;8;4"
+                                    dur="2s"
+                                    repeatCount="indefinite"/>
+                        </circle>
+                        <circle r="2.5" fill="#C85A0A"/>
+                    </g>
+
+                    <!-- RIO DE JANEIRO -->
+                    <g id="pin-rj" class="cursor-pointer" transform="translate(331 409)">
+                        <circle r="10" fill="transparent" pointer-events="all"/>
+                        <circle r="4" fill="rgba(27,108,168,0.50)">
+                            <animate attributeName="r"
+                                    values="4;8;4"
+                                    dur="2s"
+                                    repeatCount="indefinite"/>
+                        </circle>
+                        <circle r="2.5" fill="#1B6CA8"/>
+                    </g>
+
+                    <!-- NORDESTE -->
+                    <g id="pin-ne" class="cursor-pointer" transform="translate(348 358)">
+                        <circle r="10" fill="transparent" pointer-events="all"/>
+                        <circle r="4" fill="rgba(200,90,10,0.50)">
+                            <animate attributeName="r"
+                                    values="4;8;4"
+                                    dur="2s"
+                                    repeatCount="indefinite"/>
+                        </circle>
+                        <circle r="2.5" fill="#C85A0A"/>
+                    </g>
+
+                    <!-- AMAZÔNIA -->
+                    <g id="pin-am" class="cursor-pointer" transform="translate(285 360)">
+                        <circle r="10" fill="transparent" pointer-events="all"/>
+                        <circle r="4" fill="rgba(200,90,10,0.50)">
+                            <animate attributeName="r"
+                                    values="4;8;4"
+                                    dur="2s"
+                                    repeatCount="indefinite"/>
+                        </circle>
+                        <circle r="2.5" fill="#C85A0A"/>
+                    </g>
+                </svg>
             </div>
         </div>
     </section>

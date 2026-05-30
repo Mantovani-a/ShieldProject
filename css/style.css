@@ -32,7 +32,7 @@ body {
 
 .animate-fade-up {
     opacity: 0;
-    animation: fadeUpGentle 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: fadeUpGentle 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* Delays escalonados */
@@ -87,12 +87,12 @@ body {
 #pin-ne:hover circle:not([fill="transparent"]),
 #pin-am:hover circle:not([fill="transparent"]) {
     filter:
-        drop-shadow(0 0 3px #FF7A1A)
-        drop-shadow(0 0 8px rgba(255, 122, 26, 0.6));
+        drop-shadow(0 0 2px #FF7A1A)
+        drop-shadow(0 0 5px rgba(255, 122, 26, 0.5));
 }
 
 #pin-rj:hover circle:not([fill="transparent"]) {
     filter:
-        drop-shadow(0 0 3px #1B6CA8)
-        drop-shadow(0 0 8px rgba(27, 108, 168, 0.6));
+        drop-shadow(0 0 2px #1B6CA8)
+        drop-shadow(0 0 5px rgba(27, 108, 168, 0.5));
 }
