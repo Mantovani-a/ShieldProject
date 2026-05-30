@@ -29,6 +29,8 @@ const pontosInfo = {
     rs: {
         local: "[ Rio Grande do Sul ]",
         id: "ID: LEO-902",
+        fonte: "Space Charter",
+        activationId: "BR-2024-0001",
         status: "Lâmina hídrica estabilizada sobre áreas urbanas das bacias do Guaíba.",
         risco: "Grau Crítico",
         pop: "56% Alagado",
@@ -37,6 +39,8 @@ const pontosInfo = {
     rj: {
         local: "[ Rio de Janeiro - Região Serrana ]",
         id: "ID: MON-304",
+        fonte: "Space Charter",
+        activationId: "BR-2024-0002",
         status: "Área sob monitoramento contínuo.",
         risco: "Em Avaliação",
         pop: "Monitoramento Ativo",
@@ -45,6 +49,8 @@ const pontosInfo = {
     ne: {
         local: "[ Região Nordeste ]",
         id: "ID: LEO-112",
+        fonte: "Space Charter",
+        activationId: "BR-2024-0003",
         status: "Stress hídrico acumulado de alta escala temporal. Escassez hídrica aguda.",
         risco: "Severo",
         pop: "Solo Seco",
@@ -53,6 +59,8 @@ const pontosInfo = {
     am: {
         local: "[ Amazônia ]",
         id: "ID: LEO-778",
+        fonte: "Space Charter",
+        activationId: "BR-2024-0004",
         status: "Focos de calor detectados em múltiplos setores da floresta.",
         risco: "Alerta Ambiental",
         pop: "Queimadas Ativas",
@@ -73,7 +81,7 @@ function focarPonto(id) {
     const painel = document.getElementById('telemetry-display');
 
     if (telLocal) telLocal.textContent = info.local;
-    if (telId) telId.textContent = info.id;
+    if (telId) telId.textContent = `${info.id} | ${info.activationId} (Fonte: ${info.fonte})`;
     if (telStatus) telStatus.textContent = info.status;
     if (telRiskVal) telRiskVal.textContent = info.risco;
     if (telPop) telPop.textContent = info.pop;
@@ -119,9 +127,21 @@ if (sosForm) {
         const tipo = document.getElementById('sosTipo').value;
         const pessoas = parseInt(document.getElementById('sosPessoas').value);
 
+        // Fatores de risco oficiais: Inundação = 3, Colapso = 2, Isolamento = 1
+        let riskFactor = 1;
         let prioValue = 4;
-        if (tipo.includes("Inundação")) prioValue = 1;
-        if (tipo.includes("Colapso")) prioValue = 2;
+        if (tipo.includes("Inundação")) {
+            riskFactor = 3;
+            prioValue = 1;
+        } else if (tipo.includes("Colapso")) {
+            riskFactor = 2;
+            prioValue = 2;
+        } else if (tipo.includes("Isolamento")) {
+            riskFactor = 1;
+            prioValue = 3;
+        }
+
+        const urgenciaVal = pessoas * riskFactor;
 
         const list = document.getElementById('incident-list');
         if (list) {
@@ -129,6 +149,7 @@ if (sosForm) {
             card.className = "p-3 bg-brand-dark-opacity border border-brand-border rounded d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 mb-2 transition-all duration-500 opacity-0";
             card.style.transform = "translateY(16px)";
             card.setAttribute('data-prioridade', prioValue);
+            card.setAttribute('data-urgencia', urgenciaVal);
             
             card.innerHTML = `
                 <div class="d-flex flex-column gap-1">
@@ -159,8 +180,12 @@ if (btnOtimizarRotas) {
         if (!list) return;
 
         const items = Array.from(list.children);
+        
+        // Ordena por Urgência de forma decrescente (População * Risco)
         items.sort((a, b) => {
-            return parseInt(a.getAttribute('data-prioridade')) - parseInt(b.getAttribute('data-prioridade'));
+            const urgA = parseInt(a.getAttribute('data-urgencia')) || 0;
+            const urgB = parseInt(b.getAttribute('data-urgencia')) || 0;
+            return urgB - urgA;
         });
 
         list.innerHTML = '';
@@ -277,6 +302,7 @@ if (btnBuscarCidade) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+    // Inicializar simulação de satélite se o canvas existir
     const urlParams = new URLSearchParams(window.location.search);
     const cidadeParam = urlParams.get('cidade');
     if (cidadeParam) {
@@ -296,3 +322,31 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+// --- ANIMAÇÕES INTERATIVAS: SCROLL E 3D ---
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    
+    // Efeito Parallax
+    document.querySelectorAll('.parallax-element').forEach(el => {
+        // Move o elemento levemente no eixo Y baseado no scroll
+        el.style.transform = `translateY(${scrollY * 0.05}px)`;
+    });
+});
+
+const interactive3dIcon = document.querySelector('.interactive-3d-icon');
+if (interactive3dIcon) {
+    document.addEventListener('mousemove', (e) => {
+        // Rotaciona o ícone baseado na posição do mouse relativa ao centro da tela
+        const x = (e.clientX / window.innerWidth - 0.5) * 60; // -30 a 30 graus
+        const y = (e.clientY / window.innerHeight - 0.5) * -60; // -30 a 30 graus
+        interactive3dIcon.style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
+    });
+    
+    // Efeito complementar para dispositivos móveis via scroll
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        // Se não houver mousemove (mobile), o scroll também gira o ícone
+        interactive3dIcon.style.transform = `rotateX(${scrollY * 0.2}deg) rotateY(${scrollY * 0.1}deg)`;
+    });
+}

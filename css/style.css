@@ -3,19 +3,20 @@
     --brand-black: #0A0A0A;
     --brand-card: #232323;
     --brand-dark-card: #0f0f11;
-    --brand-border: rgba(243, 241, 236, 0.08);
-    --brand-copper: #C85A0A;
-    --brand-copper-dim: #9E4708;
-    --brand-copper-faint: rgba(200, 90, 10, 0.08);
-    --brand-gray: #B8B6B1;
-    --brand-light: #F3F1EC;
+    --brand-border: rgba(235, 231, 223, 0.06);
+    --brand-copper: #c26c27; /* Increased saturation orange */
+    --brand-copper-dim: #994f18; /* Increased saturation dark orange */
+    --brand-copper-faint: rgba(194, 108, 39, 0.08); /* Increased saturation faint orange */
+    --brand-gray: #a8a6a1; /* Softened gray */
+    --brand-light: #e8e6e1; /* Softened light */
     
     --font-sans: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 }
 
 body {
-    background-color: var(--brand-black);
+    background: linear-gradient(to top, #050505 0%, #151515 100%);
+    background-attachment: fixed;
     color: var(--brand-light);
     font-family: var(--font-sans);
     font-size: 16px;
@@ -92,9 +93,10 @@ body {
     transition: transform 0.3s ease;
 }
 
-.img-logo:hover {
+/* Hover removido a pedido */
+/* .img-logo:hover {
     transform: scale(1.05);
-}
+} */
 
 .nav-link-brand {
     color: var(--brand-gray);
@@ -314,4 +316,39 @@ body {
     section {
         padding-top: 5rem !important;
     }
+}
+
+/* --- CLASSES UTILITÁRIAS DE COMPATIBILIDADE (TAILWIND UTILITIES) --- */
+.text-xs { font-size: 0.75rem !important; }
+.text-sm { font-size: 0.875rem !important; }
+.text-lg { font-size: 1.125rem !important; }
+.text-xl { font-size: 1.25rem !important; }
+.tracking-widest { letter-spacing: 0.15em !important; }
+.font-sans { font-family: var(--font-sans) !important; }
+.font-mono { font-family: var(--font-mono) !important; }
+.border-t { border-top: 1px solid var(--brand-border) !important; }
+.cursor-pointer { cursor: pointer !important; }
+.transition-scale { transition: transform 0.3s ease !important; }
+.transition-all { transition: all 0.3s ease !important; }
+.duration-500 { transition-duration: 500ms !important; }
+
+/* Estilização dos Sliders de Simulação */
+input[type="range"].form-range::-webkit-slider-runnable-track {
+    background-color: var(--brand-dark-card);
+    border: 1px solid var(--brand-border);
+    height: 6px;
+    border-radius: 3px;
+}
+input[type="range"].form-range::-webkit-slider-thumb {
+    background-color: var(--brand-copper);
+    margin-top: -5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+}
+input[type="range"].form-range::-webkit-slider-thumb:hover {
+    background-color: #FF7A1A;
 }
