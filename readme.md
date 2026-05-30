@@ -1,4 +1,4 @@
-# S.H.I.E.L.D. — Monitoramento de Desastres por Satélite
+# SENTRYA — Monitoramento de Desastres por Satélite
 
 Uma plataforma descentralizada de coordenação climática desenhada para unificar o fluxo de dados orbitais à logística civil, contornando falhas de conexão convencionais no mapeamento de riscos e otimizando a resposta a desastres naturais.
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S.H.I.E.L.D. — Monitoramento de Desastres por Satélite</title>
+    <title>SENTRYA — Monitoramento de Desastres por Satélite</title>
     
     <!-- Tailwind CSS para estruturação limpa -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,15 +19,18 @@
                 extend: {
                     colors: {
                         brand: {
-                            black: '#09090b', // Preto profundo puro (Zinc-950)
-                            card: '#0f0f11', // Card sutil
-                            border: 'rgba(255, 255, 255, 0.04)', // Bordas quase invisíveis
-                            copper: '#8a5f4e', // Cobre altamente dessaturado/terracota fosco
-                            copperDim: '#573c31', 
-                            copperFaint: 'rgba(138, 95, 78, 0.05)',
-                            grayText: '#71717a', // Texto secundário (Zinc-500)
-                            grayLight: '#a1a1aa'
-                        }
+                            black: '#0A0A0A',
+                            card: '#232323',
+
+                            border: 'rgba(243, 241, 236, 0.08)',
+
+                            copper: '#C85A0A',
+                            copperDim: '#9E4708',
+                            copperFaint: 'rgba(200, 90, 10, 0.08)',
+
+                            grayText: '#B8B6B1',
+                            grayLight: '#F3F1EC'
+}
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -44,47 +47,138 @@
 <body class="bg-brand-black text-[#f4f4f5] font-sans overflow-x-hidden antialiased selection:bg-brand-copperFaint selection:text-brand-copper">
 
     <!-- HEADER MINIMALISTA -->
-    <header class="fixed top-0 w-full z-50 bg-brand-black/70 backdrop-blur-md border-b border-brand-border px-8 py-5">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="#" class="font-mono text-sm tracking-widest text-[#f4f4f5] hover:text-brand-copper transition-colors">
-                S.H.I.E.L.D.
+    <header class="fixed top-0 w-full z-50 bg-[#0A0A0A]/95 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto h-20 px-8 flex items-center justify-between">
+
+        <!-- Logo -->
+        <a href="#" class="flex items-center">
+            <img
+                src="img/logosentrya.png"
+                alt="Sentrya"
+                class="h-16 w-auto transition-all duration-300 hover:scale-105"
+            >
+        </a>
+
+        <!-- Navegação -->
+        <nav class="hidden md:flex items-center gap-12 font-mono text-[14px] uppercase tracking-[0.15em]">
+
+            <a href="#mapa-operacoes"
+               class="text-[#B8B6B1] hover:text-[#F3F1EC] transition-colors">
+                Satélites
             </a>
-            <nav class="hidden md:flex space-x-10 font-mono text-[11px] text-brand-grayText uppercase tracking-widest">
-                <a href="#solucao" class="hover:text-[#f4f4f5] transition-colors">Abordagem</a>
-                <a href="#mapa-operacoes" class="hover:text-[#f4f4f5] transition-colors">Satélites</a>
-                <a href="#simulador" class="hover:text-[#f4f4f5] transition-colors">Roteamento</a>
-                <a href="#timeline" class="hover:text-[#f4f4f5] transition-colors">Histórico</a>
-                <a href="#roadmap" class="hover:text-[#f4f4f5] transition-colors">Evolução</a>
-            </nav>
-            <div class="hidden sm:block">
-                <a href="#simulador" class="font-mono text-[10px] uppercase tracking-widest border border-brand-border text-brand-grayLight hover:text-white hover:border-brand-copper/50 px-4 py-2 transition-all rounded">
-                    Terminal
-                </a>
-            </div>
-        </div>
-    </header>
+
+            <a href="#simulador"
+               class="text-[#B8B6B1] hover:text-[#F3F1EC] transition-colors">
+                Roteamento
+            </a>
+
+            <a href="#timeline"
+               class="text-[#B8B6B1] hover:text-[#F3F1EC] transition-colors">
+                Histórico
+            </a>
+
+        </nav>
+
+        <!-- Botão -->
+        <a href="#simulador"
+           class="hidden sm:flex items-center justify-center h-11 px-6 rounded-md border border-[#C85A0A]/40 text-[#F3F1EC] font-mono text-[11px] uppercase tracking-widest hover:bg-[#C85A0A] hover:text-[#0A0A0A] transition-all duration-300">
+
+            Central
+
+        </a>
+
+    </div>
+</header>
 
     <!-- HERO SECTION -->
-    <section class="relative min-h-screen flex items-center px-8 pt-20 border-b border-brand-border">
+    <section class="relative min-h-screen flex items-center px-8 pt-32 border-b border-brand-border">
         <!-- Canvas Dinâmico Minimalista (Interativo com mouse) -->
-        <div class="absolute right-0 top-0 w-full lg:w-1/2 h-full pointer-events-auto flex items-center justify-center opacity-30 lg:opacity-100 z-10">
-            <canvas id="satelliteCanvas" class="w-full max-w-[480px] aspect-square cursor-crosshair" title="Passe o mouse para alterar a gravidade do satélite"></canvas>
+        <div class="absolute right-0 top-0 w-full lg:w-1/2 h-full flex items-center justify-center z-10 opacity-20 lg:opacity-40">
+
+            <svg
+                viewBox="240 320 120 125"
+                class="w-[650px] max-w-[80%] h-auto text-[#232323] fill-current">
+
+                <path d="M314.24,438.85l6.25-12.02l0.23-10.1l11.66-7.52h6.53l5.13-8.69l0.93-16.68l-2.1-4.46l12.36-11.28l0.47-12.45l-16.79-8.22l-20.28-6.34l-9.56-0.94l2.57-5.4l-0.7-8.22l-2.09-0.69l-3.09,6.14l-1.62,2.03l-4.16-1.84l-13.99,4.93l-4.66-5.87l0.75-6.13l-4.4,4.48l-4.86-2.62l-0.49,0.69l0.01,2.13l4.19,2.25l-6.29,6.63l-3.97-0.04l-4.02-4.09l-4.55,0.14l-0.56,4.86l2.61,3.17l-3.08,9.87l-3.6,0.28l-5.73,3.62l-1.4,7.11l4.97,5.32l0.91-1.03l3.49-0.94l2.98,5.02l8.53-3.66l3.31,0.19l2.28,8.07l12.17,3.86l2.1,6.44l5.18,0.62l2.47,6.15l-1.67,5.47l2.18,2.86l-0.32,4.26l5.84-0.55l5.35,6.76l-0.42,4.75l3.17,2.68l-7.6,11.51L314.24,438.85L314.24,438.85z"/>
+
+                <!-- RIO GRANDE DO SUL -->
+            <g id="pin-rs" class="cursor-pointer" transform="translate(314 434)">
+                <circle r="10" fill="transparent" pointer-events="all"/>
+                <circle r="4" fill="rgba(200,90,10,0.50)">
+                    <animate attributeName="r"
+                            values="4;8;4"
+                            dur="2s"
+                            repeatCount="indefinite"/>
+                </circle>
+                <circle r="2.5" fill="#C85A0A"/>
+            </g>
+
+            <!-- RIO DE JANEIRO -->
+            <g id="pin-rj" class="cursor-pointer" transform="translate(331 409)">
+                <circle r="10" fill="transparent" pointer-events="all"/>
+                <circle r="4" fill="rgba(27,108,168,0.50)">
+                    <animate attributeName="r"
+                            values="4;8;4"
+                            dur="2s"
+                            repeatCount="indefinite"/>
+                </circle>
+                <circle r="2.5" fill="#1B6CA8"/>
+            </g>
+
+            <!-- NORDESTE -->
+            <g id="pin-ne" class="cursor-pointer" transform="translate(348 358)">
+                <circle r="10" fill="transparent" pointer-events="all"/>
+                <circle r="4" fill="rgba(200,90,10,0.50)">
+                    <animate attributeName="r"
+                            values="4;8;4"
+                            dur="2s"
+                            repeatCount="indefinite"/>
+                </circle>
+                <circle r="2.5" fill="#C85A0A"/>
+            </g>
+
+            <!-- AMAZÔNIA -->
+            <g id="pin-am" class="cursor-pointer" transform="translate(285 360)">
+                <circle r="10" fill="transparent" pointer-events="all"/>
+                <circle r="4" fill="rgba(200,90,10,0.50)">
+                    <animate attributeName="r"
+                            values="4;8;4"
+                            dur="2s"
+                            repeatCount="indefinite"/>
+                </circle>
+                <circle r="2.5" fill="#C85A0A"/>
+            </g>
+            </svg>
+
         </div>
 
-        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 z-20">
-            <div class="lg:col-span-7 flex flex-col justify-center space-y-6">
-                <!-- Animação do Badge de Categoria -->
-                <div class="font-mono text-[10px] text-brand-copper tracking-[0.2em] uppercase animate-fade-up delay-1">
-                    [ Sensoriamento Orbital & Logística ]
-                </div>
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 z-20 pointer-events-none">
+            <div class="lg:col-span-7 flex flex-col justify-center space-y-6 pointer-events-auto">
                 <!-- Animação do Título Principal -->
                 <h1 class="text-4xl md:text-5xl font-light tracking-tight leading-tight max-w-2xl text-white animate-fade-up delay-2">
-                    Resposta preventiva de precisão quando a <span class="text-brand-copper font-normal">infraestrutura</span> terrestre falha.
+                    Verifique se sua região está em <span class="text-brand-copper font-normal">risco</span>, e obtenha as informações necessárias.
                 </h1>
                 <!-- Animação do Texto Descritivo -->
-                <p class="text-brand-grayText max-w-lg text-sm leading-relaxed animate-fade-up delay-3">
-                    Plataforma descentralizada de coordenação climática. Desenhada para unificar o fluxo de dados orbitais à logística civil, contornando falhas de conexão convencionais no mapeamento de risco.
+                <p class="text-brand-grayText max-w-xl text-lg leading-relaxed animate-fade-up delay-3">
+                    Consulte o nome da sua cidade abaixo para verificar possíveis áreas de risco, alertas ativos e informações atualizadas sobre desastres naturais na sua região.
                 </p>
+                <div class="flex gap-3 mt-6 animate-fade-up delay-4">
+    
+                    <input
+                        id="cidadeBusca"
+                        type="text"
+                        placeholder="Digite sua cidade..."
+                        class="w-full max-w-md bg-[#0A0A0A] border border-[#232323] rounded-md px-4 py-3 text-white focus:outline-none focus:border-[#C85A0A] transition"
+                    >
+
+                    <button
+                        id="btnBuscarCidade"
+                        class="px-6 py-3 bg-[#C85A0A] text-white rounded-md hover:opacity-90 transition"
+                    >
+                        Buscar
+                    </button>
+
+                </div>
                 <!-- Animação dos Botões de Ação -->
                 <div class="flex items-center space-x-6 pt-4 animate-fade-up delay-4">
                     <a href="#mapa-operacoes" class="font-mono text-[11px] uppercase tracking-widest bg-[#f4f4f5] hover:bg-white text-brand-black px-6 py-3 transition-colors">
@@ -98,133 +192,24 @@
         </div>
     </section>
 
-    <!-- STATS -->
-    <section class="border-b border-brand-border bg-brand-black/30 py-12 reveal">
-        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 px-8">
-            <div class="space-y-1">
-                <span class="text-[10px] font-mono text-brand-grayText uppercase block">[ Resposta ]</span>
-                <span class="text-2xl font-light text-brand-copper">-45%</span>
-                <p class="text-xs text-brand-grayText">Tempo de roteamento operacional</p>
-            </div>
-            <div class="space-y-1">
-                <span class="text-[10px] font-mono text-brand-grayText uppercase block">[ Área útil ]</span>
-                <span class="text-2xl font-light text-brand-copper">100%</span>
-                <p class="text-xs text-brand-grayText">Independente de redes celulares</p>
-            </div>
-            <div class="space-y-1">
-                <span class="text-[10px] font-mono text-brand-grayText uppercase block">[ Sensoriamento ]</span>
-                <span class="text-2xl font-light text-brand-copper">0,5m</span>
-                <p class="text-xs text-brand-grayText">Resolução óptica máxima</p>
-            </div>
-            <div class="space-y-1">
-                <span class="text-[10px] font-mono text-brand-grayText uppercase block">[ Conectividade ]</span>
-                <span class="text-2xl font-light text-brand-copper">Fallback</span>
-                <p class="text-xs text-brand-grayText">Protocolo LEO redundante</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ABORDAGEM / SOLUÇÃO -->
-    <section id="solucao" class="py-24 px-8 max-w-7xl mx-auto border-b border-brand-border reveal">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
-            <div class="lg:col-span-5 space-y-6">
-                <div class="font-mono text-[10px] text-brand-copper tracking-widest uppercase">
-                    [ Filosofia de Engenharia ]
-                </div>
-                <h2 class="text-2xl font-light tracking-tight text-white">Descentralização radical.</h2>
-                <p class="text-xs text-brand-grayText leading-relaxed">
-                    Sistemas estaduais frequentemente paralisam pela dependência de servidores centralizados e antenas de transmissão que vulneram sob condições críticas de clima. Reduzimos a arquitetura ao essencial: dados brutos de satélite traduzidos em vetores leves de prioridade de resgate.
-                </p>
-            </div>
-
-            <!-- Spotlight Card 1 -->
-            <div class="lg:col-span-7 spotlight-card p-10 rounded space-y-8">
-                <div class="border-b border-brand-border/60 pb-4">
-                    <span class="font-mono text-[10px] text-brand-copper uppercase">[ Vetores de Operação ]</span>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-                    <div class="space-y-1">
-                        <span class="text-xs font-mono text-brand-copper block">01 / Monitoramento Ativo</span>
-                        <p class="text-xs text-brand-grayText">Mapeamento dinâmico de lâminas hídricas superficiais por sensoriamento óptico e de radar.</p>
-                    </div>
-                    <div class="space-y-1">
-                        <span class="text-xs font-mono text-brand-copper block">02 / Triagem Inteligente</span>
-                        <p class="text-xs text-brand-grayText">Priorização algorítmica de lives baseada em densidade populacional e tempo de resposta.</p>
-                    </div>
-                    <div class="space-y-1">
-                        <span class="text-xs font-mono text-brand-copper block">03 / Comunicação Minimalista</span>
-                        <p class="text-xs text-brand-grayText">Transmissão em rajadas curtas de dados via satélite de órbita baixa para equipes sem internet.</p>
-                    </div>
-                    <div class="space-y-1">
-                        <span class="text-xs font-mono text-brand-copper block">04 / Despacho Distribuído</span>
-                        <p class="text-xs text-brand-grayText">Mapas de navegação táticos simplificados gerados diretamente para dispositivos de campo.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- MAPA INTERATIVO SENSORIAL -->
     <section id="mapa-operacoes" class="py-24 px-8 bg-brand-black border-b border-brand-border reveal">
         <div class="max-w-7xl mx-auto space-y-12">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                 <div class="space-y-2">
                     <span class="font-mono text-[10px] text-brand-copper tracking-widest uppercase">[ Telemetria Ativa ]</span>
-                    <h2 class="text-2xl font-light text-white">Pontos Críticos Registrados</h2>
+                    <h2 class="text-4xl font-light text-white">Pontos Críticos Registrados</h2>
                 </div>
-                <p class="text-xs text-brand-grayText max-w-sm">
-                    Dados estáticos baseados em crises registradas no território brasileiro. Interaja com os nós ativos no mapa vetorial.
+                <p class="text-sm text-brand-grayText max-w-sm">
+                    Selecione um alerta no mapa principal acima para visualizar o diagnóstico satelital e os dados operacionais da região.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <!-- Widget de Fundo do Mapa (Adicionado 'relative' para o posicionamento da legenda) -->
-                <div class="relative lg:col-span-7 border border-brand-border bg-brand-card/30 p-4 md:p-6 flex flex-col justify-center items-center rounded min-h-[480px]">
-                    <!-- Container Interativo para Zoom (Centralizado vertical e horizontalmente) -->
-                    <div id="map-container" class="relative w-full max-w-[540px] aspect-[1.2/1] overflow-hidden rounded flex items-center justify-center select-none transition-colors duration-300">
-                        <!-- Wrapper Transformável -->
-                        <div id="map-wrapper" class="w-full h-full origin-center flex items-center justify-center transition-transform duration-75 ease-out">
-                            <!-- SVG com Recorte Milimétrico (ViewBox otimizada de 230 245 para 240 320) -->
-                            <svg viewBox="240 320 120 125" class="w-full h-full text-[#1c1c1f] fill-current stroke-[#222226] stroke-1 pointer-events-none">
-                                <!-- Silhueta do Brasil -->
-                                <path d="M314.24,438.85l6.25-12.02l0.23-10.1l11.66-7.52h6.53l5.13-8.69l0.93-16.68l-2.1-4.46l12.36-11.28l0.47-12.45l-16.79-8.22l-20.28-6.34l-9.56-0.94l2.57-5.4l-0.7-8.22l-2.09-0.69l-3.09,6.14l-1.62,2.03l-4.16-1.84l-13.99,4.93l-4.66-5.87l0.75-6.13l-4.4,4.48l-4.86-2.62l-0.49,0.69l0.01,2.13l4.19,2.25l-6.29,6.63l-3.97-0.04l-4.02-4.09l-4.55,0.14l-0.56,4.86l2.61,3.17l-3.08,9.87l-3.6,0.28l-5.73,3.62l-1.4,7.11l4.97,5.32l0.91-1.03l3.49-0.94l2.98,5.02l8.53-3.66l3.31,0.19l2.28,8.07l12.17,3.86l2.1,6.44l5.18,0.62l2.47,6.15l-1.67,5.47l2.18,2.86l-0.32,4.26l5.84-0.55l5.35,6.76l-0.42,4.75l3.17,2.68l-7.6,11.51L314.24,438.85L314.24,438.85z" />
-
-                                <!-- Pins de Telemetria Integrados ao SVG -->
-                                <!-- Ponto 1: RS -->
-                                <g id="pin-rs" class="pointer-events-auto cursor-pointer group">
-                                    <circle cx="314.2" cy="434" r="8" class="fill-transparent" />
-                                    <circle cx="314.2" cy="434" r="4.5" class="fill-none stroke-brand-copper/50 stroke-[0.8] group-hover:stroke-white transition-colors duration-300" />
-                                    <circle cx="314.2" cy="434" r="2" class="fill-brand-copper group-hover:fill-white transition-colors duration-300" />
-                                </g>
-
-                                <!-- Ponto 2: RJ -->
-                                <g id="pin-rj" class="pointer-events-auto cursor-pointer group">
-                                    <circle cx="331" cy="409" r="8" class="fill-transparent" />
-                                    <circle cx="331" cy="409" r="4.5" class="fill-none stroke-brand-copper/50 stroke-[0.8] group-hover:stroke-white transition-colors duration-300" />
-                                    <circle cx="331" cy="409" r="2" class="fill-brand-copper group-hover:fill-white transition-colors duration-300" />
-                                </g>
-
-                                <!-- Ponto 3: NE -->
-                                <g id="pin-ne" class="pointer-events-auto cursor-pointer group">
-                                    <circle cx="348" cy="358" r="8" class="fill-transparent" />
-                                    <circle cx="348" cy="358" r="4.5" class="fill-none stroke-brand-copper/50 stroke-[0.8] group-hover:stroke-white transition-colors duration-300" />
-                                    <circle cx="348" cy="358" r="2" class="fill-brand-copper group-hover:fill-white transition-colors duration-300" />
-                                </g>
-                            </svg>
-                        </div>
-                    </div>
-                    <!-- Guia de usuário posicionada em absoluto para não deslocar a centralização do mapa -->
-                    <div class="absolute bottom-4 font-mono text-[9px] text-brand-grayText uppercase tracking-wider select-none flex items-center gap-1.5">
-                        <span class="inline-block w-1 h-1 bg-brand-copper rounded-full animate-pulse"></span>
-                        <span>Use o scroll / pince para aproximar • Arraste para navegar no zoom</span>
-                    </div>
-                </div>
-
                 <!-- Painel de Dados -->
-                <div class="lg:col-span-5 flex flex-col justify-between">
+                <div class="lg:col-span-12 flex flex-col justify-between">
                     <div id="telemetry-display" class="spotlight-card p-8 space-y-6 flex-grow rounded">
-                        <div class="flex justify-between items-center border-b border-brand-border pb-4 relative z-10">
-                            <span class="font-mono text-xs text-brand-copper uppercase" id="tel-local">[ Foco: Perímetro ]</span>
+                        <div class="flex justify-between items-center border-b border-brand-border  pb-4 relative z-10">
+                            <span class="font-mono text-sm text-brand-copper uppercase" id="tel-local">[ Foco: Perímetro ]</span>
                             <span class="font-mono text-[9px] text-brand-grayText" id="tel-id">ID: 000-A</span>
                         </div>
                         
@@ -237,15 +222,15 @@
                             <div class="grid grid-cols-2 gap-4">
                                 <div class="bg-brand-black/50 p-3 rounded border border-brand-border">
                                     <span class="text-[9px] font-mono text-brand-grayText block uppercase">Alerta Crítico</span>
-                                    <span class="text-xs font-mono text-white" id="tel-risk-val">--</span>
+                                    <span class="text-sm font-mono text-white" id="tel-risk-val">--</span>
                                 </div>
                                 <div class="bg-brand-black/50 p-3 rounded border border-brand-border">
                                     <span class="text-[9px] font-mono text-brand-grayText block uppercase">Análise Hídrica</span>
-                                    <span class="text-xs font-mono text-white" id="tel-pop">--</span>
+                                    <span class="text-sm font-mono text-white" id="tel-pop">--</span>
                                 </div>
                             </div>
 
-                            <p class="text-xs text-brand-grayText leading-relaxed" id="tel-analise">
+                            <p class="text-sm text-brand-grayText leading-relaxed" id="tel-analise">
                                 Selecione um dos marcadores circulares do sensor espacial. O processamento orbital exibirá o diagnóstico correspondente no monitor.
                             </p>
                         </div>
@@ -255,22 +240,48 @@
         </div>
     </section>
 
+    <!-- STATS -->
+    <section class="border-b border-brand-border bg-brand-black/30 py-12 reveal">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 px-8">
+            <div class="space-y-1">
+                <span class="text-[10px] font-mono text-brand-grayText uppercase block">[ Resposta ]</span>
+                <span class="text-2xl font-light text-brand-copper">-45%</span>
+                <p class="text-sm text-brand-grayText">Tempo de roteamento operacional</p>
+            </div>
+            <div class="space-y-1">
+                <span class="text-[10px] font-mono text-brand-grayText uppercase block">[ Área útil ]</span>
+                <span class="text-2xl font-light text-brand-copper">100%</span>
+                <p class="text-sm text-brand-grayText">Independente de redes celulares</p>
+            </div>
+            <div class="space-y-1">
+                <span class="text-[10px] font-mono text-brand-grayText uppercase block">[ Sensoriamento ]</span>
+                <span class="text-2xl font-light text-brand-copper">0,5m</span>
+                <p class="text-sm text-brand-grayText">Resolução óptica máxima</p>
+            </div>
+            <div class="space-y-1">
+                <span class="text-[10px] font-mono text-brand-grayText uppercase block">[ Conectividade ]</span>
+                <span class="text-2xl font-light text-brand-copper">Fallback</span>
+                <p class="text-sm text-brand-grayText">Protocolo LEO redundante</p>
+            </div>
+        </div>
+    </section>
+
     <!-- TERMINAL E ROTEADOR -->
     <section id="simulador" class="py-24 px-8 border-b border-brand-border reveal">
         <div class="max-w-7xl mx-auto space-y-12">
             <div class="space-y-2">
                 <span class="font-mono text-[10px] text-brand-copper tracking-widest uppercase">[ Módulo Operacional ]</span>
-                <h2 class="text-2xl font-light text-white">Logística de Triagem e Rotas</h2>
+                <h2 class="text-4xl font-light text-white">Logística de Triagem e Rotas</h2>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <!-- Esquerda: SOS -->
                 <div class="lg:col-span-4 spotlight-card p-8 rounded space-y-4">
                     <div class="border-b border-brand-border pb-3 relative z-10">
-                        <span class="text-xs font-mono text-brand-copper uppercase">[ Registro SOS ]</span>
+                        <span class="text-sm font-mono text-brand-copper uppercase">[ Registro SOS ]</span>
                     </div>
 
-                    <form id="sosForm" onsubmit="registrarEmergencia(event)" class="space-y-4 text-xs font-mono relative z-10">
+                    <form id="sosForm" onsubmit="registrarEmergencia(event)" class="space-y-4 text-sm font-mono relative z-10">
                         <div class="space-y-1">
                             <label class="text-[9px] text-brand-grayText block uppercase">Localização</label>
                             <input required id="sosLocal" type="text" placeholder="Bairro, Município" class="w-full bg-brand-black border border-brand-border p-3 text-white focus:outline-none focus:border-brand-copper rounded transition-colors">
@@ -301,7 +312,7 @@
                     <div class="w-full relative z-10">
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-brand-border pb-4 mb-4 gap-4">
                             <div>
-                                <span class="font-mono text-xs text-brand-copper uppercase">[ Fila de Atendimento ]</span>
+                                <span class="font-mono text-sm text-brand-copper uppercase">[ Fila de Atendimento ]</span>
                                 <p class="text-[10px] text-brand-grayText">Pedidos prioritários filtrados por urgência humanitária</p>
                             </div>
                             <button onclick="otimizarRotas()" class="px-4 py-2 border border-brand-copper/30 hover:border-brand-copper/80 text-brand-copper font-mono text-[10px] uppercase tracking-widest rounded transition-all">
@@ -309,7 +320,7 @@
                             </button>
                         </div>
 
-                        <div id="incident-list" class="space-y-3 font-mono text-xs max-h-[250px] overflow-y-auto">
+                        <div id="incident-list" class="space-y-3 font-mono text-sm max-h-[250px] overflow-y-auto">
                             <!-- Alerta 1 -->
                             <div class="p-3 bg-brand-black/40 border border-brand-border rounded flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 transition-all duration-500" data-prioridade="2">
                                 <div class="space-y-0.5">
@@ -336,7 +347,7 @@
 
                     <div class="mt-4 pt-4 border-t border-brand-border text-[9px] font-mono text-brand-grayText relative z-10 flex justify-between">
                         <span>Algoritmo: Urgência = (População * Risco)</span>
-                        <span>S.H.I.E.L.D v1.02</span>
+                        <span>SENTRYA v1.02</span>
                     </div>
                 </div>
             </div>
@@ -348,8 +359,8 @@
         <div class="max-w-4xl mx-auto space-y-12">
             <div class="text-center space-y-2">
                 <span class="font-mono text-[10px] text-brand-copper tracking-widest uppercase">[ Retrospectiva Crítica ]</span>
-                <h2 class="text-2xl font-light text-white">Rio Grande do Sul (2024)</h2>
-                <p class="text-xs text-brand-grayText max-w-lg mx-auto leading-relaxed">
+                <h2 class="text-4xl font-light text-white">Rio Grande do Sul (2024)</h2>
+                <p class="text-sm text-brand-grayText max-w-lg mx-auto leading-relaxed">
                     Lições de resgate em condições de perda total de sinal terrestre de telefonia móvel.
                 </p>
             </div>
@@ -368,52 +379,7 @@
                         <span class="text-brand-grayText">Fase Operacional 1</span>
                     </div>
                     <h3 class="text-base text-white relative z-10">Volume acumulado de alta intensidade</h3>
-                    <p class="text-xs text-brand-grayText leading-relaxed relative z-10">${info.texto}</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- EVOLUÇÃO (ROADMAP) -->
-    <section id="roadmap" class="py-24 px-8 bg-brand-black reveal">
-        <div class="max-w-7xl mx-auto space-y-12">
-            <div class="text-center space-y-2">
-                <span class="font-mono text-[10px] text-brand-copper tracking-widest uppercase">[ Arquitetura Futura ]</span>
-                <h2 class="text-2xl font-light text-white">Próximos Estágios do Sistema</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Card 1 -->
-                <div class="spotlight-card p-6 rounded space-y-3">
-                    <span class="font-mono text-[9px] text-brand-copper uppercase block">[ Fase 2 ]</span>
-                    <h3 class="text-xs font-semibold text-white">Integração Direta</h3>
-                    <p class="text-[11px] text-brand-grayText leading-relaxed">
-                        Conexão via API aberta ao Space Charter e CEMADEN para processamento de radar SAR em tempo real.
-                    </p>
-                </div>
-                <!-- Card 2 -->
-                <div class="spotlight-card p-6 rounded space-y-3">
-                    <span class="font-mono text-[9px] text-brand-copper uppercase block">[ Fase 3 ]</span>
-                    <h3 class="text-xs font-semibold text-white">Backend Seguro</h3>
-                    <p class="text-[11px] text-brand-grayText leading-relaxed">
-                        Canais criptografados para a Defesa Civil gerenciar o status de atuação das equipes civis de forma síncrona.
-                    </p>
-                </div>
-                <!-- Card 3 -->
-                <div class="spotlight-card p-6 rounded space-y-3">
-                    <span class="font-mono text-[9px] text-brand-copper uppercase block">[ Fase 4 ]</span>
-                    <h3 class="text-xs font-semibold text-white">Inteligência Preditiva</h3>
-                    <p class="text-[11px] text-brand-grayText leading-relaxed">
-                        Mecanismo estatístico para prever bacias com probabilidade de transbordo por volume de chuva histórica.
-                    </p>
-                </div>
-                <!-- Card 4 -->
-                <div class="spotlight-card p-6 rounded space-y-3">
-                    <span class="font-mono text-[9px] text-brand-copper uppercase block">[ Fase 5 ]</span>
-                    <h3 class="text-xs font-semibold text-white">Equipamentos de Campo</h3>
-                    <p class="text-[11px] text-brand-grayText leading-relaxed">
-                        Modems portáteis de fallback de baixo consumo para manter transmissão de socorro sem internet convencional.
-                    </p>
+                    <p class="text-sm text-brand-grayText leading-relaxed relative z-10">Modelos de solo saturaram em tempo recorde nos leitos dos rios Taquari e Jacuí. Agências locais operaram sem centralização em tempo real de altitudes e relevo topográfico.</p>
                 </div>
             </div>
         </div>
@@ -422,7 +388,7 @@
     <!-- FOOTER -->
     <footer class="border-t border-brand-border py-10 px-8 bg-brand-black font-mono text-[11px] text-brand-grayText">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <span class="text-[#f4f4f5] font-light">S.H.I.E.L.D. — 2026</span>
+            <span class="text-[#f4f4f5] font-light">SENTRYA — 2026</span>
             <div class="flex space-x-6">
                 <a href="#" class="hover:text-brand-copper transition-colors">Especificações</a>
                 <a href="#" class="hover:text-brand-copper transition-colors">Segurança</a>

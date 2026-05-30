@@ -1,4 +1,24 @@
-/* Animação sutil de carregamento inicial (Hero) */
+/* Base tipográfica */
+body {
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* Barra de rolagem personalizada */
+::-webkit-scrollbar {
+    width: 4px;
+}
+::-webkit-scrollbar-track {
+    background: #09090b;
+}
+::-webkit-scrollbar-thumb {
+    background: #27272a;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #8a5f4e;
+}
+
+/* Animação principal de entrada */
 @keyframes fadeUpGentle {
     0% {
         opacity: 0;
@@ -15,17 +35,17 @@
     animation: fadeUpGentle 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Delays escalonados para um surgimento fluido por etapas */
+/* Delays escalonados */
 .delay-1 { animation-delay: 150ms; }
 .delay-2 { animation-delay: 350ms; }
 .delay-3 { animation-delay: 550ms; }
 .delay-4 { animation-delay: 750ms; }
 
-/* Efeito de revelar no Scroll (Intersection Observer) */
+/* Revelar elementos ao scroll */
 .reveal {
     opacity: 0;
     transform: translateY(16px);
-    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal.active {
@@ -33,7 +53,7 @@
     transform: translateY(0);
 }
 
-/* Efeito interativo Spotlight que segue o mouse nas seções */
+/* Cartões com efeito spotlight */
 .spotlight-card {
     position: relative;
     background: #0f0f11;
@@ -44,10 +64,10 @@
 .spotlight-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    inset: 0;
     background: radial-gradient(
-        350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), 
-        rgba(138, 95, 78, 0.06), 
+        350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+        rgba(138, 95, 78, 0.06),
         transparent 80%
     );
     z-index: 1;
@@ -62,16 +82,17 @@
     border-color: rgba(138, 95, 78, 0.2);
 }
 
-/* Estilização sutil da barra de rolagem */
-::-webkit-scrollbar {
-    width: 4px;
+/* Pins do mapa */
+#pin-rs:hover circle:not([fill="transparent"]),
+#pin-ne:hover circle:not([fill="transparent"]),
+#pin-am:hover circle:not([fill="transparent"]) {
+    filter:
+        drop-shadow(0 0 3px #FF7A1A)
+        drop-shadow(0 0 8px rgba(255, 122, 26, 0.6));
 }
-::-webkit-scrollbar-track {
-    background: #09090b;
-}
-::-webkit-scrollbar-thumb {
-    background: #27272a;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #8a5f4e;
+
+#pin-rj:hover circle:not([fill="transparent"]) {
+    filter:
+        drop-shadow(0 0 3px #1B6CA8)
+        drop-shadow(0 0 8px rgba(27, 108, 168, 0.6));
 }
