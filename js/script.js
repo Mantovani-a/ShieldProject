@@ -79,6 +79,7 @@ function focarPonto(id) {
     const telPop = document.getElementById('tel-pop');
     const telAnalise = document.getElementById('tel-analise');
     const painel = document.getElementById('telemetry-display');
+    const telFonte = document.getElementById('tel-fonte');
 
     if (telLocal) telLocal.textContent = info.local;
     if (telId) telId.textContent = `${info.id} | ${info.activationId} (Fonte: ${info.fonte})`;
@@ -87,16 +88,30 @@ function focarPonto(id) {
     if (telPop) telPop.textContent = info.pop;
     if (telAnalise) telAnalise.textContent = info.analise;
 
-    if (painel) {
-        if (id === 'rj') {
-            painel.style.borderColor = '#1B6CA8';
-            if (telLocal) telLocal.style.color = '#4EA0DC';
-            if (telRiskVal) telRiskVal.style.color = '#4EA0DC';
-        } else {
-            painel.style.borderColor = '#C85A0A';
-            if (telLocal) telLocal.style.color = '#C85A0A';
-            if (telRiskVal) telRiskVal.style.color = '#C85A0A';
-        }
+    // TEMA DO PAINEL
+    painel.classList.remove(
+        'telemetry-orange',
+        'telemetry-blue'
+    );
+
+    if (id === 'rj') {
+        painel.classList.add('telemetry-blue');
+    } else {
+        painel.classList.add('telemetry-orange');
+    }
+
+    // DESTACA O PIN SELECIONADO
+    document
+        .querySelectorAll('[id^="pin-"]')
+        .forEach(pin => {
+            pin.style.opacity = '0.4';
+        });
+
+    const pinSelecionado =
+        document.getElementById(`pin-${id}`);
+
+    if (pinSelecionado) {
+        pinSelecionado.style.opacity = '1';
     }
 }
 
@@ -349,4 +364,91 @@ if (interactive3dIcon) {
         // Se não houver mousemove (mobile), o scroll também gira o ícone
         interactive3dIcon.style.transform = `rotateX(${scrollY * 0.2}deg) rotateY(${scrollY * 0.1}deg)`;
     });
+}
+
+// ======================
+// ZOOM + ARRASTAR MAPA
+// ======================
+
+const mapa = document.getElementById('mapa-svg');
+const mapaContainer = document.getElementById('mapa-container');
+
+if (mapa && mapaContainer) {
+
+    let scale = 1;
+    let posX = 0;
+    let posY = 0;
+
+    let dragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    function atualizarMapa() {
+
+    const limiteX = 80 * scale;
+    const limiteY = 80 * scale;
+
+    posX = Math.max(
+        -limiteX,
+        Math.min(posX, limiteX)
+    );
+
+    posY = Math.max(
+        -limiteY,
+        Math.min(posY, limiteY)
+    );
+
+    mapa.style.transform =
+        `translate(${posX}px, ${posY}px) scale(${scale})`;
+}
+
+    // ZOOM COM SCROLL
+    mapaContainer.addEventListener('wheel', (e) => {
+
+        e.preventDefault();
+
+        const zoomSpeed = 0.25;
+
+        if (e.deltaY < 0) {
+            scale += zoomSpeed;
+        } else {
+            scale -= zoomSpeed;
+        }
+
+        // ZOOM MÍNIMO E MÁXIMO
+        scale = Math.max(1, Math.min(scale, 4));
+
+        atualizarMapa();
+    });
+
+    // INÍCIO DO ARRASTE
+    mapaContainer.addEventListener('mousedown', (e) => {
+
+        dragging = true;
+
+        startX = e.clientX - posX;
+        startY = e.clientY - posY;
+
+        mapaContainer.style.cursor = 'grabbing';
+    });
+
+    // FIM DO ARRASTE
+    document.addEventListener('mouseup', () => {
+
+        dragging = false;
+
+        mapaContainer.style.cursor = 'grab';
+    });
+
+    // MOVIMENTO
+    document.addEventListener('mousemove', (e) => {
+
+        if (!dragging) return;
+
+        posX = e.clientX - startX;
+        posY = e.clientY - startY;
+
+        atualizarMapa();
+    });
+
 }

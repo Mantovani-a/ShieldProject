@@ -1,24 +1,19 @@
-/* --- SENTRYA DESIGN SYSTEM --- */
+﻿/* --- SENTRYA DESIGN SYSTEM --- */
 :root {
     --brand-black: #0A0A0A;
     --brand-card: #232323;
     --brand-dark-card: #0f0f11;
     --brand-border: rgba(235, 231, 223, 0.06);
     --brand-copper: #c26c27;
-    /* Increased saturation orange */
     --brand-copper-dim: #994f18;
-    /* Increased saturation dark orange */
     --brand-copper-faint: rgba(194, 108, 39, 0.08);
-    /* Increased saturation faint orange */
     --brand-gray: #a8a6a1;
-    /* Softened gray */
     --brand-light: #e8e6e1;
-    /* Softened light */
-
     --font-sans: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 }
 
+/* --- BASE --- */
 body {
     background: linear-gradient(to top, #050505 0%, #1b1b1b 100%);
     background-attachment: fixed;
@@ -26,8 +21,8 @@ body {
     font-family: var(--font-sans);
     font-size: 16px;
     line-height: 1.7;
-    position: relative;
     min-height: 100vh;
+    position: relative;
 }
 
 body::before {
@@ -39,8 +34,8 @@ body::before {
     width: 100vw;
     height: 100vh;
     background: url('../img/logo-sentrya-branca.png') center center no-repeat;
-    background-size: 50%; /* Tamanho maior */
-    opacity: 0.02; /* Quase não notável */
+    background-size: 50%;
+    opacity: 0.02;
     z-index: -1;
     pointer-events: none;
 }
@@ -50,55 +45,12 @@ body::before {
     color: var(--brand-copper);
 }
 
+/* Global typography */
 .font-mono {
     font-family: var(--font-mono) !important;
 }
 
-/* Classes Utilitárias de Cores */
-.bg-brand-black {
-    background-color: var(--brand-black) !important;
-}
-
-.text-brand-light {
-    color: var(--brand-light) !important;
-}
-
-.text-brand-gray {
-    color: var(--brand-gray) !important;
-}
-
-.text-brand-copper {
-    color: var(--brand-copper) !important;
-}
-
-.bg-brand-dark-card {
-    background-color: var(--brand-dark-card) !important;
-}
-
-.bg-brand-dark-opacity {
-    background-color: rgba(10, 10, 10, 0.3) !important;
-}
-
-.border-brand-border {
-    border: 1px solid var(--brand-border) !important;
-}
-
-.max-w-sm {
-    max-width: 24rem !important;
-}
-
-.max-w-md {
-    max-width: 28rem !important;
-}
-
-.max-w-lg {
-    max-width: 32rem !important;
-}
-
-.max-w-4xl {
-    max-width: 56rem !important;
-}
-
+/* Scrollbars */
 ::-webkit-scrollbar {
     width: 4px;
 }
@@ -115,7 +67,7 @@ body::before {
     background: #8a5f4e;
 }
 
-/* --- COMPONENTES --- */
+/* --- CABEÇALHO E NAVEGAÇÃO --- */
 .bg-brand-header {
     background-color: transparent !important;
     backdrop-filter: blur(12px);
@@ -129,11 +81,6 @@ body::before {
     transition: transform 0.3s ease;
 }
 
-/* Hover removido a pedido */
-/* .img-logo:hover {
-    transform: scale(1.05);
-} */
-
 .nav-link-brand {
     color: var(--brand-gray);
     text-decoration: none;
@@ -145,6 +92,7 @@ body::before {
     color: var(--brand-light);
 }
 
+/* --- BOTÕES --- */
 .btn-outline-brand-copper {
     background-color: transparent;
     border: 1px solid rgba(200, 90, 10, 0.4);
@@ -155,36 +103,37 @@ body::before {
 
 .btn-outline-brand-copper:hover {
     background-color: var(--brand-copper);
-    color: var(--brand-black) !important;
     border-color: var(--brand-copper);
+    color: var(--brand-black) !important;
+}
+
+.btn-brand-light,
+.btn-brand-copper {
+    border: none;
+    border-radius: 0.25rem;
 }
 
 .btn-brand-light {
     background-color: var(--brand-light);
     color: var(--brand-black);
-    border: none;
-    border-radius: 0.25rem;
     transition: background-color 0.3s ease;
 }
 
 .btn-brand-light:hover {
     background-color: #ffffff;
-    color: var(--brand-black);
 }
 
 .btn-brand-copper {
     background-color: var(--brand-copper);
     color: var(--brand-light);
-    border: none;
-    border-radius: 0.25rem;
     transition: opacity 0.3s ease;
 }
 
 .btn-brand-copper:hover {
     opacity: 0.9;
-    color: var(--brand-light);
 }
 
+/* --- FORMULÁRIOS --- */
 .form-control,
 .form-select {
     background-color: var(--brand-black) !important;
@@ -206,6 +155,7 @@ body::before {
     color: #fff !important;
 }
 
+/* --- CONTROLES DE TIMELINE --- */
 .timeline-navigation {
     overflow-x: auto;
 }
@@ -228,6 +178,7 @@ body::before {
     border-bottom-color: var(--brand-copper) !important;
 }
 
+/* --- RODAPÉ --- */
 .footer-link {
     color: var(--brand-gray);
     text-decoration: none;
@@ -238,52 +189,7 @@ body::before {
     color: var(--brand-copper);
 }
 
-/* --- ANIMAÇÕES E EFEITOS --- */
-@keyframes fadeUpGentle {
-    0% {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.animate-fade-up {
-    opacity: 0;
-    animation: fadeUpGentle 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.delay-1 {
-    animation-delay: 150ms;
-}
-
-.delay-2 {
-    animation-delay: 350ms;
-}
-
-.delay-3 {
-    animation-delay: 550ms;
-}
-
-.delay-4 {
-    animation-delay: 750ms;
-}
-
-.reveal {
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
+/* --- CARTÕES E EFEITOS --- */
 .spotlight-card {
     position: relative;
     background: #0f0f11;
@@ -339,6 +245,94 @@ body::before {
         drop-shadow(0 0 2px #1B6CA8) drop-shadow(0 0 5px rgba(27, 108, 168, 0.5));
 }
 
+#mapa-container {
+    overflow: hidden;
+    cursor: grab;
+}
+
+#mapa-container:active {
+    cursor: grabbing;
+}
+
+#mapa-svg {
+    transform-origin: center center;
+    transition: transform 0.05s linear;
+    user-select: none;
+}
+
+/* Temas dinâmicos do painel */
+.telemetry-orange {
+    border-color: #C85A0A !important;
+    box-shadow:
+        0 0 10px rgba(200,90,10,0.15),
+        0 0 40px rgba(200,90,10,0.08);
+}
+
+.telemetry-blue {
+    border-color: #1B6CA8 !important;
+    box-shadow:
+        0 0 10px rgba(27,108,168,0.15),
+        0 0 40px rgba(27,108,168,0.08);
+}
+
+.telemetry-orange #tel-local,
+.telemetry-orange #tel-risk-val,
+.telemetry-orange #tel-fonte {
+    color: #FF7A1A !important;
+}
+
+.telemetry-blue #tel-local,
+.telemetry-blue #tel-risk-val,
+.telemetry-blue #tel-fonte {
+    color: #4EA0DC !important;
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes fadeUpGentle {
+    0% {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-up {
+    opacity: 0;
+    animation: fadeUpGentle 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.delay-1 {
+    animation-delay: 150ms;
+}
+
+.delay-2 {
+    animation-delay: 350ms;
+}
+
+.delay-3 {
+    animation-delay: 550ms;
+}
+
+.delay-4 {
+    animation-delay: 750ms;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* --- RESPONSIVIDADE --- */
 @media (max-width: 768px) {
     body {
@@ -362,7 +356,51 @@ body::before {
     }
 }
 
-/* --- CLASSES UTILITÁRIAS DE COMPATIBILIDADE (TAILWIND UTILITIES) --- */
+/* --- CLASSES UTILITÁRIAS --- */
+.bg-brand-black {
+    background-color: var(--brand-black) !important;
+}
+
+.text-brand-light {
+    color: var(--brand-light) !important;
+}
+
+.text-brand-gray {
+    color: var(--brand-gray) !important;
+}
+
+.text-brand-copper {
+    color: var(--brand-copper) !important;
+}
+
+.bg-brand-dark-card {
+    background-color: var(--brand-dark-card) !important;
+}
+
+.bg-brand-dark-opacity {
+    background-color: rgba(10, 10, 10, 0.3) !important;
+}
+
+.border-brand-border {
+    border: 1px solid var(--brand-border) !important;
+}
+
+.max-w-sm {
+    max-width: 24rem !important;
+}
+
+.max-w-md {
+    max-width: 28rem !important;
+}
+
+.max-w-lg {
+    max-width: 32rem !important;
+}
+
+.max-w-4xl {
+    max-width: 56rem !important;
+}
+
 .text-xs {
     font-size: 0.75rem !important;
 }
@@ -385,10 +423,6 @@ body::before {
 
 .font-sans {
     font-family: var(--font-sans) !important;
-}
-
-.font-mono {
-    font-family: var(--font-mono) !important;
 }
 
 .border-t {
@@ -420,14 +454,14 @@ input[type="range"].form-range::-webkit-slider-runnable-track {
 }
 
 input[type="range"].form-range::-webkit-slider-thumb {
-    background-color: var(--brand-copper);
-    margin-top: -5px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    transition: background-color 0.2s;
     appearance: none;
     -webkit-appearance: none;
+    background-color: var(--brand-copper);
+    border-radius: 50%;
+    height: 16px;
+    margin-top: -5px;
+    transition: background-color 0.2s;
+    width: 16px;
 }
 
 input[type="range"].form-range::-webkit-slider-thumb:hover {

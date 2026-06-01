@@ -19,7 +19,7 @@
     <header class="fixed-top bg-brand-header border-bottom border-brand-border py-3">
         <div class="container-xl d-flex align-items-center justify-content-between">
             <a href="index.html" class="d-flex align-items-center">
-                <img src="img/logosentrya.png" alt="Sentrya" class="img-logo transition-scale">
+                <img src="img/logosentriav2.png" alt="Sentrya" class="img-logo transition-scale">
             </a>
 
             <nav class="nav d-none d-md-flex align-items-center gap-5 text-uppercase font-mono tracking-widest small">
@@ -74,9 +74,49 @@
             </div>
 
             <div class="row g-5 align-items-center">
+                <div class="col-lg-6 reveal delay-2">
+                    <div id="telemetry-display" class="spotlight-card p-5 rounded">
+                        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center border-bottom border-brand-border pb-3 mb-4 gap-2">
+                            <span class="font-mono text-sm text-brand-copper text-uppercase" id="tel-local">[ Foco: Selecione um Ponto ]</span>
+                            <div class="d-flex flex-column align-items-start align-items-sm-end gap-1">
+                                <span class="font-mono text-xs text-brand-gray" id="tel-id">ID: 000-A</span>
+                                <span id="tel-fonte" class="text-xs font-mono text-brand-copper font-bold">
+                                    [ Fonte: Space Charter — disasterscharter.org ]
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex flex-column gap-3">
+                            <div class="mb-4">
+                                <h4 class="text-xs font-mono text-brand-gray text-uppercase mb-1">Resumo Operacional</h4>
+                                <p class="text-sm font-light text-white" id="tel-status">Selecione um dos marcadores circulares do sensor espacial. O processamento orbital exibirá o diagnóstico correspondente no monitor.</p>
+                            </div>
+
+                            <div class="row g-3 mb-4">
+                                <div class="col-6">
+                                    <div class="bg-brand-dark-card p-3 rounded border border-brand-border text-center">
+                                        <span class="text-xs font-mono text-brand-gray d-block text-uppercase mb-1">Alerta Crítico</span>
+                                        <span class="h6 font-mono text-white mb-0" id="tel-risk-val">--</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="bg-brand-dark-card p-3 rounded border border-brand-border text-center">
+                                        <span class="text-xs font-mono text-brand-gray d-block text-uppercase mb-1">Análise Hídrica</span>
+                                        <span class="h6 font-mono text-white mb-0" id="tel-pop">--</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-sm text-brand-gray mb-0" id="tel-analise">
+                                Selecione um dos marcadores circulares do sensor espacial. O processamento orbital exibirá o diagnóstico correspondente no monitor.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-lg-6 d-flex justify-content-center reveal">
-                    <div class="map-container w-100 max-w-sm">
-                        <svg viewBox="240 320 120 125" class="w-100 h-auto map-svg text-brand-card fill-current">
+                    <div id="mapa-container" class="map-container w-100 max-w-3x1">
+                        <svg id="mapa-svg" viewBox="240 320 120 125" class="w-100 h-auto map-svg text-brand-card fill-current">
                             <path d="M314.24,438.85l6.25-12.02l0.23-10.1l11.66-7.52h6.53l5.13-8.69l0.93-16.68l-2.1-4.46l12.36-11.28l0.47-12.45l-16.79-8.22l-20.28-6.34l-9.56-0.94l2.57-5.4l-0.7-8.22l-2.09-0.69l-3.09,6.14l-1.62,2.03l-4.16-1.84l-13.99,4.93l-4.66-5.87l0.75-6.13l-4.4,4.48l-4.86-2.62l-0.49,0.69l0.01,2.13l4.19,2.25l-6.29,6.63l-3.97-0.04l-4.02-4.09l-4.55,0.14l-0.56,4.86l2.61,3.17l-3.08,9.87l-3.6,0.28l-5.73,3.62l-1.4,7.11l4.97,5.32l0.91-1.03l3.49-0.94l2.98,5.02l8.53-3.66l3.31,0.19l2.28,8.07l12.17,3.86l2.1,6.44l5.18,0.62l2.47,6.15l-1.67,5.47l2.18,2.86l-0.32,4.26l5.84-0.55l5.35,6.76l-0.42,4.75l3.17,2.68l-7.6,11.51L314.24,438.85L314.24,438.85z" />
 
                             <g id="pin-rs" class="cursor-pointer" transform="translate(314 434)">
@@ -111,44 +151,6 @@
                                 <circle r="2.5" fill="#C85A0A" />
                             </g>
                         </svg>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 reveal delay-2">
-                    <div id="telemetry-display" class="spotlight-card p-5 rounded">
-                        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center border-bottom border-brand-border pb-3 mb-4 gap-2">
-                            <span class="font-mono text-sm text-brand-copper text-uppercase" id="tel-local">[ Foco: Selecione um Ponto ]</span>
-                            <div class="d-flex flex-column align-items-start align-items-sm-end gap-1">
-                                <span class="font-mono text-xs text-brand-gray" id="tel-id">ID: 000-A</span>
-                                <span class="text-xs font-mono text-brand-copper font-bold">[ Fonte: Space Charter — disasterscharter.org ]</span>
-                            </div>
-                        </div>
-                        
-                        <div class="d-flex flex-column gap-3">
-                            <div class="mb-4">
-                                <h4 class="text-xs font-mono text-brand-gray text-uppercase mb-1">Resumo Operacional</h4>
-                                <p class="text-sm font-light text-white" id="tel-status">Selecione um dos marcadores circulares do sensor espacial. O processamento orbital exibirá o diagnóstico correspondente no monitor.</p>
-                            </div>
-
-                            <div class="row g-3 mb-4">
-                                <div class="col-6">
-                                    <div class="bg-brand-dark-card p-3 rounded border border-brand-border text-center">
-                                        <span class="text-xs font-mono text-brand-gray d-block text-uppercase mb-1">Alerta Crítico</span>
-                                        <span class="h6 font-mono text-white mb-0" id="tel-risk-val">--</span>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="bg-brand-dark-card p-3 rounded border border-brand-border text-center">
-                                        <span class="text-xs font-mono text-brand-gray d-block text-uppercase mb-1">Análise Hídrica</span>
-                                        <span class="h6 font-mono text-white mb-0" id="tel-pop">--</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <p class="text-sm text-brand-gray mb-0" id="tel-analise">
-                                Selecione um dos marcadores circulares do sensor espacial. O processamento orbital exibirá o diagnóstico correspondente no monitor.
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
