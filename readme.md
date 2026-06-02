@@ -12,6 +12,7 @@ Uma plataforma descentralizada de coordenação climática desenhada para unific
 - **Efeitos Visuais Interativos & Premium**: Spotlight cards reativos ao cursor, inclinação em 3D de elementos baseada no mouse, efeitos de paralaxe durante o scroll e transições suaves de revelação (reveal scroll).
 - **Linha do Tempo Histórica**: Seção interativa com retrospectiva crítica detalhando as fases de colapso de infraestrutura terrestre durante as enchentes no Rio Grande do Sul em 2024.
 - **Roteamento Dinâmico de Cidades**: Preenchimento automático do formulário SOS através de parâmetros de URL (`?cidade=NomeDaCidade`), agilizando a triagem operacional.
+- **Fale Conosco**: Canal de comunicação direta por e-mail com formulário de contato integrado e exibição das informações oficiais da equipe Sentrya, com janelas modais de confirmação personalizadas.
 
 ---
 
@@ -41,6 +42,7 @@ SENTRYA/
 ├── index.html              # Apresentação do projeto e Timeline histórica (RS 2024)
 ├── simulacao.html          # Diagnóstico orbital e Mapa do Brasil interativo (Zoom & Pan)
 ├── acoes.html              # Central de Operações: Envio SOS via satélite e Fila de Atendimento
+├── contato.html            # Módulo de Fale Conosco (formulário de e-mail e contatos institucionais)
 └── readme.md               # Documentação do projeto (este arquivo)
 ```
 

@@ -4,11 +4,13 @@ function initSharedComponents() {
     const path = window.location.pathname;
     const isSimulacao = path.includes('simulacao.html');
     const isAcoes = path.includes('acoes.html');
-    const isIndex = !isSimulacao && !isAcoes;
+    const isContato = path.includes('contato.html');
+    const isIndex = !isSimulacao && !isAcoes && !isContato;
 
     const activeIndex = isIndex ? 'active' : '';
     const activeSimulacao = isSimulacao ? 'active' : '';
     const activeAcoes = isAcoes ? 'active' : '';
+    const activeContato = isContato ? 'active' : '';
 
     const header = document.querySelector('header');
     if (header) {
@@ -22,6 +24,7 @@ function initSharedComponents() {
                 <a href="index.html" class="nav-link-brand ${activeIndex}">Início</a>
                 <a href="simulacao.html" class="nav-link-brand ${activeSimulacao}">Simulação</a>
                 <a href="acoes.html" class="nav-link-brand ${activeAcoes}">Ações</a>
+                <a href="contato.html" class="nav-link-brand ${activeContato}">Contato</a>
             </nav>
 
             <div class="d-flex align-items-center gap-3">
@@ -495,4 +498,53 @@ if (mapa && mapaContainer) {
         atualizarMapa();
     });
 
+}
+
+// ============================================
+// FORMULÁRIO DE CONTATO (EMAIL)
+// ============================================
+
+const contactForm = document.getElementById('contactForm');
+const contactMessage = document.getElementById('contactMessage');
+const charCounter = document.getElementById('char-counter');
+
+if (contactMessage && charCounter) {
+    contactMessage.addEventListener('input', () => {
+        charCounter.textContent = contactMessage.value.length;
+    });
+}
+
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const nome = document.getElementById('contactName').value;
+        const email = document.getElementById('contactEmail').value;
+        const assunto = document.getElementById('contactSubject').value;
+        const msg = document.getElementById('contactMessage').value;
+
+        // Atualizar campos do modal de confirmação
+        const confirmName = document.getElementById('confirm-name');
+        const confirmSubject = document.getElementById('confirm-subject');
+        const confirmTime = document.getElementById('confirm-time');
+
+        if (confirmName) confirmName.textContent = nome;
+        if (confirmSubject) confirmSubject.textContent = assunto;
+        if (confirmTime) {
+            const agora = new Date();
+            confirmTime.textContent = agora.toLocaleTimeString('pt-BR');
+        }
+
+        // Exibir modal do Bootstrap
+        const contactConfirmModalEl = document.getElementById('contactConfirmModal');
+        if (contactConfirmModalEl) {
+            const confirmModal = new bootstrap.Modal(contactConfirmModalEl);
+            confirmModal.show();
+        }
+
+        contactForm.reset();
+        if (charCounter) {
+            charCounter.textContent = "0";
+        }
+    });
 }
