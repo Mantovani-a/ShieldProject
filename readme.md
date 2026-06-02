@@ -20,7 +20,7 @@ Uma plataforma descentralizada de coordenação climática desenhada para unific
 
 - **Estruturação**: [HTML5](https://developer.mozilla.org/pt-BR/docs/Web/HTML) com marcação semântica moderna.
 - **Estilização**: [Bootstrap 5](https://getbootstrap.com/) para layouts fluidos e responsivos + [CSS3](https://developer.mozilla.org/pt-BR/docs/Web/CSS) Vanilla com variáveis personalizadas para a identidade visual (efeitos neon, spotlight, temas dinâmicos e scrollbars customizadas).
-- **Lógica e Dinâmica**: [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript) Vanilla para injeção dinâmica de componentes compartilhados (header e footer), manipulação do DOM, controle de zoom/pan no SVG, e execução do algoritmo de prioridade na fila SOS.
+- **Lógica e Dinâmica**: [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript) Vanilla para manipulação do DOM, controle de zoom/pan no SVG, e execução do algoritmo de prioridade na fila SOS.
 
 ---
 
