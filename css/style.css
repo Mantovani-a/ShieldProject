@@ -1,10 +1,13 @@
-﻿/* --- SENTRYA DESIGN SYSTEM --- */
+/* --- SENTRYA DESIGN SYSTEM --- */
 :root {
     --brand-black: #0A0A0A;
+    --brand-black-rgb: 10, 10, 10;
     --brand-card: #232323;
     --brand-dark-card: #0f0f11;
+    --brand-dark-card-rgb: 15, 15, 17;
     --brand-border: rgba(235, 231, 223, 0.06);
     --brand-copper: #c26c27;
+    --brand-copper-rgb: 194, 108, 39;
     --brand-copper-dim: #994f18;
     --brand-copper-faint: rgba(194, 108, 39, 0.08);
     --brand-gray: #a8a6a1;
@@ -95,7 +98,7 @@ body::before {
 /* --- BOTÕES --- */
 .btn-outline-brand-copper {
     background-color: transparent;
-    border: 1px solid rgba(200, 90, 10, 0.4);
+    border: 1px solid rgba(var(--brand-copper-rgb), 0.4);
     color: var(--brand-light);
     border-radius: 0.25rem;
     transition: all 0.3s ease;
@@ -192,7 +195,7 @@ body::before {
 /* --- CARTÕES E EFEITOS --- */
 .spotlight-card {
     position: relative;
-    background: #0f0f11;
+    background: var(--brand-dark-card);
     border: 1px solid rgba(255, 255, 255, 0.04);
     overflow: hidden;
     transition: border-color 0.4s ease;
@@ -222,7 +225,7 @@ body::before {
 /* --- MAPA E TELEMETRIA --- */
 .map-container {
     padding: 1rem;
-    background-color: rgba(15, 15, 17, 0.4);
+    background-color: rgba(var(--brand-dark-card-rgb), 0.4);
     border: 1px solid var(--brand-border);
     border-radius: 0.5rem;
 }
@@ -378,7 +381,7 @@ body::before {
 }
 
 .bg-brand-dark-opacity {
-    background-color: rgba(10, 10, 10, 0.3) !important;
+    background-color: rgba(var(--brand-black-rgb), 0.3) !important;
 }
 
 .border-brand-border {

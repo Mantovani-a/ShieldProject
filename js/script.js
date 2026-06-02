@@ -1,3 +1,92 @@
+// --- COMPONENTES COMPARTILHADOS ---
+
+function initSharedComponents() {
+    const path = window.location.pathname;
+    const isSimulacao = path.includes('simulacao.html');
+    const isAcoes = path.includes('acoes.html');
+    const isIndex = !isSimulacao && !isAcoes;
+
+    const activeIndex = isIndex ? 'active' : '';
+    const activeSimulacao = isSimulacao ? 'active' : '';
+    const activeAcoes = isAcoes ? 'active' : '';
+
+    const header = document.querySelector('header');
+    if (header) {
+        header.innerHTML = `
+        <div class="container-xl d-flex align-items-center justify-content-between">
+            <a href="index.html" class="d-flex align-items-center">
+                <img src="img/logosentriav2.png" alt="Sentrya" class="img-logo transition-scale">
+            </a>
+
+            <nav class="nav d-none d-md-flex align-items-center gap-5 text-uppercase font-mono tracking-widest small">
+                <a href="index.html" class="nav-link-brand ${activeIndex}">Início</a>
+                <a href="simulacao.html" class="nav-link-brand ${activeSimulacao}">Simulação</a>
+                <a href="acoes.html" class="nav-link-brand ${activeAcoes}">Ações</a>
+            </nav>
+
+            <div class="d-flex align-items-center gap-3">
+                <a href="acoes.html" class="btn btn-outline-brand-copper font-mono text-uppercase tracking-widest px-4 py-2 small d-none d-md-inline-block">
+                    Central
+                </a>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="btn btn-link text-brand-copper d-md-none p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu" style="border:none; background:transparent;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        `;
+
+        if (!document.getElementById('mobileMenu')) {
+            const offcanvasHTML = `
+            <div class="offcanvas offcanvas-end bg-brand-black text-brand-light border-start border-brand-border" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+                <div class="offcanvas-header border-bottom border-brand-border">
+                    <h5 class="offcanvas-title font-mono text-uppercase tracking-widest text-brand-copper" id="mobileMenuLabel">Sentrya</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="d-flex flex-column gap-4 font-mono text-uppercase tracking-widest mt-3">
+                        <a href="index.html" class="nav-link-brand ${activeIndex}">Início</a>
+                        <a href="simulacao.html" class="nav-link-brand ${activeSimulacao}">Simulação</a>
+                        <a href="acoes.html" class="nav-link-brand ${activeAcoes}">Ações</a>
+                        <hr class="border-brand-border my-2">
+                        <a href="acoes.html" class="btn btn-brand-copper font-mono text-uppercase tracking-widest px-4 py-3 small text-center w-100">
+                            Central
+                        </a>
+                    </div>
+                </div>
+            </div>
+            `;
+            header.insertAdjacentHTML('afterend', offcanvasHTML);
+        }
+    }
+
+    const footer = document.querySelector('footer');
+    if (footer) {
+        footer.innerHTML = `
+        <div class="container-xl d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3">
+            <div class="d-flex flex-column align-items-center align-items-sm-start gap-1">
+                <div class="d-flex align-items-center gap-2">
+                    <img src="img/logo-sentrya-branca.png" alt="Sentrya" style="height: 18px;">
+                    <span class="text-white fw-light">SENTRYA — 2026</span>
+                </div>
+                <span class="text-brand-gray" style="font-size: 10px !important;">Dados baseados em ativações do International Charter Space and Major Disasters.</span>
+            </div>
+            <div class="d-flex gap-4">
+                <a href="#" class="footer-link">Especificações</a>
+                <a href="#" class="footer-link">Segurança</a>
+                <a href="#" class="footer-link">Código Aberto</a>
+            </div>
+        </div>
+        `;
+    }
+}
+
+// Inicializa componentes compartilhados
+initSharedComponents();
+
 // --- EFEITOS VISUAIS ---
 
 document.querySelectorAll('.spotlight-card').forEach(card => {
@@ -25,48 +114,21 @@ if (reveals.length > 0) {
 
 // --- TELEMETRIA DO MAPA ---
 
-const pontosInfo = {
-    rs: {
-        local: "[ Rio Grande do Sul ]",
-        id: "ID: LEO-902",
-        fonte: "Space Charter",
-        activationId: "BR-2024-0001",
-        status: "Lâmina hídrica estabilizada sobre áreas urbanas das bacias do Guaíba.",
-        risco: "Grau Crítico",
-        pop: "56% Alagado",
-        analise: "Imagens do satélite Sentinel indicam descompasso hídrico persistente em locais baixos. Comunicação civil limitada a fallback."
-    },
-    rj: {
-        local: "[ Rio de Janeiro - Região Serrana ]",
-        id: "ID: MON-304",
-        fonte: "Space Charter",
-        activationId: "BR-2024-0002",
-        status: "Área sob monitoramento contínuo.",
-        risco: "Em Avaliação",
-        pop: "Monitoramento Ativo",
-        analise: "Sensores pluviométricos e imagens orbitais indicam instabilidade potencial. Equipes técnicas acompanham a evolução das condições do terreno."
-    },
-    ne: {
-        local: "[ Região Nordeste ]",
-        id: "ID: LEO-112",
-        fonte: "Space Charter",
-        activationId: "BR-2024-0003",
-        status: "Stress hídrico acumulado de alta escala temporal. Escassez hídrica aguda.",
-        risco: "Severo",
-        pop: "Solo Seco",
-        analise: "Medições termais via sensores orbitais demonstram anomalia térmica positiva. Índices vegetativos severamente decrescentes."
-    },
-    am: {
-        local: "[ Amazônia ]",
-        id: "ID: LEO-778",
-        fonte: "Space Charter",
-        activationId: "BR-2024-0004",
-        status: "Focos de calor detectados em múltiplos setores da floresta.",
-        risco: "Alerta Ambiental",
-        pop: "Queimadas Ativas",
-        analise: "Sensores orbitais identificaram aumento significativo de temperatura superficial e emissões térmicas compatíveis com incêndios florestais."
-    }
-};
+const pontosInfo = {};
+if (typeof SENTRYA_ACTIVATIONS !== 'undefined') {
+    Object.entries(SENTRYA_ACTIVATIONS).forEach(([key, value]) => {
+        pontosInfo[key] = {
+            local: `[ ${value.local} ]`,
+            id: `ID: ${value.satelliteId}`,
+            fonte: "Space Charter",
+            activationId: value.id,
+            status: value.detalhes,
+            risco: value.risco,
+            pop: value.pop,
+            analise: value.analise
+        };
+    });
+}
 
 function focarPonto(id) {
     const info = pontosInfo[id];
@@ -335,6 +397,11 @@ window.addEventListener('DOMContentLoaded', () => {
                 }, 100);
             }
         }
+    }
+
+    // Inicializar timeline
+    if (document.getElementById('timeline-box')) {
+        timelineData(1);
     }
 });
 
