@@ -38,29 +38,6 @@ function initSharedComponents() {
             </div>
         </div>
         `;
-
-        if (!document.getElementById('mobileMenu')) {
-            const offcanvasHTML = `
-            <div class="offcanvas offcanvas-end bg-brand-black text-brand-light border-start border-brand-border" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
-                <div class="offcanvas-header border-bottom border-brand-border">
-                    <h5 class="offcanvas-title font-mono text-uppercase tracking-widest text-brand-copper" id="mobileMenuLabel">Sentrya</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <div class="d-flex flex-column gap-4 font-mono text-uppercase tracking-widest mt-3">
-                        <a href="index.html" class="nav-link-brand ${activeIndex}">Início</a>
-                        <a href="simulacao.html" class="nav-link-brand ${activeSimulacao}">Simulação</a>
-                        <a href="acoes.html" class="nav-link-brand ${activeAcoes}">Ações</a>
-                        <hr class="border-brand-border my-2">
-                        <a href="acoes.html" class="btn btn-brand-copper font-mono text-uppercase tracking-widest px-4 py-3 small text-center w-100">
-                            Central
-                        </a>
-                    </div>
-                </div>
-            </div>
-            `;
-            header.insertAdjacentHTML('afterend', offcanvasHTML);
-        }
     }
 
     const footer = document.querySelector('footer');
