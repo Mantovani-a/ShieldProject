@@ -16,7 +16,7 @@ Uma plataforma descentralizada de coordenação climática desenhada para unific
 ## 🛠️ Tecnologias Utilizadas
 
 - **Estruturação**: [HTML5](https://developer.mozilla.org/pt-BR/docs/Web/HTML) estruturado de forma semântica.
-- **Estilização**: [Tailwind CSS](https://tailwindcss.com/) (via CDN) para estruturação utilitária rápida e responsiva + [CSS3](https://developer.mozilla.org/pt-BR/docs/Web/CSS) Vanilla para efeitos de micro-animações, spotlights e customização de scroll.
+- **Estilização**: [Bootstrap](https://bootstrap.com/) para estruturação utilitária rápida e responsiva + [CSS3](https://developer.mozilla.org/pt-BR/docs/Web/CSS) Vanilla para efeitos de micro-animações, spotlights e customização de scroll.
 - **Lógica e Dinâmica**: [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript) Vanilla para manipulação do DOM, interações complexas de mapas, e a física e renderização no elemento `<canvas>`.
 
 ---
@@ -56,6 +56,5 @@ Shield Project/
 ## 🗺️ Roadmap de Evolução
 
 - [ ] **Fase 2**: Integração via API aberta com o Space Charter e CEMADEN para processamento de radar SAR em tempo real.
-- [ ] **Fase 3**: Criação de backend seguro e canais criptografados para a Defesa Civil gerenciar o status de atuação das equipes de campo de forma síncrona.
+- [ ] **Fase 3**: Criação de backend seguro.
 - [ ] **Fase 4**: Mecanismo estatístico preditivo para identificar bacias com risco de transbordo com base em volume de chuva histórica.
-- [ ] **Fase 5**: Criação de equipamentos de campo portáteis de fallback de baixo consumo de energia.
