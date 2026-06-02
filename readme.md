@@ -6,33 +6,42 @@ Uma plataforma descentralizada de coordenação climática desenhada para unific
 
 ## 🚀 Funcionalidades
 
-- **Monitoramento Ativo (Telemetria Espacial)**: Mapeamento dinâmico de lâminas hídricas superficiais e riscos de deslizamento no território brasileiro através de telemetria simulada baseada em satélites LEO (Low Earth Orbit).
-- **Mapa Vetorial Interativo**: Mapa interativo do Brasil em formato SVG que permite visualização em tempo real de focos de incidentes, com suporte para zoom (scroll/pinch) e arrasto (pan).
-- **Algoritmo de Roteamento & Triagem**: Sistema de priorização automática de alertas SOS com base em criticidade de vulneráveis e tipo de ocorrência (Urgência = População * Risco).
-- **Simulação de Satélite em 3D (Canvas)**: Elemento gráfico reativo que simula visualmente a órbita de satélites e sua atração gravitacional sob o cursor.
+- **Monitoramento Ativo (Telemetria Espacial)**: Diagnóstico e mapeamento dinâmico de lâminas hídricas superficiais, riscos de deslizamento, queimadas e seca severa no território brasileiro. Utiliza telemetria simulada baseada em satélites LEO (Low Earth Orbit) associados a missões reais como Sentinel-1, Pleiades, CBERS-4 e Terra/MODIS.
+- **Mapa Vetorial Interativo**: Mapa interativo do Brasil em formato SVG integrado a um monitor de telemetria em tempo real, com suporte completo para zoom (scroll do mouse) e arrasto (pan).
+- **Algoritmo de Roteamento & Triagem**: Sistema de priorização e ordenação dinâmica de chamados SOS com base na criticidade de vulneráveis e tipo de ocorrência. O índice de urgência é calculado por: `Urgência = População × Fator de Risco`.
+- **Efeitos Visuais Interativos & Premium**: Spotlight cards reativos ao cursor, inclinação em 3D de elementos baseada no mouse, efeitos de paralaxe durante o scroll e transições suaves de revelação (reveal scroll).
+- **Linha do Tempo Histórica**: Seção interativa com retrospectiva crítica detalhando as fases de colapso de infraestrutura terrestre durante as enchentes no Rio Grande do Sul em 2024.
+- **Roteamento Dinâmico de Cidades**: Preenchimento automático do formulário SOS através de parâmetros de URL (`?cidade=NomeDaCidade`), agilizando a triagem operacional.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Estruturação**: [HTML5](https://developer.mozilla.org/pt-BR/docs/Web/HTML) estruturado de forma semântica.
-- **Estilização**: [Bootstrap](https://bootstrap.com/) para estruturação utilitária rápida e responsiva + [CSS3](https://developer.mozilla.org/pt-BR/docs/Web/CSS) Vanilla para efeitos de micro-animações, spotlights e customização de scroll.
-- **Lógica e Dinâmica**: [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript) Vanilla para manipulação do DOM, interações complexas de mapas, e a física e renderização no elemento `<canvas>`.
+- **Estruturação**: [HTML5](https://developer.mozilla.org/pt-BR/docs/Web/HTML) com marcação semântica moderna.
+- **Estilização**: [Bootstrap 5](https://getbootstrap.com/) para layouts fluidos e responsivos + [CSS3](https://developer.mozilla.org/pt-BR/docs/Web/CSS) Vanilla com variáveis personalizadas para a identidade visual (efeitos neon, spotlight, temas dinâmicos e scrollbars customizadas).
+- **Lógica e Dinâmica**: [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript) Vanilla para injeção dinâmica de componentes compartilhados (header e footer), manipulação do DOM, controle de zoom/pan no SVG, e execução do algoritmo de prioridade na fila SOS.
 
 ---
 
 ## 📁 Estrutura de Arquivos
 
 ```text
-Shield Project/
-├── assets/             # Recursos de mídia e imagens estáticas
+SENTRYA/
 ├── css/
-│   └── style.css       # Estilizações customizadas e efeitos visuais
+│   └── style.css           # Estilizações customizadas, identidade visual e efeitos luminosos
+├── img/
+│   ├── logo-sentrya-branca.png
+│   ├── logo-sentryamenor.png
+│   ├── logo_Sentrya.png
+│   └── logosentriav2.png   # Logotipos e identidades visuais da plataforma
 ├── js/
-│   └── script.js       # Comportamento interativo e simulação física
-├── .gitignore          # Arquivos e diretórios ignorados pelo Git
-├── index.html          # Página principal e estrutura HTML
-└── readme.md           # Documentação do projeto (este arquivo)
+│   ├── script.js           # Efeitos visuais, controle do mapa interativo e lógica SOS/timeline
+│   └── spaceCharter.js     # Banco de dados de ativações e telemetria de satélites (RS, RJ, NE, AM)
+├── .gitignore              # Arquivos e diretórios ignorados pelo Git
+├── index.html              # Apresentação do projeto e Timeline histórica (RS 2024)
+├── simulacao.html          # Diagnóstico orbital e Mapa do Brasil interativo (Zoom & Pan)
+├── acoes.html              # Central de Operações: Envio SOS via satélite e Fila de Atendimento
+└── readme.md               # Documentação do projeto (este arquivo)
 ```
 
 ---
@@ -46,10 +55,10 @@ Shield Project/
 
 2. Acesse a pasta do projeto:
    ```bash
-   cd "Shield Project"
+   cd ShieldProject
    ```
 
-3. Abra o arquivo `index.html` diretamente em seu navegador web de preferência ou utilize uma extensão de servidor local como a *Live Server* no VS Code para ter recarregamento automático.
+3. Abra o arquivo `index.html` diretamente em seu navegador web de preferência ou utilize uma extensão de servidor local como a *Live Server* no VS Code para desfrutar de recarregamento automático.
 
 ---
 
