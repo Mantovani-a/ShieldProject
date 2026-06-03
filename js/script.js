@@ -1,4 +1,6 @@
 
+let isDraggingMap = false;
+
 // --- EFEITOS VISUAIS ---
 
 document.querySelectorAll('.spotlight-card').forEach(card => {
@@ -63,15 +65,17 @@ function focarPonto(id) {
     if (telAnalise) telAnalise.textContent = info.analise;
 
     // TEMA DO PAINEL
-    painel.classList.remove(
-        'telemetry-orange',
-        'telemetry-blue'
-    );
+    if (painel) {
+        painel.classList.remove(
+            'telemetry-orange',
+            'telemetry-blue'
+        );
 
-    if (id === 'rj') {
-        painel.classList.add('telemetry-blue');
-    } else {
-        painel.classList.add('telemetry-orange');
+        if (id === 'rj') {
+            painel.classList.add('telemetry-blue');
+        } else {
+            painel.classList.add('telemetry-orange');
+        }
     }
 
     // DESTACA O PIN SELECIONADO
@@ -93,6 +97,7 @@ function focarPonto(id) {
     const pin = document.getElementById(`pin-${id}`);
     if (pin) {
         pin.addEventListener('click', () => {
+            if (isDraggingMap) return;
             focarPonto(id);
             const mapaOperacoes = document.getElementById('mapa-operacoes');
             if (mapaOperacoes) {
@@ -315,6 +320,11 @@ window.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('timeline-box')) {
         timelineData(1);
     }
+
+    // Inicializar ponto default no mapa se o telemetry-display existir
+    if (document.getElementById('telemetry-display')) {
+        focarPonto('rs');
+    }
 });
 
 // --- ANIMAÇÕES INTERATIVAS: SCROLL E 3D ---
@@ -361,6 +371,8 @@ if (mapa && mapaContainer) {
     let dragging = false;
     let startX = 0;
     let startY = 0;
+    let startDragX = 0;
+    let startDragY = 0;
 
     function atualizarMapa() {
 
@@ -407,7 +419,11 @@ if (mapa && mapaContainer) {
 
         startX = e.clientX - posX;
         startY = e.clientY - posY;
+        startDragX = e.clientX;
+        startDragY = e.clientY;
+        isDraggingMap = false;
 
+        mapa.classList.add('dragging');
         mapaContainer.style.cursor = 'grabbing';
     });
 
@@ -416,13 +432,24 @@ if (mapa && mapaContainer) {
 
         dragging = false;
 
+        mapa.classList.remove('dragging');
         mapaContainer.style.cursor = 'grab';
+
+        setTimeout(() => {
+            isDraggingMap = false;
+        }, 50);
     });
 
     // MOVIMENTO
     document.addEventListener('mousemove', (e) => {
 
         if (!dragging) return;
+
+        const dx = e.clientX - startDragX;
+        const dy = e.clientY - startDragY;
+        if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+            isDraggingMap = true;
+        }
 
         posX = e.clientX - startX;
         posY = e.clientY - startY;
