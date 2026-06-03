@@ -112,6 +112,39 @@ function focarPonto(id) {
 
 // --- REGISTRO SOS E ALGORITMO DE PRIORIZAÇÃO ---
 
+function ordenarFila() {
+    const list = document.getElementById('incident-list');
+    if (!list) return;
+
+    const items = Array.from(list.children);
+    
+    // Ordena por Urgência de forma decrescente (População * Risco)
+    items.sort((a, b) => {
+        const urgA = parseInt(a.getAttribute('data-urgencia')) || 0;
+        const urgB = parseInt(b.getAttribute('data-urgencia')) || 0;
+        return urgB - urgA;
+    });
+
+    list.innerHTML = '';
+    
+    items.forEach((item, index) => {
+        const priorityBadge = item.querySelector('.text-sm-end span');
+        if (priorityBadge) {
+            priorityBadge.innerHTML = `[Prioridade #${index + 1}]`;
+            priorityBadge.classList.remove('text-brand-copper');
+            priorityBadge.classList.add('text-brand-light');
+        }
+        
+        if (index === 0) {
+            item.className = "p-3 bg-brand-dark-opacity border border-brand-copper rounded d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 mb-2 transition-all duration-500";
+        } else {
+            item.className = "p-3 bg-brand-dark-opacity border border-brand-border rounded d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 mb-2 transition-all duration-500";
+        }
+
+        list.appendChild(item);
+    });
+}
+
 const sosForm = document.getElementById('sosForm');
 if (sosForm) {
     sosForm.addEventListener('submit', (event) => {
@@ -156,6 +189,8 @@ if (sosForm) {
             `;
 
             list.prepend(card);
+            
+            ordenarFila();
 
             setTimeout(() => {
                 card.classList.remove('opacity-0');
@@ -164,42 +199,6 @@ if (sosForm) {
         }
 
         sosForm.reset();
-    });
-}
-
-const btnOtimizarRotas = document.getElementById('btnOtimizarRotas');
-if (btnOtimizarRotas) {
-    btnOtimizarRotas.addEventListener('click', () => {
-        const list = document.getElementById('incident-list');
-        if (!list) return;
-
-        const items = Array.from(list.children);
-        
-        // Ordena por Urgência de forma decrescente (População * Risco)
-        items.sort((a, b) => {
-            const urgA = parseInt(a.getAttribute('data-urgencia')) || 0;
-            const urgB = parseInt(b.getAttribute('data-urgencia')) || 0;
-            return urgB - urgA;
-        });
-
-        list.innerHTML = '';
-        
-        items.forEach((item, index) => {
-            const priorityBadge = item.querySelector('.text-sm-end span');
-            if (priorityBadge) {
-                priorityBadge.innerHTML = `[Prioridade #${index + 1}]`;
-                priorityBadge.classList.remove('text-brand-copper');
-                priorityBadge.classList.add('text-brand-light');
-            }
-            
-            if (index === 0) {
-                item.className = "p-3 bg-brand-dark-opacity border border-brand-copper rounded d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 mb-2 transition-all duration-500";
-            } else {
-                item.className = "p-3 bg-brand-dark-opacity border border-brand-border rounded d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 mb-2 transition-all duration-500";
-            }
-
-            list.appendChild(item);
-        });
     });
 }
 
@@ -324,6 +323,11 @@ window.addEventListener('DOMContentLoaded', () => {
     // Inicializar ponto default no mapa se o telemetry-display existir
     if (document.getElementById('telemetry-display')) {
         focarPonto('rs');
+    }
+
+    // Inicializar fila de prioridade de forma automatica ordenando do mais critico para o menos critico
+    if (document.getElementById('incident-list')) {
+        ordenarFila();
     }
 });
 
