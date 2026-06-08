@@ -156,16 +156,12 @@ if (sosForm) {
 
         // Fatores de risco oficiais: Inundação = 3, Colapso = 2, Isolamento = 1
         let riskFactor = 1;
-        let prioValue = 4;
         if (tipo.includes("Inundação")) {
             riskFactor = 3;
-            prioValue = 1;
         } else if (tipo.includes("Colapso")) {
             riskFactor = 2;
-            prioValue = 2;
         } else if (tipo.includes("Isolamento")) {
             riskFactor = 1;
-            prioValue = 3;
         }
 
         const urgenciaVal = pessoas * riskFactor;
@@ -175,7 +171,6 @@ if (sosForm) {
             const card = document.createElement('div');
             card.className = "p-3 bg-brand-dark-opacity border border-brand-border rounded d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 mb-2 transition-all duration-500 opacity-0";
             card.style.transform = "translateY(16px)";
-            card.setAttribute('data-prioridade', prioValue);
             card.setAttribute('data-urgencia', urgenciaVal);
             
             card.innerHTML = `
@@ -564,9 +559,3 @@ function inicializarChecklistKit() {
         }
     });
 }
-
-
-
-
-
-

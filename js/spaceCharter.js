@@ -61,4 +61,3 @@ const SENTRYA_ACTIVATIONS = {
         descricao: "Monitoramento de focos de queimadas ativas e plumas de fumaça na bacia amazônica por sensores termais e ópticos."
     }
 };
-

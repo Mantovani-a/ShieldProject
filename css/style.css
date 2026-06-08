@@ -10,7 +10,6 @@
     --brand-border: rgba(235, 231, 223, 0.06);
     --brand-copper: #c26c27;
     --brand-copper-rgb: 194, 108, 39;
-    --brand-copper-dim: #994f18;
     --brand-copper-faint: rgba(194, 108, 39, 0.08);
     --brand-gray: #a8a6a1;
     --brand-light: #e8e6e1;
@@ -90,10 +89,6 @@ body::before {
 
 .text-lg {
     font-size: 1.125rem !important;
-}
-
-.text-xl {
-    font-size: 1.25rem !important;
 }
 
 .tracking-widest {
@@ -202,29 +197,6 @@ body::before {
     border-color: var(--brand-copper) !important;
     box-shadow: none !important;
     color: #fff !important;
-}
-
-/* Estilização dos Sliders de Simulação */
-input[type="range"].form-range::-webkit-slider-runnable-track {
-    background-color: var(--brand-dark-card);
-    border: 1px solid var(--brand-border);
-    height: 6px;
-    border-radius: 3px;
-}
-
-input[type="range"].form-range::-webkit-slider-thumb {
-    appearance: none;
-    -webkit-appearance: none;
-    background-color: var(--brand-copper);
-    border-radius: 50%;
-    height: 16px;
-    margin-top: -5px;
-    transition: background-color 0.2s;
-    width: 16px;
-}
-
-input[type="range"].form-range::-webkit-slider-thumb:hover {
-    background-color: #FF7A1A;
 }
 
 /* ==========================================================================
@@ -423,25 +395,12 @@ input[type="range"].form-range::-webkit-slider-thumb:hover {
     }
 }
 
-.animate-fade-up {
-    opacity: 0;
-    animation: fadeUpGentle 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
 .delay-1 {
     animation-delay: 150ms;
 }
 
 .delay-2 {
     animation-delay: 350ms;
-}
-
-.delay-3 {
-    animation-delay: 550ms;
-}
-
-.delay-4 {
-    animation-delay: 750ms;
 }
 
 .reveal {
@@ -485,14 +444,6 @@ input[type="range"].form-range::-webkit-slider-thumb:hover {
 
 .border-brand-border {
     border: 1px solid var(--brand-border) !important;
-}
-
-.max-w-sm {
-    max-width: 24rem !important;
-}
-
-.max-w-md {
-    max-width: 28rem !important;
 }
 
 .max-w-lg {
