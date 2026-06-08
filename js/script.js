@@ -335,8 +335,7 @@ window.addEventListener('DOMContentLoaded', () => {
         ordenarFila();
     }
 
-    // Inicializar assistente de triagem, checklist e countdown da Central se existirem
-    inicializarTriagemCentral();
+    // Inicializar checklist e countdown da Central se existirem
     inicializarChecklistKit();
     iniciarCountdownOrbital();
 });
@@ -523,139 +522,29 @@ if (contactForm) {
 }
 
 // ============================================
-// ASSISTENTE DE TRIAGEM E KIT DE SOBREVIVÊNCIA
+// CHECKLIST DO KIT DE SOBREVIVÊNCIA
 // ============================================
-
-function inicializarTriagemCentral() {
-    const btnCalcular = document.getElementById('btn-calcular-triagem');
-    if (!btnCalcular) return;
-
-    btnCalcular.addEventListener('click', () => {
-        const desastre = document.getElementById('triagem-desastre').value;
-        const checkboxes = document.querySelectorAll('.check-risco:checked');
-        
-        let score = 0;
-        checkboxes.forEach(cb => {
-            score += parseInt(cb.getAttribute('data-peso')) || 1;
-        });
-
-        const painelResultado = document.getElementById('triagem-resultado');
-        const badgeRisco = document.getElementById('triagem-badge');
-        const descRisco = document.getElementById('triagem-desc');
-        const ctaRisco = document.getElementById('triagem-cta');
-
-        painelResultado.classList.remove('d-none');
-
-        // Determinar Risco baseado no score
-        if (score >= 5) {
-            painelResultado.className = 'bg-brand-dark-opacity border p-3 rounded text-center mb-3 triagem-critico-box';
-            badgeRisco.className = 'badge p-2 text-uppercase mb-2 badge-triagem-critico';
-            badgeRisco.textContent = 'Risco Crítico (Grau Alto)';
-            descRisco.innerHTML = `<strong>Ação recomendada:</strong> Evacue a área imediatamente para pontos seguros indicados pela Defesa Civil local. Desligue os disjuntores de energia e o registro de água. Se estiver isolado, suba para telhados ou pontos altos e sinalize sua presença.`;
-            if (ctaRisco) {
-                ctaRisco.className = 'btn btn-brand-copper w-100 mt-3 text-uppercase font-mono text-xs py-2';
-                ctaRisco.textContent = 'Registrar SOS Urgente';
-                ctaRisco.href = `acoes.html?cidade=Alerta&tipo=${encodeURIComponent(desastre)}&pessoas=4`;
-                ctaRisco.style.display = 'block';
-            }
-        } else if (score >= 2) {
-            painelResultado.className = 'bg-brand-dark-opacity border p-3 rounded text-center mb-3 triagem-severo-box';
-            badgeRisco.className = 'badge p-2 text-uppercase mb-2 badge-triagem-severo';
-            badgeRisco.textContent = 'Risco Severo (Grau Médio)';
-            descRisco.innerHTML = `<strong>Ação recomendada:</strong> Prepare seu Kit de Sobrevivência (aba ao lado) e documentos essenciais. Mantenha aparelhos celulares carregados. Sintonize em canais locais para boletins meteorológicos e esteja pronto para evacuação rápida caso a situação mude.`;
-            if (ctaRisco) {
-                ctaRisco.style.display = 'none';
-            }
-        } else {
-            painelResultado.className = 'bg-brand-dark-opacity border p-3 rounded text-center mb-3 triagem-atencao-box';
-            badgeRisco.className = 'badge p-2 text-uppercase mb-2 badge-triagem-atencao';
-            badgeRisco.textContent = 'Atenção / Risco Baixo';
-            descRisco.innerHTML = `<strong>Ação recomendada:</strong> A situação no momento é de monitoramento preventivo. Acompanhe a passagem de satélites no contador acima e confira se há novos alertas emitidos na lista lateral de regiões sob alerta.`;
-            if (ctaRisco) {
-                ctaRisco.style.display = 'none';
-            }
-        }
-
-        // Rola até o resultado
-        painelResultado.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    });
-
-    // Mudar opções de risco dinamicamente dependendo do desastre selecionado
-    const selectDesastre = document.getElementById('triagem-desastre');
-    selectDesastre.addEventListener('change', () => {
-        const val = selectDesastre.value;
-        const containerFatores = document.getElementById('container-fatores-risco');
-        if (!containerFatores) return;
-
-        let html = '';
-        if (val === 'Inundação de Grande Porte') {
-            html = `
-                <div class="form-check mb-2">
-                    <input class="form-check-input check-risco" type="checkbox" id="risk1" data-peso="3">
-                    <label class="form-check-label text-brand-light" for="risk1">Água invadindo ou próxima à residência (+3)</label>
-                </div>
-                <div class="form-check mb-2">
-                    <input class="form-check-input check-risco" type="checkbox" id="risk2" data-peso="2">
-                    <label class="form-check-label text-brand-light" for="risk2">Isolado sem acesso terrestre / vias bloqueadas (+2)</label>
-                </div>
-                <div class="form-check mb-2">
-                    <input class="form-check-input check-risco" type="checkbox" id="risk3" data-peso="2">
-                    <label class="form-check-label text-brand-light" for="risk3">Crianças, idosos ou pessoas com mobilidade reduzida (+2)</label>
-                </div>
-                <div class="form-check mb-2">
-                    <input class="form-check-input check-risco" type="checkbox" id="risk4" data-peso="1">
-                    <label class="form-check-label text-brand-light" for="risk4">Queda de fornecimento de energia ou água potável (+1)</label>
-                </div>
-            `;
-        } else if (val === 'Deslizamento / Encosta') {
-            html = `
-                <div class="form-check mb-2">
-                    <input class="form-check-input check-risco" type="checkbox" id="risk1" data-peso="3">
-                    <label class="form-check-label text-brand-light" for="risk1">Surgimento de trincas nas paredes, muros ou chão (+3)</label>
-                </div>
-                <div class="form-check mb-2">
-                    <input class="form-check-input check-risco" type="checkbox" id="risk2" data-peso="3">
-                    <label class="form-check-label text-brand-light" for="risk2">Postes, árvores inclinadas ou barulho estranho na encosta (+3)</label>
-                </div>
-                <div class="form-check mb-2">
-                    <input class="form-check-input check-risco" type="checkbox" id="risk3" data-peso="2">
-                    <label class="form-check-label text-brand-light" for="risk3">Chuva persistente / solo saturado de água (+2)</label>
-                </div>
-                <div class="form-check mb-2">
-                    <input class="form-check-input check-risco" type="checkbox" id="risk4" data-peso="1">
-                    <label class="form-check-label text-brand-light" for="risk4">Presença de encostas muito íngremes coladas à casa (+1)</label>
-                </div>
-            `;
-        } else { // Seca / Isolamento
-            html = `
-                <div class="form-check mb-2">
-                    <input class="form-check-input check-risco" type="checkbox" id="risk1" data-peso="3">
-                    <label class="form-check-label text-brand-light" for="risk1">Falta absoluta de água potável ou alimentos na região (+3)</label>
-                </div>
-                <div class="form-check mb-2">
-                    <input class="form-check-input check-risco" type="checkbox" id="risk2" data-peso="2">
-                    <label class="form-check-label text-brand-light" for="risk2">Interrupção total de vias e comércio de abastecimento (+2)</label>
-                </div>
-                <div class="form-check mb-2">
-                    <input class="form-check-input check-risco" type="checkbox" id="risk3" data-peso="2">
-                    <label class="form-check-label text-brand-light" for="risk3">Presença de pessoas doentes ou vulneráveis (+2)</label>
-                </div>
-                <div class="form-check mb-2">
-                    <input class="form-check-input check-risco" type="checkbox" id="risk4" data-peso="1">
-                    <label class="form-check-label text-brand-light" for="risk4">Redes de telefonia móvel terrestre completamente inativas (+1)</label>
-                </div>
-            `;
-        }
-        containerFatores.innerHTML = html;
-        
-        // Esconde resultado anterior ao mudar categoria
-        document.getElementById('triagem-resultado').classList.add('d-none');
-    });
-}
 
 function inicializarChecklistKit() {
     const listItems = document.querySelectorAll('.survival-item');
     if (listItems.length === 0) return;
+
+    const progressBar = document.getElementById('kit-progress-bar');
+    const percentageText = document.getElementById('kit-percentage');
+
+    function atualizarProgresso() {
+        const total = listItems.length;
+        const marcados = document.querySelectorAll('.survival-item:checked').length;
+        const pct = total > 0 ? Math.round((marcados / total) * 100) : 0;
+        
+        if (progressBar) {
+            progressBar.style.width = `${pct}%`;
+            progressBar.setAttribute('aria-valuenow', pct);
+        }
+        if (percentageText) {
+            percentageText.textContent = `${pct}%`;
+        }
+    }
 
     // Carrega o estado salvo
     listItems.forEach(item => {
@@ -673,8 +562,12 @@ function inicializarChecklistKit() {
             } else {
                 item.closest('li').classList.remove('opacity-50', 'text-decoration-line-through');
             }
+            atualizarProgresso();
         });
     });
+
+    // Calcula progresso inicial
+    atualizarProgresso();
 }
 
 function iniciarCountdownOrbital() {

@@ -82,147 +82,117 @@
             <!-- ROW PRINCIPAL DO DASHBOARD -->
             <div class="row g-4 reveal delay-1">
                 
-                <!-- COLUNA PRINCIPAL: GUIA CIVIL & TRIAGEM DE RISCO (LADO ESQUERDO) -->
+                <!-- COLUNA PRINCIPAL: KIT DE SOBREVIVÊNCIA (LADO ESQUERDO) -->
                 <div class="col-lg-8 col-xl-9">
                     <div class="spotlight-card p-4 rounded h-100">
                         
-                        <!-- ABAS DO COMPONENTE -->
-                        <ul class="nav nav-tabs font-mono mb-4" id="triageTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active fw-medium tracking-widest text-uppercase p-3" id="assistant-tab" data-bs-toggle="tab" data-bs-target="#assistant-pane" type="button" role="tab" aria-controls="assistant-pane" aria-selected="true" style="font-size: 11px;">
-                                    [ Assistente de Triagem ]
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link fw-medium tracking-widest text-uppercase p-3" id="kit-tab" data-bs-toggle="tab" data-bs-target="#kit-pane" type="button" role="tab" aria-controls="kit-pane" aria-selected="false" style="font-size: 11px;">
-                                    [ Kit de Sobrevivência ]
-                                </button>
-                            </li>
-                        </ul>
+                        <div class="mb-4">
+                            <span class="font-mono text-brand-copper text-uppercase tracking-widest mb-2 d-block" style="font-size: 11px;">[ Checklist do Kit de Emergência ]</span>
+                            <h2 class="h4 text-white fw-light mb-2">Suprimentos para Casos de Desastre</h2>
+                            <p class="text-brand-gray mb-4" style="font-size: 0.9rem;">
+                                Prepare seus suprimentos essenciais para garantir autonomia e segurança durante incidentes críticos de desastre. O progresso de montagem é salvo offline automaticamente neste dispositivo.
+                            </p>
 
-                        <div class="tab-content text-xs font-mono" id="triageTabContent">
-                            
-                            <!-- ABA 1: ASSISTENTE DE TRIAGEM -->
-                            <div class="tab-pane fade show active" id="assistant-pane" role="tabpanel" aria-labelledby="assistant-tab" tabindex="0">
-                                <div class="row g-4">
-                                    <div class="col-md-6 triage-divider">
-                                        <h3 class="h6 font-mono text-brand-copper text-uppercase mb-3">[ Calculadora de Risco ]</h3>
-                                        
-                                        <div class="mb-3">
-                                            <label for="triagem-desastre" class="text-brand-gray text-uppercase mb-2 d-block" style="font-size: 10px;">Tipo de Ocorrência</label>
-                                            <select id="triagem-desastre" class="form-select bg-brand-black border-brand-border text-white p-3 rounded" style="font-size: 11px;">
-                                                <option value="Inundação de Grande Porte">Inundação de Grande Porte</option>
-                                                <option value="Deslizamento / Encosta">Deslizamento / Encosta</option>
-                                                <option value="Escassez Crítica / Seca">Escassez Crítica / Seca</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="mb-4">
-                                            <span class="text-brand-gray text-uppercase mb-2 d-block" style="font-size: 10px;">Fatores Observados no Local</span>
-                                            <div id="container-fatores-risco" class="bg-brand-dark-opacity border border-brand-border p-3 rounded">
-                                                <div class="form-check mb-2">
-                                                    <input class="form-check-input check-risco" type="checkbox" id="risk1" data-peso="3">
-                                                    <label class="form-check-label text-brand-light" for="risk1">Água invadindo ou próxima à residência (+3)</label>
-                                                </div>
-                                                <div class="form-check mb-2">
-                                                    <input class="form-check-input check-risco" type="checkbox" id="risk2" data-peso="2">
-                                                    <label class="form-check-label text-brand-light" for="risk2">Isolado sem acesso terrestre / vias bloqueadas (+2)</label>
-                                                </div>
-                                                <div class="form-check mb-2">
-                                                    <input class="form-check-input check-risco" type="checkbox" id="risk3" data-peso="2">
-                                                    <label class="form-check-label text-brand-light" for="risk3">Crianças, idosos ou pessoas com mobilidade reduzida (+2)</label>
-                                                </div>
-                                                <div class="form-check mb-2">
-                                                    <input class="form-check-input check-risco" type="checkbox" id="risk4" data-peso="1">
-                                                    <label class="form-check-label text-brand-light" for="risk4">Queda de fornecimento de energia ou água potável (+1)</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <button id="btn-calcular-triagem" class="btn btn-outline-brand-copper w-100 py-3 text-uppercase tracking-widest text-xs font-mono">
-                                            Avaliar Situação de Risco
-                                        </button>
-                                    </div>
-
-                                    <div class="col-md-6 d-flex flex-column justify-content-between">
-                                        <div>
-                                            <h3 class="h6 font-mono text-brand-copper text-uppercase mb-3">[ Resultado e Instruções ]</h3>
-                                            
-                                            <!-- Resultado dinâmico -->
-                                            <div id="triagem-resultado" class="bg-brand-dark-opacity border border-brand-border p-3 rounded text-center d-none mb-3">
-                                                <span id="triagem-badge" class="badge p-2 text-uppercase mb-2" style="font-size: 10px;">--</span>
-                                                <p id="triagem-desc" class="text-brand-gray mb-0 text-start leading-relaxed" style="font-size: 11px; line-height: 1.6;">
-                                                    --
-                                                </p>
-                                                <a href="#" id="triagem-cta" class="btn btn-brand-copper w-100 mt-3 text-uppercase font-mono text-xs py-2" style="display:none;">Registrar SOS</a>
-                                            </div>
-
-                                            <div id="triagem-intro" class="text-brand-gray" style="font-size: 11px; line-height: 1.6;">
-                                                <p>Este assistente avalia parâmetros de perigo local para sugerir ações imediatas de proteção.</p>
-                                                <ul class="list-unstyled ps-0">
-                                                    <li class="mb-2"><span class="status-indicator status-offline"></span><strong class="text-danger">Risco Crítico (Score 5+):</strong> Evacuação imediata e acionamento de SOS via satélite.</li>
-                                                    <li class="mb-2"><span class="status-indicator status-pending"></span><strong class="text-warning">Risco Severo (Score 2-4):</strong> Preparação para evacuação e kits.</li>
-                                                    <li><span class="status-indicator status-online"></span><strong class="text-success">Atenção (Score 0-1):</strong> Acompanhamento e vigilância preventiva.</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <!-- BARRA DE PROGRESSO DO KIT -->
+                            <div class="bg-brand-dark-opacity border border-brand-border p-4 rounded mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2 font-mono text-xs">
+                                    <span class="text-brand-gray text-uppercase tracking-widest">[ Status da Preparação ]</span>
+                                    <span class="text-brand-copper fw-bold text-sm" id="kit-percentage">0%</span>
+                                </div>
+                                <div class="progress bg-brand-black border border-brand-border" style="height: 10px;">
+                                    <div id="kit-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-brand-copper" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- ABA 2: CHECKLIST KIT DE SOBREVIVÊNCIA -->
-                            <div class="tab-pane fade" id="kit-pane" role="tabpanel" aria-labelledby="kit-tab" tabindex="0">
-                                <h3 class="h6 font-mono text-brand-copper text-uppercase mb-2">[ Checklist do Kit de Emergência ]</h3>
-                                <p class="text-brand-gray mb-4" style="font-size: 11px;">Marque os itens à medida que os prepara. O estado é salvo automaticamente no seu navegador para uso posterior offline.</p>
-                                
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <div class="bg-brand-dark-opacity border border-brand-border p-3 rounded">
-                                            <span class="font-mono text-xs text-brand-copper text-uppercase d-block mb-3">[ Sobrevivência & Saúde ]</span>
-                                            <ul class="list-unstyled mb-0 d-flex flex-column gap-3">
-                                                <li class="d-flex align-items-center">
-                                                    <input class="form-check-input survival-item me-2" type="checkbox" id="kit-water" style="margin-top: 0;">
-                                                    <label class="form-check-label text-brand-light" for="kit-water">Água Potável (mín. 2 litros por pessoa/dia)</label>
-                                                </li>
-                                                <li class="d-flex align-items-center">
-                                                    <input class="form-check-input survival-item me-2" type="checkbox" id="kit-food" style="margin-top: 0;">
-                                                    <label class="form-check-label text-brand-light" for="kit-food">Comida enlatada / Barras de cereal (não perecíveis)</label>
-                                                </li>
-                                                <li class="d-flex align-items-center">
-                                                    <input class="form-check-input survival-item me-2" type="checkbox" id="kit-meds" style="margin-top: 0;">
-                                                    <label class="form-check-label text-brand-light" for="kit-meds">Medicamentos de uso contínuo (estoque para 7 dias)</label>
-                                                </li>
-                                                <li class="d-flex align-items-center">
-                                                    <input class="form-check-input survival-item me-2" type="checkbox" id="kit-hygiene" style="margin-top: 0;">
-                                                    <label class="form-check-label text-brand-light" for="kit-hygiene">Itens básicos de higiene pessoal e papel higiênico</label>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="bg-brand-dark-opacity border border-brand-border p-3 rounded">
-                                            <span class="font-mono text-xs text-brand-copper text-uppercase d-block mb-3">[ Segurança & Suporte ]</span>
-                                            <ul class="list-unstyled mb-0 d-flex flex-column gap-3">
-                                                <li class="d-flex align-items-center">
-                                                    <input class="form-check-input survival-item me-2" type="checkbox" id="kit-docs" style="margin-top: 0;">
-                                                    <label class="form-check-label text-brand-light" for="kit-docs">Documentos em sacos plásticos impermeáveis</label>
-                                                </li>
-                                                <li class="d-flex align-items-center">
-                                                    <input class="form-check-input survival-item me-2" type="checkbox" id="kit-light" style="margin-top: 0;">
-                                                    <label class="form-check-label text-brand-light" for="kit-light">Lanterna portátil com pilhas extras carregadas</label>
-                                                </li>
-                                                <li class="d-flex align-items-center">
-                                                    <input class="form-check-input survival-item me-2" type="checkbox" id="kit-whistle" style="margin-top: 0;">
-                                                    <label class="form-check-label text-brand-light" for="kit-whistle">Apito para sinalização de resgate acústico</label>
-                                                </li>
-                                                <li class="d-flex align-items-center">
-                                                    <input class="form-check-input survival-item me-2" type="checkbox" id="kit-battery" style="margin-top: 0;">
-                                                    <label class="form-check-label text-brand-light" for="kit-battery">Carregador portátil (Powerbank) para celulares</label>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                        <!-- CATEGORIAS DE ITENS -->
+                        <div class="row g-4 font-sans">
+                            <!-- Categoria 1 -->
+                            <div class="col-md-6">
+                                <div class="d-flex flex-column gap-3">
+                                    <span class="font-mono text-xs text-brand-copper text-uppercase tracking-wider">[ 01 / Sobrevivência & Saúde ]</span>
+                                    <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+                                        <li class="d-flex align-items-start gap-3 p-3 rounded bg-brand-dark-opacity border border-brand-border transition-all">
+                                            <div class="pt-1">
+                                                <input class="form-check-input survival-item" type="checkbox" id="kit-water">
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <label class="form-check-label text-white fw-medium mb-1 cursor-pointer" for="kit-water" style="font-size: 0.85rem;">Água Potável</label>
+                                                <span class="text-brand-gray text-xs">Mínimo de 2 litros por pessoa/dia para hidratação e higiene básica.</span>
+                                            </div>
+                                        </li>
+                                        <li class="d-flex align-items-start gap-3 p-3 rounded bg-brand-dark-opacity border border-brand-border transition-all">
+                                            <div class="pt-1">
+                                                <input class="form-check-input survival-item" type="checkbox" id="kit-food">
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <label class="form-check-label text-white fw-medium mb-1 cursor-pointer" for="kit-food" style="font-size: 0.85rem;">Alimentos Não Perecíveis</label>
+                                                <span class="text-brand-gray text-xs">Comidas enlatadas, barras de cereais e alimentos prontos para consumo.</span>
+                                            </div>
+                                        </li>
+                                        <li class="d-flex align-items-start gap-3 p-3 rounded bg-brand-dark-opacity border border-brand-border transition-all">
+                                            <div class="pt-1">
+                                                <input class="form-check-input survival-item" type="checkbox" id="kit-meds">
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <label class="form-check-label text-white fw-medium mb-1 cursor-pointer" for="kit-meds" style="font-size: 0.85rem;">Medicamentos de Uso Contínuo</label>
+                                                <span class="text-brand-gray text-xs">Estoque para 7 dias dos seus remédios prescritos e primeiros socorros.</span>
+                                            </div>
+                                        </li>
+                                        <li class="d-flex align-items-start gap-3 p-3 rounded bg-brand-dark-opacity border border-brand-border transition-all">
+                                            <div class="pt-1">
+                                                <input class="form-check-input survival-item" type="checkbox" id="kit-hygiene">
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <label class="form-check-label text-white fw-medium mb-1 cursor-pointer" for="kit-hygiene" style="font-size: 0.85rem;">Higiene Pessoal</label>
+                                                <span class="text-brand-gray text-xs">Sabão, álcool gel, escova/pasta de dentes, papel higiênico e lenços.</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Categoria 2 -->
+                            <div class="col-md-6">
+                                <div class="d-flex flex-column gap-3">
+                                    <span class="font-mono text-xs text-brand-copper text-uppercase tracking-wider">[ 02 / Segurança & Suporte ]</span>
+                                    <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+                                        <li class="d-flex align-items-start gap-3 p-3 rounded bg-brand-dark-opacity border border-brand-border transition-all">
+                                            <div class="pt-1">
+                                                <input class="form-check-input survival-item" type="checkbox" id="kit-docs">
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <label class="form-check-label text-white fw-medium mb-1 cursor-pointer" for="kit-docs" style="font-size: 0.85rem;">Documentos e Cópias</label>
+                                                <span class="text-brand-gray text-xs">RG, CPF e contatos de emergência protegidos em sacos plásticos.</span>
+                                            </div>
+                                        </li>
+                                        <li class="d-flex align-items-start gap-3 p-3 rounded bg-brand-dark-opacity border border-brand-border transition-all">
+                                            <div class="pt-1">
+                                                <input class="form-check-input survival-item" type="checkbox" id="kit-light">
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <label class="form-check-label text-white fw-medium mb-1 cursor-pointer" for="kit-light" style="font-size: 0.85rem;">Lanterna Portátil</label>
+                                                <span class="text-brand-gray text-xs">Lanterna de LED com pilhas extras ou com recarga por dínamo.</span>
+                                            </div>
+                                        </li>
+                                        <li class="d-flex align-items-start gap-3 p-3 rounded bg-brand-dark-opacity border border-brand-border transition-all">
+                                            <div class="pt-1">
+                                                <input class="form-check-input survival-item" type="checkbox" id="kit-whistle">
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <label class="form-check-label text-white fw-medium mb-1 cursor-pointer" for="kit-whistle" style="font-size: 0.85rem;">Apito de Emergência</label>
+                                                <span class="text-brand-gray text-xs">Dispositivo acústico para sinalizar localização a equipes de resgate.</span>
+                                            </div>
+                                        </li>
+                                        <li class="d-flex align-items-start gap-3 p-3 rounded bg-brand-dark-opacity border border-brand-border transition-all">
+                                            <div class="pt-1">
+                                                <input class="form-check-input survival-item" type="checkbox" id="kit-battery">
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <label class="form-check-label text-white fw-medium mb-1 cursor-pointer" for="kit-battery" style="font-size: 0.85rem;">Powerbank Carregado</label>
+                                                <span class="text-brand-gray text-xs">Bateria externa reserva para garantir carga no celular durante cortes de energia.</span>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

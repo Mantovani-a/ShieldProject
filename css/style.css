@@ -528,72 +528,48 @@ input[type="range"].form-range::-webkit-slider-thumb:hover {
     }
 }
 
-/* Custom Tabs Styling */
-.nav-tabs {
-    border-bottom: 1px solid var(--brand-border) !important;
-}
-
-.nav-tabs .nav-link {
-    color: var(--brand-gray) !important;
-    border: none !important;
-    border-bottom: 2px solid transparent !important;
-    transition: color 0.3s ease, border-color 0.3s ease;
-    background-color: transparent !important;
-}
-
-.nav-tabs .nav-link:hover {
-    color: var(--brand-light) !important;
-}
-
-.nav-tabs .nav-link.active {
-    color: var(--brand-copper) !important;
-    border-bottom-color: var(--brand-copper) !important;
-}
-
-/* --- Triage Results Themed Colors --- */
-.triagem-critico-box {
-    border: 1px solid #d9571e !important;
-    box-shadow: 0 0 15px rgba(217, 87, 30, 0.15), inset 0 0 10px rgba(217, 87, 30, 0.05) !important;
-}
-
-.triagem-severo-box {
-    border: 1px solid var(--brand-copper) !important;
-    box-shadow: 0 0 15px rgba(194, 108, 39, 0.15), inset 0 0 10px rgba(194, 108, 39, 0.05) !important;
-}
-
-.triagem-atencao-box {
+/* --- Survival Kit Checklist Styling --- */
+.survival-item {
+    background-color: var(--brand-black) !important;
     border: 1px solid var(--brand-border) !important;
+    cursor: pointer;
+    width: 1.15rem;
+    height: 1.15rem;
+    border-radius: 0.2rem !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.badge-triagem-critico {
-    color: #ff8c52 !important;
-    border: 1px solid #d9571e !important;
-    background-color: rgba(217, 87, 30, 0.1) !important;
+.survival-item:checked {
+    background-color: var(--brand-copper) !important;
+    border-color: var(--brand-copper) !important;
+    box-shadow: 0 0 8px rgba(194, 108, 39, 0.5);
 }
 
-.badge-triagem-severo {
-    color: var(--brand-light) !important;
-    border: 1px solid var(--brand-copper) !important;
-    background-color: var(--brand-copper-faint) !important;
+.survival-item:focus {
+    border-color: var(--brand-copper) !important;
+    box-shadow: 0 0 0 0.25rem rgba(194, 108, 39, 0.25) !important;
 }
 
-.badge-triagem-atencao {
-    color: var(--brand-gray) !important;
+/* Custom Progress Bar styling */
+.progress {
+    background-color: rgba(var(--brand-black-rgb), 0.5) !important;
     border: 1px solid var(--brand-border) !important;
-    background-color: rgba(255, 255, 255, 0.02) !important;
+    border-radius: 4px;
+    overflow: hidden;
 }
 
-/* --- Responsiveness Adjustments --- */
-@media (min-width: 768px) {
-    .triage-divider {
-        border-right: 1px solid var(--brand-border);
-    }
+.progress-bar {
+    background: linear-gradient(90deg, var(--brand-copper-dim) 0%, var(--brand-copper) 100%) !important;
+    box-shadow: 0 0 10px rgba(194, 108, 39, 0.3);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-@media (max-width: 576px) {
-    .nav-tabs .nav-link {
-        padding: 0.75rem 0.5rem !important;
-        font-size: 9px !important;
-        letter-spacing: 0.05em !important;
-    }
+/* Hover effect on checklist cards */
+.list-unstyled li.d-flex {
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.list-unstyled li.d-flex:hover {
+    border-color: rgba(194, 108, 39, 0.2) !important;
+    background-color: rgba(194, 108, 39, 0.02) !important;
 }
