@@ -39,7 +39,7 @@ body::before {
     transform: translate(-50%, -50%);
     width: 100vw;
     height: 100vh;
-    background: url('../img/logo-sentrya-branca.png') center center no-repeat;
+    background: url('../assets/img/logo-sentrya-branca.png') center center no-repeat;
     background-size: 50%;
     opacity: 0.02;
     z-index: -1;

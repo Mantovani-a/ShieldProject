@@ -25,10 +25,13 @@ Uma plataforma de coordenação climática que une telemetria orbital à logíst
 
 ```text
 SENTRYA/
+├── assets/
+│   └── img/             # Imagens e logotipos do sistema
 ├── css/style.css        # Estilos e efeitos visuais
-├── js/
-│   ├── script.js        # Lógica de interface e interações
-│   └── spaceCharter.js  # Banco de dados e telemetria de satélites
+├── src/
+│   └── js/
+│       ├── script.js        # Lógica de interface e interações
+│       └── spaceCharter.js  # Banco de dados e telemetria de satélites
 ├── index.html           # Página inicial e Linha do tempo (RS 2024)
 ├── central.html         # Painel central de controle e monitoramento
 ├── simulacao.html       # Mapa do Brasil e diagnóstico orbital
