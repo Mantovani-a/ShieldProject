@@ -322,7 +322,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Inicializar ponto no mapa se o telemetry-display existir
     if (document.getElementById('telemetry-display')) {
-        const urlParams = new URLSearchParams(window.location.search);
         const focoParam = urlParams.get('foco');
         if (focoParam && ['rs', 'rj', 'ne', 'am'].includes(focoParam)) {
             focarPonto(focoParam);
@@ -335,6 +334,11 @@ window.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('incident-list')) {
         ordenarFila();
     }
+
+    // Inicializar assistente de triagem, checklist e countdown da Central se existirem
+    inicializarTriagemCentral();
+    inicializarChecklistKit();
+    iniciarCountdownOrbital();
 });
 
 // --- ANIMAÇÕES INTERATIVAS: SCROLL E 3D ---
@@ -544,7 +548,8 @@ function inicializarTriagemCentral() {
 
         // Determinar Risco baseado no score
         if (score >= 5) {
-            badgeRisco.className = 'badge bg-danger text-white p-2 text-uppercase mb-2';
+            painelResultado.className = 'bg-brand-dark-opacity border p-3 rounded text-center mb-3 triagem-critico-box';
+            badgeRisco.className = 'badge p-2 text-uppercase mb-2 badge-triagem-critico';
             badgeRisco.textContent = 'Risco Crítico (Grau Alto)';
             descRisco.innerHTML = `<strong>Ação recomendada:</strong> Evacue a área imediatamente para pontos seguros indicados pela Defesa Civil local. Desligue os disjuntores de energia e o registro de água. Se estiver isolado, suba para telhados ou pontos altos e sinalize sua presença.`;
             if (ctaRisco) {
@@ -554,14 +559,16 @@ function inicializarTriagemCentral() {
                 ctaRisco.style.display = 'block';
             }
         } else if (score >= 2) {
-            badgeRisco.className = 'badge bg-warning text-dark p-2 text-uppercase mb-2';
+            painelResultado.className = 'bg-brand-dark-opacity border p-3 rounded text-center mb-3 triagem-severo-box';
+            badgeRisco.className = 'badge p-2 text-uppercase mb-2 badge-triagem-severo';
             badgeRisco.textContent = 'Risco Severo (Grau Médio)';
             descRisco.innerHTML = `<strong>Ação recomendada:</strong> Prepare seu Kit de Sobrevivência (aba ao lado) e documentos essenciais. Mantenha aparelhos celulares carregados. Sintonize em canais locais para boletins meteorológicos e esteja pronto para evacuação rápida caso a situação mude.`;
             if (ctaRisco) {
                 ctaRisco.style.display = 'none';
             }
         } else {
-            badgeRisco.className = 'badge bg-success text-white p-2 text-uppercase mb-2';
+            painelResultado.className = 'bg-brand-dark-opacity border p-3 rounded text-center mb-3 triagem-atencao-box';
+            badgeRisco.className = 'badge p-2 text-uppercase mb-2 badge-triagem-atencao';
             badgeRisco.textContent = 'Atenção / Risco Baixo';
             descRisco.innerHTML = `<strong>Ação recomendada:</strong> A situação no momento é de monitoramento preventivo. Acompanhe a passagem de satélites no contador acima e confira se há novos alertas emitidos na lista lateral de regiões sob alerta.`;
             if (ctaRisco) {
@@ -693,11 +700,6 @@ function iniciarCountdownOrbital() {
     setInterval(updateTimer, 1000);
 }
 
-// Inicializar na carga da página
-window.addEventListener('DOMContentLoaded', () => {
-    inicializarTriagemCentral();
-    inicializarChecklistKit();
-    iniciarCountdownOrbital();
-});
+
 
 
