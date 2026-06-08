@@ -1,8 +1,7 @@
 // --- SPACE CHARTER SIMULATION MODULE ---
 
 /**
- * Banco de dados unificado de ativações e telemetria espacial SENTRYA.
- * Contém informações consolidadas das missões e dados de sensoriamento.
+DADOS MOCKADOS - INFORMAÇÕES DE DESASTRES 
  */
 const SENTRYA_ACTIVATIONS = {
     rs: {
@@ -62,26 +61,4 @@ const SENTRYA_ACTIVATIONS = {
         descricao: "Monitoramento de focos de queimadas ativas e plumas de fumaça na bacia amazônica por sensores termais e ópticos."
     }
 };
-
-/**
- * Retorna dados mockados estáticos sobre ativações do International Charter Space and Major Disasters no Brasil.
- * @returns {Array<Object>} Lista de desastres simulados.
- */
-function fetchSpaceCharterData() {
-    return Object.values(SENTRYA_ACTIVATIONS).map(item => ({
-        id: item.id,
-        local: item.local,
-        tipo: item.tipo,
-        data: item.data,
-        satelites: item.satelites,
-        status: item.status,
-        descricao: item.descricao
-    }));
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("[Space Charter] Módulo de simulação visual carregado.");
-    const data = fetchSpaceCharterData();
-    console.log("[Space Charter] Ativações simuladas do Brasil recuperadas:", data);
-});
 

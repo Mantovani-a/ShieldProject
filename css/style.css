@@ -496,38 +496,6 @@ input[type="range"].form-range::-webkit-slider-thumb:hover {
     box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
 }
 
-.status-pending {
-    background-color: #f59e0b;
-    box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
-}
-
-/* Cards rápidos do dashboard */
-.dashboard-quick-card {
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.dashboard-quick-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(var(--brand-copper-rgb), 0.5) !important;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(194, 108, 39, 0.05);
-}
-
-.pulse-animation {
-    animation: radialPulse 2.5s infinite;
-}
-
-@keyframes radialPulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(194, 108, 39, 0.4);
-    }
-    70% {
-        box-shadow: 0 0 0 8px rgba(194, 108, 39, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(194, 108, 39, 0);
-    }
-}
-
 /* --- Survival Kit Checklist Styling --- */
 .survival-item {
     background-color: var(--brand-black) !important;

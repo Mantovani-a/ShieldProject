@@ -30,6 +30,7 @@ SENTRYA/
 │   ├── script.js        # Lógica de interface e interações
 │   └── spaceCharter.js  # Banco de dados e telemetria de satélites
 ├── index.html           # Página inicial e Linha do tempo (RS 2024)
+├── central.html         # Painel central de controle e monitoramento
 ├── simulacao.html       # Mapa do Brasil e diagnóstico orbital
 ├── acoes.html           # Painel operacional de chamados SOS
 └── contato.html         # Formulário de contato institucional
