@@ -327,19 +327,6 @@ input[type="range"].form-range::-webkit-slider-thumb:hover {
     box-shadow: 0 0 0 0.25rem rgba(194, 108, 39, 0.25) !important;
 }
 
-/* Progress Bar */
-.progress {
-    background-color: rgba(var(--brand-black-rgb), 0.5) !important;
-    border: 1px solid var(--brand-border) !important;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    background: linear-gradient(90deg, var(--brand-copper-dim) 0%, var(--brand-copper) 100%) !important;
-    box-shadow: 0 0 10px rgba(194, 108, 39, 0.3);
-    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
 
 .list-unstyled li.d-flex {
     transition: border-color 0.3s ease, background-color 0.3s ease;

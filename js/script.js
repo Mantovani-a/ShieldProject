@@ -528,45 +528,41 @@ function inicializarChecklistKit() {
     const listItems = document.querySelectorAll('.survival-item');
     if (listItems.length === 0) return;
 
-    const progressBar = document.getElementById('kit-progress-bar');
-    const percentageText = document.getElementById('kit-percentage');
-
-    function atualizarProgresso() {
-        const total = listItems.length;
-        const marcados = document.querySelectorAll('.survival-item:checked').length;
-        const pct = total > 0 ? Math.round((marcados / total) * 100) : 0;
-        
-        if (progressBar) {
-            progressBar.style.width = `${pct}%`;
-            progressBar.setAttribute('aria-valuenow', pct);
-        }
-        if (percentageText) {
-            percentageText.textContent = `${pct}%`;
-        }
-    }
-
-    // Carrega o estado salvo
+    // Carrega o estado salvo e adiciona os event listeners
     listItems.forEach(item => {
         const storageKey = `survival-item-${item.id}`;
         const savedState = localStorage.getItem(storageKey);
+        const li = item.closest('li');
+
         if (savedState === 'true') {
             item.checked = true;
-            item.closest('li').classList.add('opacity-50', 'text-decoration-line-through');
+            if (li) {
+                li.classList.add('opacity-50', 'text-decoration-line-through');
+            }
         }
 
         item.addEventListener('change', () => {
             localStorage.setItem(storageKey, item.checked);
-            if (item.checked) {
-                item.closest('li').classList.add('opacity-50', 'text-decoration-line-through');
-            } else {
-                item.closest('li').classList.remove('opacity-50', 'text-decoration-line-through');
+            if (li) {
+                if (item.checked) {
+                    li.classList.add('opacity-50', 'text-decoration-line-through');
+                } else {
+                    li.classList.remove('opacity-50', 'text-decoration-line-through');
+                }
             }
-            atualizarProgresso();
         });
-    });
 
-    // Calcula progresso inicial
-    atualizarProgresso();
+        if (li) {
+            li.addEventListener('click', (e) => {
+                // Se o clique for no input ou na tag label associada, deixa o navegador tratar para evitar dupla inversão
+                if (e.target === item || e.target.tagName === 'LABEL') {
+                    return;
+                }
+                item.checked = !item.checked;
+                item.dispatchEvent(new Event('change'));
+            });
+        }
+    });
 }
 
 
