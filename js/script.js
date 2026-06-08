@@ -335,9 +335,8 @@ window.addEventListener('DOMContentLoaded', () => {
         ordenarFila();
     }
 
-    // Inicializar checklist e countdown da Central se existirem
+    // Inicializar checklist da Central se existir
     inicializarChecklistKit();
-    iniciarCountdownOrbital();
 });
 
 // --- ANIMAÇÕES INTERATIVAS: SCROLL E 3D ---
@@ -570,28 +569,7 @@ function inicializarChecklistKit() {
     atualizarProgresso();
 }
 
-function iniciarCountdownOrbital() {
-    const timerEl = document.getElementById('countdown-timer');
-    if (!timerEl) return;
 
-    let totalSeconds = 594; // ~10 minutos padrão para visualização
-
-    function updateTimer() {
-        const mins = Math.floor(totalSeconds / 60);
-        const secs = totalSeconds % 60;
-        
-        timerEl.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-
-        if (totalSeconds <= 0) {
-            totalSeconds = 600; // reseta para 10 min
-        } else {
-            totalSeconds--;
-        }
-    }
-
-    updateTimer();
-    setInterval(updateTimer, 1000);
-}
 
 
 

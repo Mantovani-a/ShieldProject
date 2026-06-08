@@ -1,4 +1,6 @@
-/* --- SENTRYA DESIGN SYSTEM --- */
+/* ==========================================================================
+   1. DESIGN SYSTEM & VARIABLES
+   ========================================================================== */
 :root {
     --brand-black: #0A0A0A;
     --brand-black-rgb: 10, 10, 10;
@@ -16,7 +18,9 @@
     --font-mono: 'JetBrains Mono', monospace;
 }
 
-/* --- BASE --- */
+/* ==========================================================================
+   2. BASE STYLES & SCROLLBARS
+   ========================================================================== */
 body {
     background: linear-gradient(to top, #050505 0%, #1b1b1b 100%);
     background-attachment: fixed;
@@ -48,11 +52,6 @@ body::before {
     color: var(--brand-copper);
 }
 
-/* Global typography */
-.font-mono {
-    font-family: var(--font-mono) !important;
-}
-
 /* Scrollbars */
 ::-webkit-scrollbar {
     width: 4px;
@@ -70,7 +69,40 @@ body::before {
     background: #8a5f4e;
 }
 
-/* --- CABEÇALHO E NAVEGAÇÃO --- */
+/* ==========================================================================
+   3. TYPOGRAPHY
+   ========================================================================== */
+.font-mono {
+    font-family: var(--font-mono) !important;
+}
+
+.font-sans {
+    font-family: var(--font-sans) !important;
+}
+
+.text-xs {
+    font-size: 0.75rem !important;
+}
+
+.text-sm {
+    font-size: 0.875rem !important;
+}
+
+.text-lg {
+    font-size: 1.125rem !important;
+}
+
+.text-xl {
+    font-size: 1.25rem !important;
+}
+
+.tracking-widest {
+    letter-spacing: 0.15em !important;
+}
+
+/* ==========================================================================
+   4. NAVIGATION, HEADER & FOOTER
+   ========================================================================== */
 .bg-brand-header {
     background-color: transparent !important;
     backdrop-filter: blur(12px);
@@ -95,7 +127,19 @@ body::before {
     color: var(--brand-light);
 }
 
-/* --- BOTÕES --- */
+.footer-link {
+    color: var(--brand-gray);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: var(--brand-copper);
+}
+
+/* ==========================================================================
+   5. BUTTONS
+   ========================================================================== */
 .btn-outline-brand-copper {
     background-color: transparent;
     border: 1px solid rgba(var(--brand-copper-rgb), 0.4);
@@ -136,7 +180,9 @@ body::before {
     opacity: 0.9;
 }
 
-/* --- FORMULÁRIOS --- */
+/* ==========================================================================
+   6. FORMS, INPUTS & SLIDERS
+   ========================================================================== */
 .form-control,
 .form-select {
     background-color: var(--brand-black) !important;
@@ -158,41 +204,34 @@ body::before {
     color: #fff !important;
 }
 
-/* --- CONTROLES DE TIMELINE --- */
-.timeline-navigation {
-    overflow-x: auto;
+/* Estilização dos Sliders de Simulação */
+input[type="range"].form-range::-webkit-slider-runnable-track {
+    background-color: var(--brand-dark-card);
+    border: 1px solid var(--brand-border);
+    height: 6px;
+    border-radius: 3px;
 }
 
-.btn-timeline {
-    background: none;
-    border: none;
-    color: var(--brand-gray);
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid transparent;
-    transition: color 0.3s ease, border-color 0.3s ease;
+input[type="range"].form-range::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: var(--brand-copper);
+    border-radius: 50%;
+    height: 16px;
+    margin-top: -5px;
+    transition: background-color 0.2s;
+    width: 16px;
 }
 
-.btn-timeline:hover {
-    color: var(--brand-light);
+input[type="range"].form-range::-webkit-slider-thumb:hover {
+    background-color: #FF7A1A;
 }
 
-.btn-timeline.active {
-    color: var(--brand-copper) !important;
-    border-bottom-color: var(--brand-copper) !important;
-}
+/* ==========================================================================
+   7. COMPONENTS & CARDS
+   ========================================================================== */
 
-/* --- RODAPÉ --- */
-.footer-link {
-    color: var(--brand-gray);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-link:hover {
-    color: var(--brand-copper);
-}
-
-/* --- CARTÕES E EFEITOS --- */
+/* --- Spotlight Cards & Effects --- */
 .spotlight-card {
     position: relative;
     background: var(--brand-dark-card);
@@ -223,7 +262,97 @@ body::before {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(194, 108, 39, 0.03);
 }
 
-/* --- MAPA E TELEMETRIA --- */
+/* --- Timeline Navigation --- */
+.timeline-navigation {
+    overflow-x: auto;
+}
+
+.btn-timeline {
+    background: none;
+    border: none;
+    color: var(--brand-gray);
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-timeline:hover {
+    color: var(--brand-light);
+}
+
+.btn-timeline.active {
+    color: var(--brand-copper) !important;
+    border-bottom-color: var(--brand-copper) !important;
+}
+
+/* --- Status Indicators --- */
+.status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.status-orange {
+    background-color: #C85A0A;
+    box-shadow: 0 0 8px rgba(200, 90, 10, 0.6);
+}
+
+.status-blue {
+    background-color: #1B6CA8;
+    box-shadow: 0 0 8px rgba(27, 108, 168, 0.6);
+}
+
+/* --- Survival Kit Checklist --- */
+.survival-item {
+    background-color: var(--brand-black) !important;
+    border: 1px solid var(--brand-border) !important;
+    cursor: pointer;
+    width: 1.15rem;
+    height: 1.15rem;
+    border-radius: 0.2rem !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.survival-item:checked {
+    background-color: var(--brand-copper) !important;
+    border-color: var(--brand-copper) !important;
+    box-shadow: 0 0 8px rgba(194, 108, 39, 0.5);
+}
+
+.survival-item:focus {
+    border-color: var(--brand-copper) !important;
+    box-shadow: 0 0 0 0.25rem rgba(194, 108, 39, 0.25) !important;
+}
+
+/* Progress Bar */
+.progress {
+    background-color: rgba(var(--brand-black-rgb), 0.5) !important;
+    border: 1px solid var(--brand-border) !important;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--brand-copper-dim) 0%, var(--brand-copper) 100%) !important;
+    box-shadow: 0 0 10px rgba(194, 108, 39, 0.3);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.list-unstyled li.d-flex {
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.list-unstyled li.d-flex:hover {
+    border-color: rgba(194, 108, 39, 0.2) !important;
+    background-color: rgba(194, 108, 39, 0.02) !important;
+}
+
+/* ==========================================================================
+   8. MAP & TELEMETRY
+   ========================================================================== */
 .map-container {
     padding: 1rem;
     background-color: rgba(var(--brand-dark-card-rgb), 0.4);
@@ -240,13 +369,11 @@ body::before {
 #pin-rs:hover circle:not([fill="transparent"]),
 #pin-ne:hover circle:not([fill="transparent"]),
 #pin-am:hover circle:not([fill="transparent"]) {
-    filter:
-        drop-shadow(0 0 2px #FF7A1A) drop-shadow(0 0 5px rgba(255, 122, 26, 0.5));
+    filter: drop-shadow(0 0 2px #FF7A1A) drop-shadow(0 0 5px rgba(255, 122, 26, 0.5));
 }
 
 #pin-rj:hover circle:not([fill="transparent"]) {
-    filter:
-        drop-shadow(0 0 2px #1B6CA8) drop-shadow(0 0 5px rgba(27, 108, 168, 0.5));
+    filter: drop-shadow(0 0 2px #1B6CA8) drop-shadow(0 0 5px rgba(27, 108, 168, 0.5));
 }
 
 #mapa-container {
@@ -268,7 +395,7 @@ body::before {
     transition: none !important;
 }
 
-/* Temas dinâmicos do painel */
+/* Panel Dynamic Themes */
 .telemetry-orange {
     border-color: #C85A0A !important;
     box-shadow:
@@ -295,13 +422,14 @@ body::before {
     color: #4EA0DC !important;
 }
 
-/* --- ANIMAÇÕES --- */
+/* ==========================================================================
+   9. ANIMATIONS
+   ========================================================================== */
 @keyframes fadeUpGentle {
     0% {
         opacity: 0;
         transform: translateY(8px);
     }
-
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -341,30 +469,9 @@ body::before {
     transform: translateY(0);
 }
 
-/* --- RESPONSIVIDADE --- */
-@media (max-width: 768px) {
-    body {
-        font-size: 14px;
-    }
-
-    .img-logo {
-        height: 2.8rem;
-    }
-
-    h1.display-5 {
-        font-size: 2rem !important;
-    }
-
-    h2.display-6 {
-        font-size: 1.75rem !important;
-    }
-
-    section {
-        padding-top: 5rem !important;
-    }
-}
-
-/* --- CLASSES UTILITÁRIAS --- */
+/* ==========================================================================
+   10. UTILITY CLASSES
+   ========================================================================== */
 .bg-brand-black {
     background-color: var(--brand-black) !important;
 }
@@ -409,30 +516,6 @@ body::before {
     max-width: 56rem !important;
 }
 
-.text-xs {
-    font-size: 0.75rem !important;
-}
-
-.text-sm {
-    font-size: 0.875rem !important;
-}
-
-.text-lg {
-    font-size: 1.125rem !important;
-}
-
-.text-xl {
-    font-size: 1.25rem !important;
-}
-
-.tracking-widest {
-    letter-spacing: 0.15em !important;
-}
-
-.font-sans {
-    font-family: var(--font-sans) !important;
-}
-
 .border-t {
     border-top: 1px solid var(--brand-border) !important;
 }
@@ -453,91 +536,27 @@ body::before {
     transition-duration: 500ms !important;
 }
 
-/* Estilização dos Sliders de Simulação */
-input[type="range"].form-range::-webkit-slider-runnable-track {
-    background-color: var(--brand-dark-card);
-    border: 1px solid var(--brand-border);
-    height: 6px;
-    border-radius: 3px;
-}
+/* ==========================================================================
+   11. RESPONSIVENESS & MEDIA QUERIES
+   ========================================================================== */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
 
-input[type="range"].form-range::-webkit-slider-thumb {
-    appearance: none;
-    -webkit-appearance: none;
-    background-color: var(--brand-copper);
-    border-radius: 50%;
-    height: 16px;
-    margin-top: -5px;
-    transition: background-color 0.2s;
-    width: 16px;
-}
+    .img-logo {
+        height: 2.8rem;
+    }
 
-input[type="range"].form-range::-webkit-slider-thumb:hover {
-    background-color: #FF7A1A;
-}
+    h1.display-5 {
+        font-size: 2rem !important;
+    }
 
-/* Indicadores de status no Dashboard */
-.status-indicator {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-right: 8px;
-    vertical-align: middle;
-}
+    h2.display-6 {
+        font-size: 1.75rem !important;
+    }
 
-.status-online {
-    background-color: #10b981;
-    box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
-}
-
-.status-offline {
-    background-color: #ef4444;
-    box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
-}
-
-/* --- Survival Kit Checklist Styling --- */
-.survival-item {
-    background-color: var(--brand-black) !important;
-    border: 1px solid var(--brand-border) !important;
-    cursor: pointer;
-    width: 1.15rem;
-    height: 1.15rem;
-    border-radius: 0.2rem !important;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.survival-item:checked {
-    background-color: var(--brand-copper) !important;
-    border-color: var(--brand-copper) !important;
-    box-shadow: 0 0 8px rgba(194, 108, 39, 0.5);
-}
-
-.survival-item:focus {
-    border-color: var(--brand-copper) !important;
-    box-shadow: 0 0 0 0.25rem rgba(194, 108, 39, 0.25) !important;
-}
-
-/* Custom Progress Bar styling */
-.progress {
-    background-color: rgba(var(--brand-black-rgb), 0.5) !important;
-    border: 1px solid var(--brand-border) !important;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    background: linear-gradient(90deg, var(--brand-copper-dim) 0%, var(--brand-copper) 100%) !important;
-    box-shadow: 0 0 10px rgba(194, 108, 39, 0.3);
-    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-/* Hover effect on checklist cards */
-.list-unstyled li.d-flex {
-    transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-
-.list-unstyled li.d-flex:hover {
-    border-color: rgba(194, 108, 39, 0.2) !important;
-    background-color: rgba(194, 108, 39, 0.02) !important;
+    section {
+        padding-top: 5rem !important;
+    }
 }
