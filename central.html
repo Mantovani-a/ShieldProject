@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SENTRYA — Plataforma de monitoramento orbital e coordenação civil em cenários de desastres extremos, unindo telemetria por satélite à triagem SOS inteligente.">
+    <title>SENTRYA — Central de Controle e Monitoramento</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=JetBrains+Mono:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/logo-sentryamenor.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-brand-black text-brand-light font-sans overflow-x-hidden">
+
+    <header class="fixed-top bg-brand-header border-bottom border-brand-border py-3">
+        <div class="container-xl d-flex align-items-center justify-content-between">
+            <a href="index.html" class="d-flex align-items-center">
+                <img src="img/logosentriav2.png" alt="Sentrya" class="img-logo transition-scale">
+            </a>
+
+            <nav class="nav d-none d-md-flex align-items-center gap-5 text-uppercase font-mono tracking-widest small">
+                <a href="index.html" class="nav-link-brand">Início</a>
+                <a href="central.html" class="nav-link-brand active">Central</a>
+                <a href="simulacao.html" class="nav-link-brand">Simulação</a>
+                <a href="acoes.html" class="nav-link-brand">Ações</a>
+                <a href="contato.html" class="nav-link-brand">Contato</a>
+            </nav>
+
+            <div class="d-flex align-items-center gap-3">
+                <a href="acoes.html" class="btn btn-outline-brand-copper font-mono text-uppercase tracking-widest px-4 py-2 small d-none d-md-inline-block">
+                    Registrar SOS
+                </a>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="btn btn-link text-brand-copper d-md-none p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu" style="border:none; background:transparent;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Offcanvas Mobile Menu -->
+    <div class="offcanvas offcanvas-end bg-brand-black text-brand-light border-start border-brand-border" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+        <div class="offcanvas-header border-bottom border-brand-border">
+            <h5 class="offcanvas-title font-mono text-uppercase tracking-widest text-brand-copper" id="mobileMenuLabel">Sentrya</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="d-flex flex-column gap-4 font-mono text-uppercase tracking-widest mt-3">
+                <a href="index.html" class="nav-link-brand">Início</a>
+                <a href="central.html" class="nav-link-brand active">Central</a>
+                <a href="simulacao.html" class="nav-link-brand">Simulação</a>
+                <a href="acoes.html" class="nav-link-brand">Ações</a>
+                <a href="contato.html" class="nav-link-brand">Contato</a>
+                <hr class="border-brand-border my-2">
+                <a href="acoes.html" class="btn btn-brand-copper font-mono text-uppercase tracking-widest px-4 py-3 small text-center w-100">
+                    Registrar SOS
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEÇÃO DASHBOARD CENTRAL -->
+    <section class="min-vh-100 pt-5 border-bottom border-brand-border">
+        <div class="container-xl py-5 mt-5">
+            
+            <!-- TÍTULO PRINCIPAL -->
+            <div class="text-center mb-5 reveal">
+                <span class="font-mono text-brand-copper tracking-widest text-uppercase d-block mb-2">[ Painel Central ]</span>
+                <h1 class="display-6 text-white fw-light">Centro de Controle Sentrya</h1>
+                <p class="text-brand-gray max-w-lg mx-auto" style="font-size: 0.9rem;">
+                    Monitoramento global da constelação de satélites, fluxo de dados humanitários e resposta a incidentes críticos em tempo real.
+                </p>
+            </div>
+
+            <!-- ROW PRINCIPAL DO DASHBOARD -->
+            <div class="row g-4 reveal delay-1">
+                
+                <!-- COLUNA PRINCIPAL: GUIA CIVIL & TRIAGEM DE RISCO (LADO ESQUERDO) -->
+                <div class="col-lg-8 col-xl-9">
+                    <div class="spotlight-card p-4 rounded h-100">
+                        
+                        <!-- ABAS DO COMPONENTE -->
+                        <ul class="nav nav-tabs font-mono mb-4" id="triageTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active fw-medium tracking-widest text-uppercase p-3" id="assistant-tab" data-bs-toggle="tab" data-bs-target="#assistant-pane" type="button" role="tab" aria-controls="assistant-pane" aria-selected="true" style="font-size: 11px;">
+                                    [ Assistente de Triagem ]
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link fw-medium tracking-widest text-uppercase p-3" id="kit-tab" data-bs-toggle="tab" data-bs-target="#kit-pane" type="button" role="tab" aria-controls="kit-pane" aria-selected="false" style="font-size: 11px;">
+                                    [ Kit de Sobrevivência ]
+                                </button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content text-xs font-mono" id="triageTabContent">
+                            
+                            <!-- ABA 1: ASSISTENTE DE TRIAGEM -->
+                            <div class="tab-pane fade show active" id="assistant-pane" role="tabpanel" aria-labelledby="assistant-tab" tabindex="0">
+                                <div class="row g-4">
+                                    <div class="col-md-6 border-end border-brand-border">
+                                        <h3 class="h6 font-mono text-brand-copper text-uppercase mb-3">[ Calculadora de Risco ]</h3>
+                                        
+                                        <div class="mb-3">
+                                            <label for="triagem-desastre" class="text-brand-gray text-uppercase mb-2 d-block" style="font-size: 10px;">Tipo de Ocorrência</label>
+                                            <select id="triagem-desastre" class="form-select bg-brand-black border-brand-border text-white p-3 rounded" style="font-size: 11px;">
+                                                <option value="Inundação de Grande Porte">Inundação de Grande Porte</option>
+                                                <option value="Deslizamento / Encosta">Deslizamento / Encosta</option>
+                                                <option value="Escassez Crítica / Seca">Escassez Crítica / Seca</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <span class="text-brand-gray text-uppercase mb-2 d-block" style="font-size: 10px;">Fatores Observados no Local</span>
+                                            <div id="container-fatores-risco" class="bg-brand-dark-opacity border border-brand-border p-3 rounded">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input check-risco" type="checkbox" id="risk1" data-peso="3">
+                                                    <label class="form-check-label text-brand-light" for="risk1">Água invadindo ou próxima à residência (+3)</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input check-risco" type="checkbox" id="risk2" data-peso="2">
+                                                    <label class="form-check-label text-brand-light" for="risk2">Isolado sem acesso terrestre / vias bloqueadas (+2)</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input check-risco" type="checkbox" id="risk3" data-peso="2">
+                                                    <label class="form-check-label text-brand-light" for="risk3">Crianças, idosos ou pessoas com mobilidade reduzida (+2)</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input check-risco" type="checkbox" id="risk4" data-peso="1">
+                                                    <label class="form-check-label text-brand-light" for="risk4">Queda de fornecimento de energia ou água potável (+1)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button id="btn-calcular-triagem" class="btn btn-outline-brand-copper w-100 py-3 text-uppercase tracking-widest text-xs font-mono">
+                                            Avaliar Situação de Risco
+                                        </button>
+                                    </div>
+
+                                    <div class="col-md-6 d-flex flex-column justify-content-between">
+                                        <div>
+                                            <h3 class="h6 font-mono text-brand-copper text-uppercase mb-3">[ Resultado e Instruções ]</h3>
+                                            
+                                            <!-- Resultado dinâmico -->
+                                            <div id="triagem-resultado" class="bg-brand-dark-opacity border border-brand-border p-3 rounded text-center d-none mb-3">
+                                                <span id="triagem-badge" class="badge p-2 text-uppercase mb-2" style="font-size: 10px;">--</span>
+                                                <p id="triagem-desc" class="text-brand-gray mb-0 text-start leading-relaxed" style="font-size: 11px; line-height: 1.6;">
+                                                    --
+                                                </p>
+                                                <a href="#" id="triagem-cta" class="btn btn-brand-copper w-100 mt-3 text-uppercase font-mono text-xs py-2" style="display:none;">Registrar SOS</a>
+                                            </div>
+
+                                            <div id="triagem-intro" class="text-brand-gray" style="font-size: 11px; line-height: 1.6;">
+                                                <p>Este assistente avalia parâmetros de perigo local para sugerir ações imediatas de proteção.</p>
+                                                <ul class="list-unstyled ps-0">
+                                                    <li class="mb-2"><span class="status-indicator status-offline"></span><strong class="text-danger">Risco Crítico (Score 5+):</strong> Evacuação imediata e acionamento de SOS via satélite.</li>
+                                                    <li class="mb-2"><span class="status-indicator status-pending"></span><strong class="text-warning">Risco Severo (Score 2-4):</strong> Preparação para evacuação e kits.</li>
+                                                    <li><span class="status-indicator status-online"></span><strong class="text-success">Atenção (Score 0-1):</strong> Acompanhamento e vigilância preventiva.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ABA 2: CHECKLIST KIT DE SOBREVIVÊNCIA -->
+                            <div class="tab-pane fade" id="kit-pane" role="tabpanel" aria-labelledby="kit-tab" tabindex="0">
+                                <h3 class="h6 font-mono text-brand-copper text-uppercase mb-2">[ Checklist do Kit de Emergência ]</h3>
+                                <p class="text-brand-gray mb-4" style="font-size: 11px;">Marque os itens à medida que os prepara. O estado é salvo automaticamente no seu navegador para uso posterior offline.</p>
+                                
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="bg-brand-dark-opacity border border-brand-border p-3 rounded">
+                                            <span class="font-mono text-xs text-brand-copper text-uppercase d-block mb-3">[ Sobrevivência & Saúde ]</span>
+                                            <ul class="list-unstyled mb-0 d-flex flex-column gap-3">
+                                                <li class="d-flex align-items-center">
+                                                    <input class="form-check-input survival-item me-2" type="checkbox" id="kit-water" style="margin-top: 0;">
+                                                    <label class="form-check-label text-brand-light" for="kit-water">Água Potável (mín. 2 litros por pessoa/dia)</label>
+                                                </li>
+                                                <li class="d-flex align-items-center">
+                                                    <input class="form-check-input survival-item me-2" type="checkbox" id="kit-food" style="margin-top: 0;">
+                                                    <label class="form-check-label text-brand-light" for="kit-food">Comida enlatada / Barras de cereal (não perecíveis)</label>
+                                                </li>
+                                                <li class="d-flex align-items-center">
+                                                    <input class="form-check-input survival-item me-2" type="checkbox" id="kit-meds" style="margin-top: 0;">
+                                                    <label class="form-check-label text-brand-light" for="kit-meds">Medicamentos de uso contínuo (estoque para 7 dias)</label>
+                                                </li>
+                                                <li class="d-flex align-items-center">
+                                                    <input class="form-check-input survival-item me-2" type="checkbox" id="kit-hygiene" style="margin-top: 0;">
+                                                    <label class="form-check-label text-brand-light" for="kit-hygiene">Itens básicos de higiene pessoal e papel higiênico</label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="bg-brand-dark-opacity border border-brand-border p-3 rounded">
+                                            <span class="font-mono text-xs text-brand-copper text-uppercase d-block mb-3">[ Segurança & Suporte ]</span>
+                                            <ul class="list-unstyled mb-0 d-flex flex-column gap-3">
+                                                <li class="d-flex align-items-center">
+                                                    <input class="form-check-input survival-item me-2" type="checkbox" id="kit-docs" style="margin-top: 0;">
+                                                    <label class="form-check-label text-brand-light" for="kit-docs">Documentos em sacos plásticos impermeáveis</label>
+                                                </li>
+                                                <li class="d-flex align-items-center">
+                                                    <input class="form-check-input survival-item me-2" type="checkbox" id="kit-light" style="margin-top: 0;">
+                                                    <label class="form-check-label text-brand-light" for="kit-light">Lanterna portátil com pilhas extras carregadas</label>
+                                                </li>
+                                                <li class="d-flex align-items-center">
+                                                    <input class="form-check-input survival-item me-2" type="checkbox" id="kit-whistle" style="margin-top: 0;">
+                                                    <label class="form-check-label text-brand-light" for="kit-whistle">Apito para sinalização de resgate acústico</label>
+                                                </li>
+                                                <li class="d-flex align-items-center">
+                                                    <input class="form-check-input survival-item me-2" type="checkbox" id="kit-battery" style="margin-top: 0;">
+                                                    <label class="form-check-label text-brand-light" for="kit-battery">Carregador portátil (Powerbank) para celulares</label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- COLUNA DE CONTROLE & STATUS (LADO DIREITO) -->
+                <div class="col-lg-4 col-xl-3">
+                    <div class="d-flex flex-column gap-3 h-100">
+                        
+                        <!-- PAINEL 1: MÉTRICAS COMPACTAS -->
+                        <div class="spotlight-card p-3 rounded">
+                            <div class="border-bottom border-brand-border pb-2 mb-2">
+                                <span class="font-mono text-xs text-brand-copper text-uppercase">[ Status do Sistema ]</span>
+                            </div>
+                            <div class="row g-2 font-mono text-xs">
+                                <div class="col-6 mb-2">
+                                    <span class="text-brand-gray d-block" style="font-size: 10px;">SATÉLITES ONLINE</span>
+                                    <span class="text-white fw-bold">4 / 4 Ativos</span>
+                                </div>
+                                <div class="col-6 mb-2">
+                                    <span class="text-brand-gray d-block" style="font-size: 10px;">RE-SINCRONIZAÇÃO</span>
+                                    <span class="text-brand-copper fw-bold" id="countdown-timer">09:54</span>
+                                </div>
+                                <div class="col-6">
+                                    <span class="text-brand-gray d-block" style="font-size: 10px;">TEMPO DE RESGATE</span>
+                                    <span class="text-white fw-bold">-45% de Atraso</span>
+                                </div>
+                                <div class="col-6">
+                                    <span class="text-brand-gray d-block" style="font-size: 10px;">REDE DE SOCORRO</span>
+                                    <span class="text-success fw-bold">Ativa (Fallback)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PAINEL 2: ZONAS ATIVAS -->
+                        <div class="spotlight-card p-3 rounded flex-grow-1">
+                            <div class="border-bottom border-brand-border pb-2 mb-3">
+                                <span class="font-mono text-xs text-brand-copper text-uppercase">[ Regiões sob Alerta ]</span>
+                            </div>
+                            <div class="d-flex flex-column gap-3 font-mono text-xs">
+                                
+                                <!-- RS -->
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <span class="status-indicator status-offline me-2"></span>
+                                        <span class="text-white">Rio Grande do Sul</span>
+                                    </div>
+                                    <a href="simulacao.html?foco=rs" class="text-brand-copper text-decoration-none text-uppercase tracking-widest text-xs" style="font-size: 10px;">Ver Mapa →</a>
+                                </div>
+
+                                <!-- RJ -->
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <span class="status-indicator status-online me-2"></span>
+                                        <span class="text-white">Região Serrana, RJ</span>
+                                    </div>
+                                    <a href="simulacao.html?foco=rj" class="text-brand-copper text-decoration-none text-uppercase tracking-widest text-xs" style="font-size: 10px;">Ver Mapa →</a>
+                                </div>
+
+                                <!-- NE -->
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <span class="status-indicator status-offline me-2"></span>
+                                        <span class="text-white">Região Nordeste</span>
+                                    </div>
+                                    <a href="simulacao.html?foco=ne" class="text-brand-copper text-decoration-none text-uppercase tracking-widest text-xs" style="font-size: 10px;">Ver Mapa →</a>
+                                </div>
+
+                                <!-- AM -->
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <span class="status-indicator status-offline me-2"></span>
+                                        <span class="text-white">Amazônia</span>
+                                    </div>
+                                    <a href="simulacao.html?foco=am" class="text-brand-copper text-decoration-none text-uppercase tracking-widest text-xs" style="font-size: 10px;">Ver Mapa →</a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- PAINEL 3: ACESSO DE NAVEGAÇÃO -->
+                        <div class="spotlight-card p-3 rounded">
+                            <div class="border-bottom border-brand-border pb-2 mb-2">
+                                <span class="font-mono text-xs text-brand-copper text-uppercase">[ O que deseja fazer? ]</span>
+                            </div>
+                            <div class="d-flex flex-column gap-2 font-mono">
+                                <a href="simulacao.html" class="btn btn-outline-brand-copper w-100 py-2 text-uppercase tracking-widest text-xs" style="font-size: 10px;">
+                                    Visualizar Mapa de Telemetria
+                                </a>
+                                <a href="acoes.html" class="btn btn-outline-brand-copper w-100 py-2 text-uppercase tracking-widest text-xs" style="font-size: 10px;">
+                                    Solicitar SOS / Ver Fila
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="border-t border-brand-border py-5 bg-brand-black font-mono text-xs text-brand-gray">
+        <div class="container-xl d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3">
+            <div class="d-flex flex-column align-items-center align-items-sm-start gap-1">
+                <div class="d-flex align-items-center gap-2">
+                    <img src="img/logo-sentrya-branca.png" alt="Sentrya" style="height: 18px;">
+                    <span class="text-white fw-light">SENTRYA — 2026</span>
+                </div>
+                <span class="text-brand-gray" style="font-size: 10px !important;">Dados baseados em ativações do International Charter Space and Major Disasters.</span>
+            </div>
+            <div class="d-flex gap-4">
+                <a href="#" class="footer-link">Especificações</a>
+                <a href="#" class="footer-link">Segurança</a>
+                <a href="#" class="footer-link">Código Aberto</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/spaceCharter.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
